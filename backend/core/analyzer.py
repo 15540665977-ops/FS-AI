@@ -2,6 +2,7 @@
 分析编排器
 协调图像提取、RAG 检索、Claude Vision 调用，流式返回分析结果
 """
+import asyncio
 import base64
 import os
 from pathlib import Path
@@ -82,10 +83,8 @@ class AnalysisOrchestrator:
     # 上下文构建
     # ------------------------------------------------------------------
 
-    def _build_rag_context(self, material_hint: Optional[str]) -> str:
-        """检索本地知识库，返回格式化文本"""
-        if not material_hint:
-            return ""
+    def _rag_context_sync(self, material_hint: str) -> str:
+        """同步 RAG 检索（由 asyncio.to_thread 调用）"""
         try:
             material_results = self.retriever.search(material_hint, top_k=2)
             failure_results = self.retriever.search_failure_modes(material_hint, top_k=2)
@@ -102,10 +101,8 @@ class AnalysisOrchestrator:
         except Exception:
             return ""
 
-    def _build_web_context(self, material_hint: Optional[str]) -> str:
-        """Tavily 联网搜索，返回格式化文本（失败时静默返回空）"""
-        if not material_hint:
-            return ""
+    def _web_context_sync(self, material_hint: str) -> str:
+        """同步 Tavily 搜索（由 asyncio.to_thread 调用）"""
         try:
             results = self.web_search.extract_technical_info(material_hint, "ftir_peaks")
             if not results:
@@ -116,6 +113,18 @@ class AnalysisOrchestrator:
             return "\n".join(parts)
         except Exception:
             return ""
+
+    async def _build_contexts(
+        self, material_hint: Optional[str]
+    ) -> tuple[str, str]:
+        """并发获取 RAG + Web 上下文，均在线程池执行，不阻塞事件循环"""
+        if not material_hint:
+            return "", ""
+        rag_ctx, web_ctx = await asyncio.gather(
+            asyncio.to_thread(self._rag_context_sync, material_hint),
+            asyncio.to_thread(self._web_context_sync, material_hint),
+        )
+        return rag_ctx, web_ctx
 
     def _build_prompt_text(
         self,
@@ -165,8 +174,7 @@ class AnalysisOrchestrator:
             material_hint: 用户提供的材料信息提示
             failure_background: 失效背景描述
         """
-        rag_context = self._build_rag_context(material_hint)
-        web_context = self._build_web_context(material_hint)
+        rag_context, web_context = await self._build_contexts(material_hint)
         prompt_text = self._build_prompt_text(
             analysis_type, material_hint, failure_background, rag_context, web_context
         )
