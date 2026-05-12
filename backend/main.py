@@ -1,5 +1,6 @@
 """
 主应用入口 — FastAPI 应用初始化
+# reload-trigger
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

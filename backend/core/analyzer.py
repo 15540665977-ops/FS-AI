@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 from typing import AsyncGenerator, List, Optional
 import anthropic
+import httpx
 
 from core.prompts import PromptTemplates
 from core.rag import VectorRetriever
@@ -46,7 +47,12 @@ class AnalysisOrchestrator:
     @property
     def async_client(self) -> anthropic.AsyncAnthropic:
         if self._async_client is None:
-            self._async_client = anthropic.AsyncAnthropic(api_key=self.api_key)
+            # 显式传入 http_client，绕过 SDK 内部对 httpx 的 proxies 初始化
+            # 避免 Python 3.14 / httpx 版本兼容问题
+            self._async_client = anthropic.AsyncAnthropic(
+                api_key=self.api_key,
+                http_client=httpx.AsyncClient(),
+            )
         return self._async_client
 
     # ------------------------------------------------------------------
