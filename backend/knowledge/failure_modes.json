@@ -1,0 +1,214 @@
+{
+  "thermal_oxidation": {
+    "name": "热氧老化",
+    "materials": ["PP", "PE-HD", "PE-LD", "EPDM"],
+    "mechanism": "材料在高温或环境温度下与氧气发生氧化反应，导致聚合物链断裂或交联",
+    "ftir_changes": {
+      "new_peaks": [
+        {"wavenumber": 1735, "assignment": "羰基 C=O 伸缩振动", "significance": "氧化产物特征峰"}
+      ],
+      "weakened_peaks": [],
+      "intensity_changes": [
+        {"wavenumber": 3400, "description": "O-H 伸缩振动增强，表明氧化产物增加"}
+      ]
+    },
+    "dsc_changes": {
+      "tg_shift": "可能升高（交联）或降低（链断裂）",
+      "delta_h_change": "结晶度可能因链断裂而降低"
+    },
+    "tga_changes": {
+      "decomposition_temp": "初期可能升高（交联保护），长期老化后降低",
+      "weight_loss": "残炭量减少"
+    },
+    "identification_confidence": "高",
+    "recommended_verification": ["OIT 氧化敏感性测试", "分子量 GPC 分析"]
+  },
+
+  "pa_hydrolysis": {
+    "name": "PA 水解降解",
+    "materials": ["PA6", "PA66"],
+    "mechanism": "尼龙中的酰胺键与水分子反应，导致分子链断裂，分子量下降",
+    "ftir_changes": {
+      "new_peaks": [
+        {"wavenumber": 1710, "assignment": "末端羧基 C=O 伸缩振动"}
+      ],
+      "weakened_peaks": [
+        {"wavenumber": 1540, "description": "酰胺 II 带减弱，表明酰胺键断裂"}
+      ],
+      "intensity_changes": []
+    },
+    "dsc_changes": {
+      "tm_shift": "熔点可能降低（结晶度下降）",
+      "tg_shift": "玻璃化转变温度降低（分子量下降）"
+    },
+    "tga_changes": {
+      "decomposition_temp": "可能降低",
+      "weight_loss": "变化不大"
+    },
+    "identification_confidence": "高",
+    "recommended_verification": ["GPC 分子量分析", "水解残留量测试"]
+  },
+
+  "plasticizer_migration": {
+    "name": "增塑剂迁移",
+    "materials": ["PVC", "TPU"],
+    "mechanism": "增塑剂从基体中迁移到表面或挥发到环境中，导致材料变脆",
+    "ftir_changes": {
+      "new_peaks": [],
+      "weakened_peaks": [],
+      "intensity_changes": [
+        {"wavenumber": 1170, "description": "邻苯二甲酸酯类增塑剂特征峰强度下降"},
+        {"wavenumber": 720, "description": "DOP 特有峰强度减弱"}
+      ]
+    },
+    "dsc_changes": {
+      "tg_shift": "Tg 升高（增塑作用减弱，分子链活动性降低）",
+      "delta_h_change": "变化不大"
+    },
+    "tga_changes": {
+      "decomposition_temp": "无显著变化",
+      "weight_loss": "早期失重增加（迁移的增塑剂）"
+    },
+    "identification_confidence": "中",
+    "recommended_verification": ["萃取分析法测增塑剂含量", "气味分析（增塑剂通常有气味）", "DSC 测试 Tg 变化"]
+  },
+
+  "silicone_contamination": {
+    "name": "硅油污染",
+    "materials": ["通用"],
+    "mechanism": "产品在生产、储存或使用过程中受到硅油、脱模剂等含硅物质的污染",
+    "ftir_changes": {
+      "new_peaks": [
+        {"wavenumber": 1260, "assignment": "Si-CH₃ 伸缩振动"},
+        {"wavenumber": 1110, "assignment": "Si-O-Si 不对称伸缩振动"},
+        {"wavenumber": 800, "assignment": "Si-CH₃ 面外变形振动", "description": "分裂双峰是特征"}
+      ],
+      "weakened_peaks": [],
+      "intensity_changes": []
+    },
+    "dsc_changes": {
+      "tg_shift": "可能出现新的低 Tg 组分（硅油 Tg 约 -120°C）",
+      "delta_h_change": "无明显变化"
+    },
+    "tga_changes": {
+      "decomposition_temp": "TGA 曲线上可能出现硅氧化物残留特征",
+      "weight_loss": "少量失重（硅油挥发）"
+    },
+    "identification_confidence": "高",
+    "recommended_verification": ["GC-MS 分析挥发分", "溶剂萃取后谱图复测"]
+  },
+
+  "wrong_material": {
+    "name": "错料替换",
+    "materials": ["通用"],
+    "mechanism": "本应使用一种材料，但错误使用了成本更低或其他牌号的材料",
+    "ftir_changes": {
+      "new_peaks": "取决于实际错用什么材料，会出现完全不同的指纹峰",
+      "weakened_peaks": "原材料的特征峰减弱或缺失",
+      "intensity_changes": "整体指纹区（600-1500 cm⁻¹）模式不一致"
+    },
+    "dsc_changes": {
+      "tm_shift": "熔融温度和熔融焓与标准值显著不符",
+      "tg_shift": "玻璃化转变温度差异明显"
+    },
+    "tga_changes": {
+      "decomposition_temp": "分解温度差异",
+      "weight_loss": "热失重曲线模式不同"
+    },
+    "identification_confidence": "高",
+    "recommended_verification": ["对比标准谱图", "元素分析（如玻纤含量）", "密度测试"]
+  },
+
+  "uv_degradation": {
+    "name": "UV 光降解",
+    "materials": ["PP", "PE", "ABS", "工程塑料"],
+    "mechanism": "紫外线辐射导致聚合物链断裂、交联，产生羰基等氧化产物",
+    "ftir_changes": {
+      "new_peaks": [
+        {"wavenumber": 1710-1750, "assignment": "羰基 C=O，强度显著增加"},
+        {"wavenumber": 3400, "assignment": "羟基 O-H，表明伴随氧化"},
+        {"wavenumber": 1630, "assignment": "共轭 carbonyl，表明形成共轭双键结构"}
+      ],
+      "weakened_peaks": [],
+      "intensity_changes": []
+    },
+    "dsc_changes": {
+      "tm_shift": "熔点降低（链断裂导致结晶度下降）",
+      "tg_shift": "Tg 可能降低（分子量下降）"
+    },
+    "tga_changes": {
+      "decomposition_temp": "分解温度降低",
+      "weight_loss": "初期失重增加（低分子量产物挥发）"
+    },
+    "identification_confidence": "高",
+    "recommended_verification": [" yellowness 指数测试", "力学性能测试（拉伸/冲击）", "老化诱导期 OIT"]
+  },
+
+  "solvent_contamination": {
+    "name": "溶剂/化学品侵蚀",
+    "materials": ["环氧树脂", "热塑性塑料"],
+    "mechanism": "残留溶剂或其他化学品未充分去除，或材料在使用过程中接触有害化学品",
+    "ftir_changes": {
+      "new_peaks": "取决于污染物的化学结构（如酯类、氯代物、胺类等特征峰）",
+      "weakened_peaks": [],
+      "intensity_changes": []
+    },
+    "dsc_changes": {
+      "tg_shift": "可能出现低 Tg 组分",
+      "delta_h_change": "无明显变化"
+    },
+    "tga_changes": {
+      "decomposition_temp": "可能出现双峰（污染物 + 基体）",
+      "weight_loss": "低温段额外失重（溶剂挥发）"
+    },
+    "identification_confidence": "中",
+    "recommended_verification": ["GC-MS 气味分析", "萃取后复测", "查阅化学品 TDS"]
+  },
+
+  "over_cure": {
+    "name": "过度交联（橡胶）",
+    "materials": ["EPDM", "NBR", "CR", "硅橡胶"],
+    "mechanism": "硫化时间或温度过高，导致交联密度超过设计范围",
+    "ftir_changes": {
+      "new_peaks": [],
+      "weakened_peaks": [
+        {"wavenumber": "双键伸缩振动区域", "description": "未反应双键减少"}
+      ],
+      "intensity_changes": []
+    },
+    "dsc_changes": {
+      "tg_shift": "Tg 升高（链段活动性降低）",
+      "delta_h_change": "可逆吸热峰变化"
+    },
+    "tga_changes": {
+      "tg_temp": "残炭量增加",
+      "decomposition_temp": "通常无明显变化"
+    },
+    "identification_confidence": "中",
+    "recommended_verification": ["硬度测试（应显著升高）", "拉伸性能测试", "溶胀测试"]
+  },
+
+  "under_cure": {
+    "name": "欠硫化（橡胶）",
+    "materials": ["EPDM", "NBR", "CR", "硅橡胶"],
+    "mechanism": "硫化不足，交联密度未达到要求，可溶性组分残留",
+    "ftir_changes": {
+      "new_peaks": [],
+      "weakened_peaks": [],
+      "intensity_changes": [
+        {"wavenumber": "硫磺特征峰（如有）", "description": "强度异常"},
+        {"wavenumber": "硅油峰（EPDM）", "description": "可溶性硅油存在"}
+      ]
+    },
+    "dsc_changes": {
+      "tg_shift": "Tg 偏低（交联不足）",
+      "delta_h_change": "可逆吸热峰减弱"
+    },
+    "tga_changes": {
+      "tg_temp": "残炭量减少",
+      "decomposition_temp": "无明显变化"
+    },
+    "identification_confidence": "中",
+    "recommended_verification": ["硬度测试（应偏低）", "拉伸强度和伸长率测试", "水洗后质量损失"]
+  }
+}

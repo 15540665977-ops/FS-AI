@@ -142,6 +142,9 @@
 import { ref, nextTick, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Document, Close, Plus, Paperclip, Position, VideoPause } from '@element-plus/icons-vue'
+import { marked } from 'marked'
+
+marked.setOptions({ breaks: true, gfm: true })
 
 // ── 常量 ─────────────────────────────────────────────
 const TYPE_LABEL = { general: '通用', failure: '失效分析', consistency: '一致性检验' }
@@ -167,11 +170,7 @@ const scroll    = () => nextTick(() => { if (msgRef.value) msgRef.value.scrollTo
 
 function render(text) {
   if (!text) return ''
-  return text
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/【(.+?)】/g, '<strong class="sec">【$1】</strong>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br/>')
+  return marked.parse(text)
 }
 
 // ── 文件 ─────────────────────────────────────────────
@@ -358,7 +357,88 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
 
 .case-no { margin-top: 10px; font-size: 12px; color: #3d6a9e; border-top: 1px solid #1e2840; padding-top: 8px; }
 
-/* ── 输入区 ── */
+/* ── Markdown 渲染样式 ── */
+:deep(.ai-content) {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #c8d3e8;
+}
+:deep(.ai-content h1),
+:deep(.ai-content h2) {
+  font-size: 15px;
+  font-weight: 700;
+  color: #d0dff5;
+  margin: 14px 0 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #2a3550;
+}
+:deep(.ai-content h3) {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8ab4d8;
+  margin: 10px 0 4px;
+}
+:deep(.ai-content p) { margin: 4px 0; }
+:deep(.ai-content ul),
+:deep(.ai-content ol) { padding-left: 20px; margin: 4px 0; }
+:deep(.ai-content li) { margin: 2px 0; }
+:deep(.ai-content strong) { color: #d0dff5; font-weight: 600; }
+:deep(.ai-content code) {
+  background: #0f1320;
+  border: 1px solid #2a3550;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 12px;
+  color: #7ec8e3;
+}
+:deep(.ai-content pre) {
+  background: #0d1220;
+  border: 1px solid #2a3550;
+  border-radius: 6px;
+  padding: 12px 14px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+:deep(.ai-content pre code) {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #a8c4e0;
+}
+:deep(.ai-content table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 13px;
+}
+:deep(.ai-content th) {
+  background: #1a2640;
+  color: #8ab4d8;
+  font-weight: 600;
+  padding: 6px 10px;
+  border: 1px solid #2a3550;
+  text-align: left;
+}
+:deep(.ai-content td) {
+  padding: 5px 10px;
+  border: 1px solid #1e2840;
+  color: #b8c8e0;
+}
+:deep(.ai-content tr:nth-child(even) td) { background: #111928; }
+:deep(.ai-content blockquote) {
+  border-left: 3px solid #4d9cf5;
+  margin: 6px 0;
+  padding: 4px 12px;
+  color: #7a8fa8;
+  font-style: normal;
+}
+:deep(.ai-content hr) {
+  border: none;
+  border-top: 1px solid #2a3550;
+  margin: 10px 0;
+}
 .inputbar {
   border-top: 1px solid #1e2840;
   padding: 12px 20px 16px;

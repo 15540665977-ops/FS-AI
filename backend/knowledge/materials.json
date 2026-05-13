@@ -1,0 +1,480 @@
+{
+  "PP": {
+    "material_type": "polyolefin",
+    "common_names": ["聚丙烯", "PP", "isotactic polypropylene"],
+    "ftir_peaks": [
+      {"wavenumber": 2960, "assignment": "CH3 反对称伸缩振动", "intensity": "强"},
+      {"wavenumber": 2920, "assignment": "CH2 反对称伸缩振动", "intensity": "强"},
+      {"wavenumber": 2870, "assignment": "CH3 对称伸缩振动", "intensity": "中"},
+      {"wavenumber": 2840, "assignment": "CH2 对称伸缩振动", "intensity": "中"},
+      {"wavenumber": 1455, "assignment": "CH3/CH2 弯曲振动", "intensity": "强"},
+      {"wavenumber": 1375, "assignment": "CH3 对称弯曲振动（双峰特征）", "intensity": "特征峰"},
+      {"wavenumber": 1165, "assignment": "C-C-C 反对称伸缩", "intensity": "中"},
+      {"wavenumber": 998, "assignment": "等规螺旋链特征峰（结晶指示）", "intensity": "强"},
+      {"wavenumber": 973, "assignment": "CH3 面外摇摆", "intensity": "中"},
+      {"wavenumber": 841, "assignment": "等规结构特征峰", "intensity": "中"},
+      {"wavenumber": 809, "assignment": "CH 面外弯曲", "intensity": "弱"}
+    ],
+    "dsc_parameters": {"tm_range": "160-175°C", "tg_range": "-10 to -20°C", "delta_h_range": "80-120 J/g"},
+    "tga_characteristics": {"onset_decomposition": "350-400°C", "weight_loss_range": "90-95%", "residue": "<2%"},
+    "鉴别要点": "1375 cm⁻¹ 甲基双峰是 PP 特征；998/973 双峰为等规度指标；无 C=O 峰；只有一个主熔融峰约 165°C",
+    "常见混淆": ["PE（无1375 cm⁻¹ 双峰）", "TPO（含橡胶相，峰宽化）"]
+  },
+
+  "PP-GF": {
+    "material_type": "polyolefin_composite",
+    "common_names": ["玻纤增强聚丙烯", "PP-GF", "glass fiber reinforced PP"],
+    "ftir_peaks": [
+      {"wavenumber": 2960, "assignment": "CH3 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 1455, "assignment": "CH3/CH2 弯曲振动", "intensity": "强"},
+      {"wavenumber": 1375, "assignment": "CH3 双峰特征", "intensity": "特征峰"},
+      {"wavenumber": 1100, "assignment": "Si-O-Si 伸缩振动（玻纤特征）", "intensity": "中强"},
+      {"wavenumber": 998, "assignment": "等规PP特征峰", "intensity": "中（因玻纤稀释而减弱）"},
+      {"wavenumber": 800, "assignment": "Si-O 弯曲振动（玻纤）", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "162-168°C", "tg_range": "-10 to -20°C", "delta_h_range": "40-80 J/g（因玻纤稀释）"},
+    "tga_characteristics": {"onset_decomposition": "350-400°C", "residue": "10-40%（玻纤残留）"},
+    "鉴别要点": "PP峰+1100/800 cm⁻¹ Si-O 玻纤峰；TGA残留量对应玻纤含量（30%GF → ~30%残留）",
+    "常见混淆": ["PP（无Si-O峰）", "PA-GF（有酰胺峰）"]
+  },
+
+  "PE-HD": {
+    "material_type": "polyolefin",
+    "common_names": ["高密度聚乙烯", "HDPE", "high density polyethylene"],
+    "ftir_peaks": [
+      {"wavenumber": 2919, "assignment": "CH2 反对称伸缩振动", "intensity": "强"},
+      {"wavenumber": 2848, "assignment": "CH2 对称伸缩振动", "intensity": "中强"},
+      {"wavenumber": 1473, "assignment": "CH2 剪切振动（正交晶型）", "intensity": "强"},
+      {"wavenumber": 1463, "assignment": "CH2 剪切振动", "intensity": "强"},
+      {"wavenumber": 731, "assignment": "CH2 面外摇摆（结晶双峰）", "intensity": "特征峰"},
+      {"wavenumber": 720, "assignment": "CH2 面外摇摆", "intensity": "特征峰"}
+    ],
+    "dsc_parameters": {"tm_range": "125-140°C", "tg_range": "不适用", "delta_h_range": "100-150 J/g"},
+    "tga_characteristics": {"onset_decomposition": "400-450°C", "weight_loss_range": "95-99%"},
+    "鉴别要点": "720/731 cm⁻¹ 双峰是HDPE结晶特征；无1375 cm⁻¹ CH3峰（区分PP）；熔点高于LDPE",
+    "常见混淆": ["PE-LD（720单峰，熔点低）", "PP（有1375峰）"]
+  },
+
+  "PE-LD": {
+    "material_type": "polyolefin",
+    "common_names": ["低密度聚乙烯", "LDPE", "low density polyethylene"],
+    "ftir_peaks": [
+      {"wavenumber": 2919, "assignment": "CH2 反对称伸缩振动", "intensity": "强"},
+      {"wavenumber": 2848, "assignment": "CH2 对称伸缩振动", "intensity": "中强"},
+      {"wavenumber": 1463, "assignment": "CH2 剪切振动", "intensity": "中"},
+      {"wavenumber": 1377, "assignment": "CH3 弯曲（支链）", "intensity": "弱-中"},
+      {"wavenumber": 720, "assignment": "CH2 面外摇摆（单峰，区分HDPE）", "intensity": "特征峰"}
+    ],
+    "dsc_parameters": {"tm_range": "105-115°C", "tg_range": "不适用", "delta_h_range": "40-70 J/g"},
+    "tga_characteristics": {"onset_decomposition": "380-420°C"},
+    "鉴别要点": "720 cm⁻¹ 单峰（HDPE为双峰）；熔点低约105-115°C；有少量1377 cm⁻¹ 支链峰",
+    "常见混淆": ["HDPE（双峰720/731）", "EVA（有酯基峰）"]
+  },
+
+  "PA6": {
+    "material_type": "polyamide",
+    "common_names": ["尼龙6", "PA6", "聚己内酰胺", "nylon 6"],
+    "ftir_peaks": [
+      {"wavenumber": 3300, "assignment": "N-H 伸缩振动（酰胺A带）", "intensity": "强宽"},
+      {"wavenumber": 3080, "assignment": "N-H 伸缩振动（酰胺B带）", "intensity": "弱"},
+      {"wavenumber": 2930, "assignment": "CH2 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2860, "assignment": "CH2 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1635, "assignment": "C=O 伸缩振动（酰胺Ⅰ带）", "intensity": "强"},
+      {"wavenumber": 1540, "assignment": "N-H 弯曲+C-N 伸缩（酰胺Ⅱ带）", "intensity": "强"},
+      {"wavenumber": 1265, "assignment": "C-N 伸缩+N-H 弯曲（酰胺Ⅲ带）", "intensity": "中"},
+      {"wavenumber": 690, "assignment": "N-H 面外弯曲（酰胺V带）", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "215-225°C", "tg_range": "50-70°C（干态）", "delta_h_range": "60-80 J/g"},
+    "tga_characteristics": {"onset_decomposition": "370-400°C", "residue": "<2%"},
+    "鉴别要点": "3300/1635/1540 cm⁻¹ 酰胺三特征带；Tm约220°C（PA66约260°C）；吸湿后Tg大幅下降",
+    "常见混淆": ["PA66（Tm更高，指纹区略异）", "PA12（CH2更多，峰位偏移）"]
+  },
+
+  "PA66": {
+    "material_type": "polyamide",
+    "common_names": ["尼龙66", "PA66", "聚己二酰己二胺", "nylon 66"],
+    "ftir_peaks": [
+      {"wavenumber": 3295, "assignment": "N-H 伸缩振动（酰胺A带）", "intensity": "强宽"},
+      {"wavenumber": 2930, "assignment": "CH2 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2860, "assignment": "CH2 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1636, "assignment": "C=O 伸缩振动（酰胺Ⅰ带）", "intensity": "强"},
+      {"wavenumber": 1540, "assignment": "酰胺Ⅱ带", "intensity": "强"},
+      {"wavenumber": 1200, "assignment": "C-N 伸缩（指纹区）", "intensity": "中"},
+      {"wavenumber": 930, "assignment": "PA66特征峰（区分PA6）", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "255-265°C", "tg_range": "50-80°C（干态）", "delta_h_range": "55-75 J/g"},
+    "tga_characteristics": {"onset_decomposition": "380-420°C"},
+    "鉴别要点": "Tm约260°C是与PA6最显著区别；930 cm⁻¹ 特征峰；PA6/PA66指纹区1200-900 cm⁻¹ 有差异",
+    "常见混淆": ["PA6（Tm~220°C）", "PA612", "PA-GF（含玻纤Si-O峰）"]
+  },
+
+  "PA12": {
+    "material_type": "polyamide",
+    "common_names": ["尼龙12", "PA12", "聚十二内酰胺"],
+    "ftir_peaks": [
+      {"wavenumber": 3300, "assignment": "N-H 伸缩（酰胺A）", "intensity": "强"},
+      {"wavenumber": 2920, "assignment": "CH2 反对称伸缩（更强，因链更长）", "intensity": "很强"},
+      {"wavenumber": 2850, "assignment": "CH2 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1635, "assignment": "酰胺Ⅰ带 C=O", "intensity": "中强"},
+      {"wavenumber": 1545, "assignment": "酰胺Ⅱ带", "intensity": "中"},
+      {"wavenumber": 720, "assignment": "长CH2链摇摆振动（特征强峰）", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "175-185°C", "tg_range": "40-50°C", "delta_h_range": "40-60 J/g"},
+    "tga_characteristics": {"onset_decomposition": "360-400°C"},
+    "鉴别要点": "720 cm⁻¹ 强峰（长亚甲基链）是PA12特征；Tm约178°C；吸湿率远低于PA6",
+    "常见混淆": ["PA6（无720强峰）", "HDPE（无酰胺峰）"]
+  },
+
+  "PC": {
+    "material_type": "engineering_plastic",
+    "common_names": ["聚碳酸酯", "PC", "polycarbonate"],
+    "ftir_peaks": [
+      {"wavenumber": 2970, "assignment": "CH3 伸缩振动", "intensity": "中"},
+      {"wavenumber": 1775, "assignment": "C=O 碳酸酯伸缩振动（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1503, "assignment": "苯环 C=C 伸缩", "intensity": "强"},
+      {"wavenumber": 1230, "assignment": "C-O-C 反对称伸缩（强）", "intensity": "强"},
+      {"wavenumber": 1190, "assignment": "C-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 1080, "assignment": "C-O 伸缩", "intensity": "中"},
+      {"wavenumber": 827, "assignment": "苯环对位取代面外弯曲", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "无结晶熔点（非晶）", "tg_range": "145-150°C", "delta_h_range": "0"},
+    "tga_characteristics": {"onset_decomposition": "430-500°C", "residue": "5-15%（炭化）"},
+    "鉴别要点": "1775 cm⁻¹ 碳酸酯C=O是最强特征峰；无熔点仅有Tg约147°C；高热稳定性",
+    "常见混淆": ["PC/ABS（ABS特征叠加）", "PET（酯峰位置不同）"]
+  },
+
+  "ABS": {
+    "material_type": "engineering_plastic",
+    "common_names": ["丙烯腈-丁二烯-苯乙烯共聚物", "ABS"],
+    "ftir_peaks": [
+      {"wavenumber": 3060, "assignment": "苯环 C-H 伸缩", "intensity": "中"},
+      {"wavenumber": 3025, "assignment": "苯环 C-H 伸缩", "intensity": "中"},
+      {"wavenumber": 2922, "assignment": "CH2/CH3 伸缩", "intensity": "强"},
+      {"wavenumber": 2236, "assignment": "C≡N 腈基伸缩振动（特征峰）", "intensity": "中强"},
+      {"wavenumber": 1604, "assignment": "苯环骨架振动", "intensity": "强"},
+      {"wavenumber": 1496, "assignment": "苯环骨架振动", "intensity": "强"},
+      {"wavenumber": 966, "assignment": "丁二烯反式 C=C 面外弯曲", "intensity": "中"},
+      {"wavenumber": 758, "assignment": "苯环单取代面外弯曲", "intensity": "强"},
+      {"wavenumber": 700, "assignment": "苯环单取代面外弯曲", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "无结晶（非晶）", "tg_range": "95-115°C", "delta_h_range": "0"},
+    "tga_characteristics": {"onset_decomposition": "350-400°C", "residue": "2-8%"},
+    "鉴别要点": "2236 cm⁻¹ C≡N腈基是最强鉴别依据；700/758 cm⁻¹ 苯环双峰；无强C=O峰",
+    "常见混淆": ["PC/ABS（有PC的碳酸酯峰）", "SAN（无丁二烯橡胶峰）", "HIPS（无腈基峰）"]
+  },
+
+  "PC_ABS": {
+    "material_type": "alloy",
+    "common_names": ["PC/ABS合金", "PC+ABS", "polycarbonate ABS blend"],
+    "ftir_peaks": [
+      {"wavenumber": 1775, "assignment": "PC 碳酸酯 C=O（存在但可能弱化）", "intensity": "强"},
+      {"wavenumber": 2236, "assignment": "ABS 腈基 C≡N", "intensity": "中"},
+      {"wavenumber": 1604, "assignment": "苯环骨架（PC+ABS叠加）", "intensity": "强"},
+      {"wavenumber": 1230, "assignment": "PC C-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 827, "assignment": "PC 苯环对位特征", "intensity": "中"},
+      {"wavenumber": 700, "assignment": "ABS 苯环单取代", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "无结晶", "tg_range": "115-130°C（混合Tg）", "delta_h_range": "0"},
+    "tga_characteristics": {"onset_decomposition": "390-440°C"},
+    "鉴别要点": "同时有PC的1775 cm⁻¹ 和ABS的2236 cm⁻¹；Tg介于两者之间；1775峰强度反映PC含量",
+    "常见混淆": ["PC（无腈基峰）", "ABS（无碳酸酯峰）"]
+  },
+
+  "POM": {
+    "material_type": "engineering_plastic",
+    "common_names": ["聚甲醛", "POM", "聚氧亚甲基", "acetal", "Delrin"],
+    "ftir_peaks": [
+      {"wavenumber": 2990, "assignment": "CH2 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2915, "assignment": "CH2 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1470, "assignment": "CH2 剪切振动", "intensity": "强"},
+      {"wavenumber": 1237, "assignment": "C-O-C 伸缩振动（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1095, "assignment": "C-O-C 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 935, "assignment": "C-O-C 弯曲振动", "intensity": "中"},
+      {"wavenumber": 900, "assignment": "C-O-C 骨架振动（特征）", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "160-175°C（均聚物）/162-168°C（共聚物）", "tg_range": "-60°C", "delta_h_range": "110-160 J/g"},
+    "tga_characteristics": {"onset_decomposition": "230-300°C（热稳定性较低）", "residue": "<1%"},
+    "鉴别要点": "1237/1095 cm⁻¹ 强C-O-C峰是最强特征；热稳定性低，230°C以上即分解；无C=O峰",
+    "常见混淆": ["PP（无强C-O-C峰）", "PE（峰位不同）"]
+  },
+
+  "PMMA": {
+    "material_type": "acrylic",
+    "common_names": ["聚甲基丙烯酸甲酯", "PMMA", "有机玻璃", "亚克力"],
+    "ftir_peaks": [
+      {"wavenumber": 2995, "assignment": "O-CH3 伸缩振动", "intensity": "中"},
+      {"wavenumber": 2950, "assignment": "CH3 伸缩振动", "intensity": "强"},
+      {"wavenumber": 1730, "assignment": "C=O 酯基伸缩振动（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1480, "assignment": "CH3 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1240, "assignment": "C-O-C 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 1190, "assignment": "C-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 1065, "assignment": "C-O-C 对称伸缩", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "无结晶（非晶）", "tg_range": "100-120°C", "delta_h_range": "0"},
+    "tga_characteristics": {"onset_decomposition": "270-300°C", "residue": "<2%"},
+    "鉴别要点": "1730 cm⁻¹ 酯C=O极强峰+1240/1190 C-O-C；无OH峰；Tg约105°C",
+    "常见混淆": ["PVC（有C-Cl峰）", "PC（碳酸酯峰位不同）"]
+  },
+
+  "PVC": {
+    "material_type": "vinyl",
+    "common_names": ["聚氯乙烯", "PVC", "polyvinyl chloride"],
+    "ftir_peaks": [
+      {"wavenumber": 2970, "assignment": "CH2 反对称伸缩", "intensity": "中"},
+      {"wavenumber": 2910, "assignment": "CH2 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1430, "assignment": "CH2 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1330, "assignment": "C-H 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1250, "assignment": "C-H 弯曲+C-Cl 伸缩", "intensity": "中强"},
+      {"wavenumber": 960, "assignment": "C-Cl 伸缩振动", "intensity": "中"},
+      {"wavenumber": 690, "assignment": "C-Cl 伸缩振动（特征峰）", "intensity": "很强"},
+      {"wavenumber": 615, "assignment": "C-Cl 伸缩振动", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "无熔点（非晶）", "tg_range": "75-105°C（含增塑剂降低）", "delta_h_range": "0"},
+    "tga_characteristics": {"onset_decomposition": "220-280°C（HCl脱除）", "second_step": "400-500°C（碳链裂解）"},
+    "鉴别要点": "690/615 cm⁻¹ C-Cl峰是最强特征；TGA两步降解（HCl脱除+主链裂解）；密度高",
+    "常见混淆": ["PVDC（峰位偏移）", "增塑PVC（有增塑剂酯峰）"]
+  },
+
+  "PBT": {
+    "material_type": "engineering_plastic",
+    "common_names": ["聚对苯二甲酸丁二酯", "PBT", "polybutylene terephthalate"],
+    "ftir_peaks": [
+      {"wavenumber": 2960, "assignment": "CH2 伸缩振动", "intensity": "中"},
+      {"wavenumber": 1720, "assignment": "C=O 酯基伸缩振动（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1610, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1260, "assignment": "C-O-C 伸缩（酯键）", "intensity": "强"},
+      {"wavenumber": 1100, "assignment": "C-O-C 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 1020, "assignment": "苯环 C-H 面内弯曲", "intensity": "中"},
+      {"wavenumber": 725, "assignment": "苯环对位取代面外弯曲", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "220-230°C", "tg_range": "40-50°C", "delta_h_range": "40-60 J/g"},
+    "tga_characteristics": {"onset_decomposition": "360-400°C", "residue": "3-8%"},
+    "鉴别要点": "1720 cm⁻¹ 酯C=O强峰+725 cm⁻¹ 苯环对位峰；Tm约225°C（区分PET ~255°C）",
+    "常见混淆": ["PET（Tm更高~255°C）", "PC（碳酸酯峰位不同）"]
+  },
+
+  "PET": {
+    "material_type": "engineering_plastic",
+    "common_names": ["聚对苯二甲酸乙二酯", "PET", "polyethylene terephthalate"],
+    "ftir_peaks": [
+      {"wavenumber": 3450, "assignment": "O-H 端羟基（弱）", "intensity": "弱"},
+      {"wavenumber": 2960, "assignment": "CH2 伸缩", "intensity": "中"},
+      {"wavenumber": 1720, "assignment": "C=O 酯基伸缩（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1615, "assignment": "苯环骨架", "intensity": "中"},
+      {"wavenumber": 1260, "assignment": "C-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 1100, "assignment": "C-O-C 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 725, "assignment": "苯环对位取代面外弯曲", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "250-260°C", "tg_range": "75-80°C", "delta_h_range": "35-55 J/g"},
+    "tga_characteristics": {"onset_decomposition": "380-420°C", "residue": "3-8%"},
+    "鉴别要点": "Tm约255°C（高于PBT ~225°C）；水解敏感；回收料可能出现酸性端基峰",
+    "常见混淆": ["PBT（Tm更低）", "PC（峰位不同）"]
+  },
+
+  "PS": {
+    "material_type": "styrene_polymer",
+    "common_names": ["聚苯乙烯", "PS", "polystyrene"],
+    "ftir_peaks": [
+      {"wavenumber": 3100, "assignment": "苯环 C-H 伸缩", "intensity": "中"},
+      {"wavenumber": 3060, "assignment": "苯环 C-H 伸缩", "intensity": "中"},
+      {"wavenumber": 3025, "assignment": "苯环 C-H 伸缩", "intensity": "中"},
+      {"wavenumber": 2920, "assignment": "CH2 伸缩", "intensity": "中"},
+      {"wavenumber": 1600, "assignment": "苯环骨架振动", "intensity": "强"},
+      {"wavenumber": 1492, "assignment": "苯环骨架振动", "intensity": "强"},
+      {"wavenumber": 1450, "assignment": "CH2/CH 弯曲", "intensity": "中"},
+      {"wavenumber": 758, "assignment": "苯环单取代面外弯曲（强特征）", "intensity": "很强"},
+      {"wavenumber": 700, "assignment": "苯环单取代面外弯曲（强特征）", "intensity": "很强"}
+    ],
+    "dsc_parameters": {"tm_range": "无结晶", "tg_range": "95-100°C", "delta_h_range": "0"},
+    "tga_characteristics": {"onset_decomposition": "300-350°C", "residue": "2-5%"},
+    "鉴别要点": "758/700 cm⁻¹ 苯环双强峰是PS最强特征；无腈基峰（区分ABS）；无C=O峰",
+    "常见混淆": ["ABS（有2236腈基峰）", "HIPS（橡胶宽化）"]
+  },
+
+  "EPDM": {
+    "material_type": "elastomer",
+    "common_names": ["三元乙丙橡胶", "EPDM", "乙丙橡胶"],
+    "ftir_peaks": [
+      {"wavenumber": 2919, "assignment": "CH2 反对称伸缩", "intensity": "很强"},
+      {"wavenumber": 2848, "assignment": "CH2 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1460, "assignment": "CH2/CH3 弯曲振动", "intensity": "强"},
+      {"wavenumber": 1375, "assignment": "CH3 弯曲（乙烯+丙烯链段）", "intensity": "中"},
+      {"wavenumber": 720, "assignment": "CH2 长链摇摆振动", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "约-30°C（结晶乙烯段）", "tg_range": "-55 to -65°C", "delta_h_range": "10-30 J/g（低结晶）"},
+    "tga_characteristics": {"onset_decomposition": "350-400°C", "residue": "2-10%（炭黑含量）"},
+    "鉴别要点": "与PE类似但峰更宽；Tg低至-60°C；橡胶态宽峰；第三单体（ENB）在815 cm⁻¹ 有特征",
+    "常见混淆": ["PE（EPDM峰更宽）", "TPO（有PP结晶峰）"]
+  },
+
+  "TPO": {
+    "material_type": "elastomer_alloy",
+    "common_names": ["热塑性聚烯烃弹性体", "TPO", "PP/EPDM"],
+    "ftir_peaks": [
+      {"wavenumber": 2960, "assignment": "CH3 反对称伸缩（PP相）", "intensity": "强"},
+      {"wavenumber": 2919, "assignment": "CH2 反对称伸缩（EPDM相）", "intensity": "强"},
+      {"wavenumber": 1455, "assignment": "CH2/CH3 弯曲振动", "intensity": "强"},
+      {"wavenumber": 1375, "assignment": "CH3 弯曲（PP特征，但相对宽化）", "intensity": "中"},
+      {"wavenumber": 998, "assignment": "PP等规特征峰（强度随橡胶含量减弱）", "intensity": "中"},
+      {"wavenumber": 720, "assignment": "长链CH2摇摆（EPDM相）", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "160-170°C（PP相）", "tg_range": "-55 to -65°C（EPDM相）", "delta_h_range": "20-60 J/g（随PP含量变化）"},
+    "tga_characteristics": {"onset_decomposition": "340-380°C", "residue": "2-15%"},
+    "鉴别要点": "同时有PP的998/1375峰和EPDM的宽烯烃峰；DSC有PP熔融峰和EPDM低温Tg；韧性优异",
+    "常见混淆": ["PP（TPO峰更宽，有低温Tg）", "EPDM（无PP结晶峰）"]
+  },
+
+  "TPU": {
+    "material_type": "elastomer",
+    "common_names": ["热塑性聚氨酯弹性体", "TPU", "thermoplastic polyurethane"],
+    "ftir_peaks": [
+      {"wavenumber": 3320, "assignment": "N-H 伸缩振动（氨基甲酸酯）", "intensity": "强"},
+      {"wavenumber": 2940, "assignment": "CH2 伸缩振动", "intensity": "强"},
+      {"wavenumber": 1730, "assignment": "C=O 酯基（软段，若为聚酯型）", "intensity": "强"},
+      {"wavenumber": 1700, "assignment": "C=O 氨基甲酸酯（N-H 键合）", "intensity": "强"},
+      {"wavenumber": 1597, "assignment": "N-H 弯曲+苯环（若含MDI）", "intensity": "中"},
+      {"wavenumber": 1540, "assignment": "N-H 弯曲+C-N 伸缩（氨酯Ⅱ带）", "intensity": "强"},
+      {"wavenumber": 1230, "assignment": "C-N 伸缩+N-H 弯曲", "intensity": "中"},
+      {"wavenumber": 1080, "assignment": "C-O-C 醚键（软段，聚醚型）", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "150-220°C（硬段熔点）", "tg_range": "-40 to -50°C（软段）", "delta_h_range": "10-40 J/g"},
+    "tga_characteristics": {"onset_decomposition": "280-350°C", "two_step": "硬段先分解，软段后分解"},
+    "鉴别要点": "3320(N-H)+1700(C=O 氨酯)+1540(酰胺Ⅱ)是TPU三特征峰；区分聚酯型(1730强)和聚醚型(1080强)",
+    "常见混淆": ["PA（无1700氨酯峰）", "PU发泡（峰相似但形态不同）"]
+  },
+
+  "NBR": {
+    "material_type": "elastomer",
+    "common_names": ["丁腈橡胶", "NBR", "nitrile rubber"],
+    "ftir_peaks": [
+      {"wavenumber": 2236, "assignment": "C≡N 腈基伸缩振动（强特征峰）", "intensity": "中强"},
+      {"wavenumber": 2920, "assignment": "CH2 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2848, "assignment": "CH2 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1640, "assignment": "C=C 残余双键（交联度越高越弱）", "intensity": "弱"},
+      {"wavenumber": 970, "assignment": "反式 CH=CH 面外弯曲", "intensity": "中"},
+      {"wavenumber": 930, "assignment": "乙烯基 =CH2 弯曲", "intensity": "弱"}
+    ],
+    "dsc_parameters": {"tm_range": "无结晶", "tg_range": "-40 to -10°C（随AN含量升高）", "delta_h_range": "0"},
+    "tga_characteristics": {"onset_decomposition": "350-420°C", "residue": "2-15%（炭黑）"},
+    "鉴别要点": "2236 cm⁻¹ 腈基峰是最强特征（与ABS相似但为橡胶态）；Tg随丙烯腈含量变化",
+    "常见混淆": ["ABS（ABS是硬质，NBR为弹性体）", "HNBR（腈基峰相似但氢化后C=C消失）"]
+  },
+
+  "CR": {
+    "material_type": "elastomer",
+    "common_names": ["氯丁橡胶", "CR", "neoprene", "polychloroprene"],
+    "ftir_peaks": [
+      {"wavenumber": 2920, "assignment": "CH2 伸缩", "intensity": "强"},
+      {"wavenumber": 1660, "assignment": "C=C 伸缩振动", "intensity": "中"},
+      {"wavenumber": 1440, "assignment": "CH2 弯曲+C-Cl", "intensity": "中"},
+      {"wavenumber": 1270, "assignment": "C-Cl 伸缩振动", "intensity": "强"},
+      {"wavenumber": 831, "assignment": "=CH 面外弯曲（α-氯）", "intensity": "强"},
+      {"wavenumber": 690, "assignment": "C-Cl 伸缩振动（特征）", "intensity": "强"}
+    ],
+    "dsc_parameters": {"tm_range": "约38°C（结晶）", "tg_range": "-40 to -45°C", "delta_h_range": "小"},
+    "tga_characteristics": {"onset_decomposition": "300-380°C（HCl脱除）"},
+    "鉴别要点": "690/1270 cm⁻¹ C-Cl峰+1660 C=C；与PVC类似但有不饱和峰；燃烧有HCl气味",
+    "常见混淆": ["PVC（CR有C=C峰）", "EPDM（CR有C-Cl特征）"]
+  },
+
+  "VMQ": {
+    "material_type": "silicone_elastomer",
+    "common_names": ["硅橡胶", "VMQ", "硅基橡胶", "silicone rubber", "PDMS"],
+    "ftir_peaks": [
+      {"wavenumber": 3000, "assignment": "Si-CH3 的 C-H 伸缩", "intensity": "中"},
+      {"wavenumber": 1260, "assignment": "Si-CH3 对称弯曲（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1090, "assignment": "Si-O-Si 反对称伸缩（强宽峰）", "intensity": "很强"},
+      {"wavenumber": 1020, "assignment": "Si-O-Si 伸缩", "intensity": "强"},
+      {"wavenumber": 800, "assignment": "Si-C 伸缩+CH3 摇摆（特征峰）", "intensity": "强"},
+      {"wavenumber": 690, "assignment": "Si-O 弯曲振动", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "无明确熔点", "tg_range": "-125 to -115°C（极低）", "delta_h_range": "很小"},
+    "tga_characteristics": {"onset_decomposition": "500-600°C（高热稳定性）", "residue": "30-60%（SiO2）"},
+    "鉴别要点": "1260(Si-CH3)+1090(Si-O-Si)+800 cm⁻¹ 三强峰是硅橡胶绝对特征；TGA残留高为SiO2；极低Tg",
+    "常见混淆": "无明显混淆，特征峰独特",
+    "污染识别": "1260 cm⁻¹ 出现在其他材料谱图中提示硅油污染"
+  },
+
+  "FKM": {
+    "material_type": "fluoroelastomer",
+    "common_names": ["氟橡胶", "FKM", "Viton", "fluorocarbon rubber"],
+    "ftir_peaks": [
+      {"wavenumber": 1400, "assignment": "CF2 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1215, "assignment": "CF2 反对称伸缩（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1145, "assignment": "CF2 对称伸缩", "intensity": "很强"},
+      {"wavenumber": 880, "assignment": "CF2/CF3 弯曲振动", "intensity": "强"},
+      {"wavenumber": 580, "assignment": "C-F 伸缩振动", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "150-200°C（结晶）", "tg_range": "-20 to -40°C", "delta_h_range": "小"},
+    "tga_characteristics": {"onset_decomposition": "450-550°C（极高热稳定性）", "residue": "<5%"},
+    "鉴别要点": "1215/1145 cm⁻¹ 强CF2伸缩峰是最显著特征；TGA高温分解（>450°C）；无C-H峰",
+    "常见混淆": ["PTFE（峰位相似但FKM有C-H）", "PVDF（峰型不同）"]
+  },
+
+  "SEBS": {
+    "material_type": "thermoplastic_elastomer",
+    "common_names": ["氢化苯乙烯-乙烯/丁烯-苯乙烯嵌段共聚物", "SEBS", "SBS（氢化前）"],
+    "ftir_peaks": [
+      {"wavenumber": 3025, "assignment": "苯环 C-H（苯乙烯段）", "intensity": "中"},
+      {"wavenumber": 2920, "assignment": "CH2/CH3 伸缩（乙烯/丁烯段）", "intensity": "强"},
+      {"wavenumber": 1600, "assignment": "苯环骨架（苯乙烯段）", "intensity": "强"},
+      {"wavenumber": 1492, "assignment": "苯环骨架", "intensity": "强"},
+      {"wavenumber": 758, "assignment": "苯环单取代面外弯曲", "intensity": "强"},
+      {"wavenumber": 700, "assignment": "苯环单取代面外弯曲", "intensity": "强"},
+      {"wavenumber": 720, "assignment": "CH2 长链摇摆（乙烯/丁烯段）", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "无明确结晶峰（弹性体态）", "tg_range": "-60°C（EB段）/+95°C（PS段）", "delta_h_range": "很小"},
+    "tga_characteristics": {"onset_decomposition": "350-420°C"},
+    "鉴别要点": "苯环700/758峰（PS段）+脂肪烃2920峰（EB段）组合；无双键峰（与SBS区别：SBS有968 cm⁻¹）",
+    "常见混淆": ["PS（无脂肪烃强峰）", "TPO（无苯环峰）", "SBS（有968反式双键峰）"]
+  },
+
+  "EVA": {
+    "material_type": "copolymer",
+    "common_names": ["乙烯-醋酸乙烯共聚物", "EVA", "ethylene vinyl acetate"],
+    "ftir_peaks": [
+      {"wavenumber": 2920, "assignment": "CH2 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2850, "assignment": "CH2 对称伸缩", "intensity": "中强"},
+      {"wavenumber": 1740, "assignment": "C=O 酯基伸缩（VA段特征）", "intensity": "强"},
+      {"wavenumber": 1237, "assignment": "C-O-C 伸缩（乙酸酯）", "intensity": "中强"},
+      {"wavenumber": 1020, "assignment": "C-O 伸缩", "intensity": "中"},
+      {"wavenumber": 720, "assignment": "CH2 摇摆（PE段）", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "60-95°C（随VA含量降低）", "tg_range": "-30 to -40°C", "delta_h_range": "20-80 J/g"},
+    "tga_characteristics": {"onset_decomposition": "300-380°C（乙酸分解）", "two_step": "VA段先分解"},
+    "鉴别要点": "1740 cm⁻¹ 酯C=O+720 CH2；VA含量越高1740峰越强；TGA两步分解",
+    "常见混淆": ["PE（无酯基峰）", "PVC（峰位不同）"]
+  },
+
+  "PTFE": {
+    "material_type": "fluoropolymer",
+    "common_names": ["聚四氟乙烯", "PTFE", "特氟龙"],
+    "ftir_peaks": [
+      {"wavenumber": 1210, "assignment": "CF2 反对称伸缩（极强）", "intensity": "极强"},
+      {"wavenumber": 1150, "assignment": "CF2 对称伸缩（极强）", "intensity": "极强"},
+      {"wavenumber": 640, "assignment": "CF2 弯曲振动", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "325-330°C", "tg_range": "不适用", "delta_h_range": "40-60 J/g"},
+    "tga_characteristics": {"onset_decomposition": "500-550°C（极高热稳定性）", "residue": "<1%"},
+    "鉴别要点": "1210/1150 cm⁻¹ 两极强CF2峰几乎无其他峰；ATR测试困难（需KBr压片）；极高Tm",
+    "常见混淆": ["FKM（FKM有C-H峰）", "PVDF（峰型不同，有C-H峰）"]
+  },
+
+  "PEEK": {
+    "material_type": "high_performance_plastic",
+    "common_names": ["聚醚醚酮", "PEEK", "polyether ether ketone"],
+    "ftir_peaks": [
+      {"wavenumber": 1650, "assignment": "C=O 酮基伸缩振动（特征峰）", "intensity": "强"},
+      {"wavenumber": 1595, "assignment": "苯环骨架振动", "intensity": "强"},
+      {"wavenumber": 1490, "assignment": "苯环骨架振动", "intensity": "强"},
+      {"wavenumber": 1220, "assignment": "C-O-C 醚键伸缩", "intensity": "很强"},
+      {"wavenumber": 1165, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 930, "assignment": "苯环面外弯曲", "intensity": "中"},
+      {"wavenumber": 770, "assignment": "苯环面外弯曲", "intensity": "中"}
+    ],
+    "dsc_parameters": {"tm_range": "340-345°C", "tg_range": "143-145°C", "delta_h_range": "20-40 J/g"},
+    "tga_characteristics": {"onset_decomposition": "550-600°C（极高热稳定性）", "residue": "40-60%"},
+    "鉴别要点": "1650(C=O)+1220(C-O-C)是PEEK特征；极高Tm ~343°C；耐化学品性极强",
+    "常见混淆": ["PEK（结构相似）", "PPS（无酮基峰）"]
+  }
+}
