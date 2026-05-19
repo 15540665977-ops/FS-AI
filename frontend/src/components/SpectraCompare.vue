@@ -154,6 +154,7 @@ function redraw() {
   const W     = canvas.width
   const H     = canvas.height
   ctx.clearRect(0, 0, W, H)
+  ctx.setLineDash([])  // 每次重绘前重置虚线状态，防止上次异常中断留下残留
 
   const plotH  = H * (1 - TOP_M - BOTTOM_M)
   const plotY0 = H * TOP_M   // 透过率 100% 对应的 Y 像素
@@ -249,6 +250,11 @@ function onMouseMove(e) {
 watch(() => props.suggestedMaterial, (val) => {
   selectedId.value = val
   loadStandardPeaks(val)
+})
+
+// ── 图像 URL 变化时重置错误状态 ──────────────────────────────────
+watch(currentImageUrl, () => {
+  imgError.value = false
 })
 
 // ── 初始化 ───────────────────────────────────────────────────────

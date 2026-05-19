@@ -292,7 +292,7 @@ async function submitSingle() {
         try {
           const p = JSON.parse(line.slice(6))
           if (p.content)                    { ai.content += p.content; scroll() }
-          else if (p.type === 'spectra_data') { ai.spectraData = p; scroll() }
+          else if (p.type === 'spectra_data' && Array.isArray(p.observed_peaks)) { ai.spectraData = p; scroll() }
           else if (p.done)                  { ai.caseNo = p.case_no; loadCases() }
           else if (p.error)                 { ai.content += `\n⚠️ ${p.error}` }
         } catch {}
