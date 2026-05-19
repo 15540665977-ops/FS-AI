@@ -102,6 +102,15 @@
         </div>
       </div>
 
+      <!-- 联合分析开关（有文件时显示） -->
+      <div v-if="fileEntries.length" class="joint-row">
+        <el-switch
+          v-model="jointMode"
+          active-text="联合分析模式（所有文件属于同一材料）"
+          size="small"
+        />
+      </div>
+
       <!-- 输入行 -->
       <div class="input-row">
         <!-- 上传按钮 -->
@@ -181,13 +190,14 @@ import SpectraCompare from '../components/SpectraCompare.vue'
 marked.setOptions({ breaks: true, gfm: true })
 
 // ── 常量 ─────────────────────────────────────────────
-const TYPE_LABEL = { general: '通用', failure: '失效分析', consistency: '一致性检验' }
+const TYPE_LABEL = { general: '通用', failure: '失效分析', consistency: '一致性检验', joint: '联合分析' }
 
 // ── 状态 ─────────────────────────────────────────────
 const messages    = ref([])
 const fileEntries = ref([])   // { name, preview|null, raw }
 const inputText   = ref('')
 const analysisType = ref('general')
+const jointMode   = ref(false)
 const loading     = ref(false)
 const drawerOpen  = ref(false)
 const irViewerOpen = ref(false)
@@ -239,7 +249,9 @@ async function loadCases() {
 // ── 提交 ─────────────────────────────────────────────
 async function submit() {
   if (!fileEntries.value.length || loading.value) return
-  if (fileEntries.value.length >= 2) {
+  if (jointMode.value) {
+    await submitJoint()
+  } else if (fileEntries.value.length >= 2) {
     await submitCompare()
   } else {
     await submitSingle()
@@ -276,6 +288,65 @@ async function submitSingle() {
 
   try {
     const resp = await fetch('/api/v1/chat/stream', { method:'POST', body:fd, signal:abortCtrl.signal })
+    if (!resp.ok) { ai.content = `请求失败 (${resp.status})`; return }
+
+    const reader = resp.body.getReader()
+    const dec = new TextDecoder()
+    let buf = ''
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buf += dec.decode(value, { stream: true })
+      const lines = buf.split('\n'); buf = lines.pop()
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue
+        try {
+          const p = JSON.parse(line.slice(6))
+          if (p.content)                    { ai.content += p.content; scroll() }
+          else if (p.type === 'spectra_data' && Array.isArray(p.observed_peaks)) { ai.spectraData = p; scroll() }
+          else if (p.done)                  { ai.caseNo = p.case_no; loadCases() }
+          else if (p.error)                 { ai.content += `\n⚠️ ${p.error}` }
+        } catch {}
+      }
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError') ai.content = `连接失败：${e.message}`
+  } finally {
+    loading.value = false
+    ai.streaming = false
+    scroll()
+  }
+}
+
+async function submitJoint() {
+  // 用户消息（展示所有文件）
+  messages.value.push({
+    role: 'user',
+    previews: fileEntries.value.map(f => f.preview).filter(Boolean),
+    pdfCount: fileEntries.value.filter(f => !f.preview).length,
+    text: inputText.value || null,
+    type: 'joint',
+  })
+
+  const ai = { role: 'assistant', content: '', streaming: true, caseNo: null, spectraData: null }
+  messages.value.push(ai)
+  scroll()
+
+  const fd = new FormData()
+  fileEntries.value.forEach(f => fd.append('files', f.raw))
+  fd.append('analysis_type', 'joint')
+  if (inputText.value) fd.append('failure_background', inputText.value)
+
+  fileEntries.value = []
+  inputText.value = ''
+  jointMode.value = false
+
+  loading.value = true
+  abortCtrl = new AbortController()
+
+  try {
+    const resp = await fetch('/api/v1/chat/stream', { method: 'POST', body: fd, signal: abortCtrl.signal })
     if (!resp.ok) { ai.content = `请求失败 (${resp.status})`; return }
 
     const reader = resp.body.getReader()
@@ -630,6 +701,10 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 10px;
+}
+
+.joint-row {
+  padding: 6px 0 2px;
 }
 
 .file-chip {
