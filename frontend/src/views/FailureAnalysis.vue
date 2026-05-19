@@ -4,9 +4,14 @@
     <!-- ── 顶栏 ── -->
     <header class="topbar">
       <span class="brand">谱图分析</span>
-      <el-button text size="small" class="history-btn" @click="drawerOpen = true">
-        历史记录
-      </el-button>
+      <div class="topbar-actions">
+        <el-button text size="small" class="history-btn" @click="irViewerOpen = true">
+          知识库
+        </el-button>
+        <el-button text size="small" class="history-btn" @click="drawerOpen = true">
+          历史记录
+        </el-button>
+      </div>
     </header>
 
     <!-- ── 主体 ── -->
@@ -44,11 +49,35 @@
           </template>
 
           <!-- AI -->
-          <template v-else>
+          <template v-else-if="m.role === 'assistant'">
             <div class="msg-bubble ai-bubble">
               <div class="ai-content" v-html="render(m.content)"></div>
               <span v-if="m.streaming" class="cursor">▍</span>
+              <SpectraCompare
+                v-if="m.spectraData"
+                :observed-peaks="m.spectraData.observed_peaks"
+                :suggested-material="m.spectraData.suggested_material"
+                :image-urls="m.spectraData.image_urls"
+              />
               <div v-if="m.caseNo" class="case-no">已存档 · {{ m.caseNo }}</div>
+            </div>
+          </template>
+
+          <!-- 多图对比 -->
+          <template v-else-if="m.role === 'compare'">
+            <div class="compare-grid">
+              <div v-for="(item, ci) in m.items" :key="ci" class="compare-col">
+                <div class="cc-head">
+                  <img v-if="item.preview" :src="item.preview" class="cc-thumb" @click="lightbox = item.preview" />
+                  <el-icon v-else class="cc-icon"><Document /></el-icon>
+                  <span class="cc-name">{{ shortName(item.name) }}</span>
+                </div>
+                <div class="cc-body">
+                  <div class="ai-content" v-html="render(item.content)" />
+                  <span v-if="item.streaming" class="cursor">▍</span>
+                  <div v-if="item.caseNo" class="case-no">已存档 · {{ item.caseNo }}</div>
+                </div>
+              </div>
             </div>
           </template>
 
@@ -135,6 +164,9 @@
 
     <!-- 大图预览 -->
     <el-image-viewer v-if="lightbox" :url-list="[lightbox]" @close="lightbox = null" />
+
+    <!-- 知识库 IR 查看器 -->
+    <IRViewer v-model:open="irViewerOpen" />
   </div>
 </template>
 
@@ -143,6 +175,8 @@ import { ref, nextTick, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Document, Close, Plus, Paperclip, Position, VideoPause } from '@element-plus/icons-vue'
 import { marked } from 'marked'
+import IRViewer from '../components/IRViewer.vue'
+import SpectraCompare from '../components/SpectraCompare.vue'
 
 marked.setOptions({ breaks: true, gfm: true })
 
@@ -156,6 +190,7 @@ const inputText   = ref('')
 const analysisType = ref('general')
 const loading     = ref(false)
 const drawerOpen  = ref(false)
+const irViewerOpen = ref(false)
 const cases       = ref([])
 const lightbox    = ref(null)
 const msgRef      = ref(null)
@@ -204,7 +239,14 @@ async function loadCases() {
 // ── 提交 ─────────────────────────────────────────────
 async function submit() {
   if (!fileEntries.value.length || loading.value) return
+  if (fileEntries.value.length >= 2) {
+    await submitCompare()
+  } else {
+    await submitSingle()
+  }
+}
 
+async function submitSingle() {
   // 用户消息
   messages.value.push({
     role: 'user',
@@ -215,7 +257,7 @@ async function submit() {
   })
 
   // AI 占位
-  const ai = { role: 'assistant', content: '', streaming: true, caseNo: null }
+  const ai = { role: 'assistant', content: '', streaming: true, caseNo: null, spectraData: null }
   messages.value.push(ai)
   scroll()
 
@@ -249,9 +291,10 @@ async function submit() {
         if (!line.startsWith('data: ')) continue
         try {
           const p = JSON.parse(line.slice(6))
-          if (p.content)       { ai.content += p.content; scroll() }
-          else if (p.done)     { ai.caseNo = p.case_no; loadCases() }
-          else if (p.error)    { ai.content += `\n⚠️ ${p.error}` }
+          if (p.content)                    { ai.content += p.content; scroll() }
+          else if (p.type === 'spectra_data') { ai.spectraData = p; scroll() }
+          else if (p.done)                  { ai.caseNo = p.case_no; loadCases() }
+          else if (p.error)                 { ai.content += `\n⚠️ ${p.error}` }
         } catch {}
       }
     }
@@ -260,6 +303,87 @@ async function submit() {
   } finally {
     loading.value = false
     ai.streaming = false
+    scroll()
+  }
+}
+
+async function submitCompare() {
+  const entries = [...fileEntries.value]
+  const hint = inputText.value
+  fileEntries.value = []
+  inputText.value = ''
+
+  // 用户消息
+  messages.value.push({
+    role: 'user',
+    previews: entries.map(f => f.preview).filter(Boolean),
+    pdfCount: entries.filter(f => !f.preview).length,
+    text: hint || null,
+    type: analysisType.value,
+  })
+
+  // 对比占位（每文件一列）
+  const compareMsg = {
+    role: 'compare',
+    items: entries.map(f => ({
+      name: f.name,
+      preview: f.preview,
+      content: '',
+      streaming: true,
+      caseNo: null,
+    })),
+  }
+  messages.value.push(compareMsg)
+  scroll()
+
+  const fd = new FormData()
+  entries.forEach(f => fd.append('files', f.raw))
+  fd.append('analysis_type', analysisType.value)
+  if (hint) fd.append('failure_background', hint)
+
+  loading.value = true
+  abortCtrl = new AbortController()
+
+  try {
+    const resp = await fetch('/api/v1/chat/compare', { method:'POST', body:fd, signal:abortCtrl.signal })
+    if (!resp.ok) {
+      compareMsg.items.forEach(it => { it.content = `请求失败 (${resp.status})` })
+      return
+    }
+
+    const reader = resp.body.getReader()
+    const dec = new TextDecoder()
+    let buf = ''
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buf += dec.decode(value, { stream: true })
+      const lines = buf.split('\n'); buf = lines.pop()
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue
+        try {
+          const p = JSON.parse(line.slice(6))
+          if (p.idx !== undefined && p.content !== undefined) {
+            compareMsg.items[p.idx].content += p.content
+            scroll()
+          } else if (p.idx !== undefined && p.error) {
+            compareMsg.items[p.idx].content += `\n⚠️ ${p.error}`
+          } else if (p.done) {
+            ;(p.case_nos || []).forEach((cn, i) => {
+              if (cn && compareMsg.items[i]) compareMsg.items[i].caseNo = cn
+            })
+            loadCases()
+          }
+        } catch {}
+      }
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError')
+      compareMsg.items.forEach(it => { if (!it.content) it.content = `连接失败：${e.message}` })
+  } finally {
+    loading.value = false
+    compareMsg.items.forEach(it => { it.streaming = false })
     scroll()
   }
 }
@@ -293,6 +417,7 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
   flex-shrink: 0;
 }
 .brand { font-size: 15px; font-weight: 700; color: #d0dff5; letter-spacing: 0.5px; }
+.topbar-actions { display: flex; gap: 4px; }
 .history-btn { color: #6a7d9a !important; }
 
 /* ── 主体 ── */
@@ -322,6 +447,7 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
 .msg-row { display: flex; }
 .msg-row.user      { justify-content: flex-end; }
 .msg-row.assistant { justify-content: flex-start; }
+.msg-row.compare   { width: 100%; }
 
 .msg-bubble {
   max-width: 76%;
@@ -356,6 +482,59 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 .case-no { margin-top: 10px; font-size: 12px; color: #3d6a9e; border-top: 1px solid #1e2840; padding-top: 8px; }
+
+/* ── 多图对比网格 ── */
+.compare-grid {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  align-items: flex-start;
+}
+.compare-col {
+  min-width: 320px;
+  max-width: 500px;
+  flex: 1;
+  border: 1px solid #1e2840;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #161d30;
+  display: flex;
+  flex-direction: column;
+}
+.cc-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #1a2240;
+  border-bottom: 1px solid #1e2840;
+  flex-shrink: 0;
+}
+.cc-thumb {
+  width: 44px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: zoom-in;
+  border: 1px solid #2a3d60;
+}
+.cc-icon { font-size: 20px; color: #4d9cf5; }
+.cc-name {
+  font-size: 12px;
+  color: #8a9bb5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.cc-body {
+  padding: 14px;
+  max-height: 65vh;
+  overflow-y: auto;
+  flex: 1;
+}
 
 /* ── Markdown 渲染样式 ── */
 :deep(.ai-content) {
