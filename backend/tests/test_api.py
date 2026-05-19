@@ -107,3 +107,69 @@ def test_list_cases_empty(client):
 def test_get_nonexistent_case(client):
     resp = client.get("/api/v1/cases/FA-2026-999")
     assert resp.status_code == 404
+
+
+# ── chat SSE ──
+
+@pytest.fixture
+def chat_client(test_db_override):
+    """独立客户端，包含 chat 路由"""
+    from fastapi import FastAPI
+    from fastapi.middleware.cors import CORSMiddleware
+    from api.chat import router as chat_router
+
+    test_app = FastAPI()
+    test_app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    test_app.include_router(chat_router, prefix="/api/v1/chat")
+    test_app.dependency_overrides[get_db] = test_db_override
+    yield TestClient(test_app)
+    test_app.dependency_overrides.clear()
+
+
+def test_stream_emits_spectra_data_event(chat_client, tmp_path):
+    """流结束后应发出 spectra_data SSE 事件"""
+    from PIL import Image
+    from unittest.mock import AsyncMock, MagicMock
+    img_path = tmp_path / "ir.png"
+    Image.new("RGB", (100, 80), "white").save(img_path)
+
+    fake_text_chunks = ["PP", " material"]
+    fake_spectra = {
+        "suggested_material": "PP",
+        "observed_peaks": [{"wavenumber": 2920, "assignment": "CH2", "intensity": "强"}],
+    }
+
+    async def fake_stream(*a, **kw):
+        for c in fake_text_chunks:
+            yield c
+
+    with patch("api.chat.get_orchestrator") as mock_get_orch:
+        mock_orch = MagicMock()
+        mock_orch.analyze_stream = fake_stream
+        mock_orch.extract_peaks_structured = AsyncMock(return_value=fake_spectra)
+        mock_get_orch.return_value = mock_orch
+
+        with open(img_path, "rb") as f:
+            resp = chat_client.post(
+                "/api/v1/chat/stream",
+                files={"files": ("ir.png", f, "image/png")},
+                data={"analysis_type": "general"},
+            )
+
+    assert resp.status_code == 200
+    body = resp.text
+    spectra_lines = [
+        l for l in body.splitlines()
+        if l.startswith("data:") and '"spectra_data"' in l
+    ]
+    assert len(spectra_lines) == 1, f"期望 1 条 spectra_data 事件，实际：{spectra_lines}"
+    import json
+    payload = json.loads(spectra_lines[0][len("data: "):])
+    assert payload["type"] == "spectra_data"
+    assert payload["suggested_material"] == "PP"
+    assert payload["observed_peaks"][0]["wavenumber"] == 2920
