@@ -5,6 +5,7 @@
     <div class="sc-header">
       <span class="sc-label">标准谱图：</span>
       <el-select
+        v-if="props.standardMaterials.length === 0"
         v-model="selectedId"
         filterable
         clearable
@@ -21,7 +22,17 @@
         />
       </el-select>
       <div class="sc-legend">
-        <span class="leg-std">━━ 标准</span>
+        <template v-if="props.standardMaterials.length > 0">
+          <span
+            v-for="(m, i) in props.standardMaterials"
+            :key="m.id"
+            class="leg-std"
+            :style="{ color: CURVE_COLORS[i % CURVE_COLORS.length] }"
+          >━━ {{ m.label || m.id }}</span>
+        </template>
+        <template v-else>
+          <span class="leg-std">━━ 标准</span>
+        </template>
         <span class="leg-obs">┃ 观测峰</span>
       </div>
     </div>
@@ -48,7 +59,7 @@
         <span class="tt-asgn">{{ ttData.assignment }}</span>
         <span class="tt-int">强度：{{ ttData.intensity }}</span>
         <span class="tt-src" :class="ttData.source === 'observed' ? 'src-obs' : 'src-std'">
-          {{ ttData.source === 'observed' ? '观测峰' : `标准 (${selectedId})` }}
+          {{ ttData.source === 'observed' ? '观测峰' : (ttData.materialLabel ? `${ttData.materialLabel} 参考` : `标准 (${selectedId})`) }}
         </span>
       </div>
     </div>
@@ -75,7 +86,16 @@ const props = defineProps({
   observedPeaks:     { type: Array,  default: () => [] },
   suggestedMaterial: { type: String, default: null },
   imageUrls:         { type: Array,  default: () => [] },
+  standardMaterials: { type: Array,  default: () => [] },  // [{id, label}] for cross-compare mode
 })
+
+const CURVE_COLORS = [
+  'rgba(77,  156, 245, 0.75)',  // 蓝
+  'rgba(52,  211, 153, 0.75)',  // 绿
+  'rgba(251, 146,  60, 0.75)',  // 橙
+  'rgba(192, 132, 252, 0.75)',  // 紫
+  'rgba(251, 191,  36, 0.75)',  // 黄
+]
 
 // ── 坐标边距（匹配主流 FTIR 软件报告图布局） ────────────────────
 const LEFT_M   = 0.10
@@ -90,6 +110,7 @@ const FTIR_AMP = { '极强': 95, '很强': 85, '强': 60, '中': 35, '弱': 18, 
 const entries       = ref([])
 const selectedId    = ref(props.suggestedMaterial)
 const standardPeaks = ref([])
+const allStandardPeaks = ref([])  // multi-mode: [{...peak, materialId, materialLabel, color}]
 const currentImgIdx = ref(0)
 const imgError      = ref(false)
 const wrapRef       = ref(null)
@@ -128,6 +149,26 @@ function onMaterialChange(id) {
   loadStandardPeaks(id)
 }
 
+async function loadMultiMaterialPeaks(materials) {
+  allStandardPeaks.value = []
+  if (!materials.length) { redraw(); return }
+  await Promise.all(materials.map(async (m, i) => {
+    try {
+      const r = await fetch(`/api/v1/knowledge/entry/${m.id}`)
+      const d = await r.json()
+      const color = CURVE_COLORS[i % CURVE_COLORS.length]
+      const peaks = (d.ftir_peaks || []).map(p => ({
+        ...p,
+        materialId:    m.id,
+        materialLabel: m.label || m.id,
+        color,
+      }))
+      allStandardPeaks.value = [...allStandardPeaks.value, ...peaks]
+    } catch {}
+  }))
+  redraw()
+}
+
 // ── 波数 ↔ Canvas X 坐标互换（4000 在左，400 在右） ─────────────
 function wnToX(wn, W) {
   const plotW = W * (1 - LEFT_M - RIGHT_M)
@@ -139,6 +180,29 @@ function xToWn(x, W) {
   const plotW = W * (1 - LEFT_M - RIGHT_M)
   const plotX = W * LEFT_M
   return 4000 - ((x - plotX) / plotW) * (4000 - 400)
+}
+
+// ── 曲线绘制辅助 ────────────────────────────────────────────────
+function drawSingleCurve(ctx, peaks, color, W, H, plotH, plotY0) {
+  const wavenumbers = []
+  for (let v = 4000; v >= 400; v -= 4) wavenumbers.push(v)
+  const transmittances = wavenumbers.map(wn => {
+    let absorbance = 0
+    for (const p of peaks) {
+      absorbance += (FTIR_AMP[p.intensity] ?? 40) *
+        Math.exp(-((wn - p.wavenumber) ** 2) / (2 * 18 ** 2))
+    }
+    return Math.max(0, 100 - absorbance)
+  })
+  ctx.beginPath()
+  ctx.strokeStyle = color
+  ctx.lineWidth   = 1.5
+  wavenumbers.forEach((wn, i) => {
+    const cx = wnToX(wn, W)
+    const cy = plotY0 + (1 - transmittances[i] / 100) * plotH
+    i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy)
+  })
+  ctx.stroke()
 }
 
 // ── 重绘 Canvas 叠加层 ──────────────────────────────────────────
@@ -154,37 +218,29 @@ function redraw() {
   const W     = canvas.width
   const H     = canvas.height
   ctx.clearRect(0, 0, W, H)
-  ctx.setLineDash([])  // 每次重绘前重置虚线状态，防止上次异常中断留下残留
+  ctx.setLineDash([])
 
   const plotH  = H * (1 - TOP_M - BOTTOM_M)
-  const plotY0 = H * TOP_M   // 透过率 100% 对应的 Y 像素
+  const plotY0 = H * TOP_M
 
-  // 绘制标准谱图（高斯合成曲线，蓝色半透明）
-  if (standardPeaks.value.length) {
-    const wavenumbers = []
-    for (let v = 4000; v >= 400; v -= 4) wavenumbers.push(v)
-
-    const transmittances = wavenumbers.map(wn => {
-      let absorbance = 0
-      for (const p of standardPeaks.value) {
-        absorbance += (FTIR_AMP[p.intensity] ?? 40) *
-          Math.exp(-((wn - p.wavenumber) ** 2) / (2 * 18 ** 2))
+  // 多曲线模式（cross-compare）
+  if (allStandardPeaks.value.length > 0) {
+    const byMaterial = new Map()
+    for (const p of allStandardPeaks.value) {
+      if (!byMaterial.has(p.materialId)) {
+        byMaterial.set(p.materialId, { peaks: [], color: p.color })
       }
-      return Math.max(0, 100 - absorbance)
-    })
-
-    ctx.beginPath()
-    ctx.strokeStyle = 'rgba(77, 156, 245, 0.75)'
-    ctx.lineWidth   = 1.5
-    wavenumbers.forEach((wn, i) => {
-      const cx = wnToX(wn, W)
-      const cy = plotY0 + (1 - transmittances[i] / 100) * plotH
-      i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy)
-    })
-    ctx.stroke()
+      byMaterial.get(p.materialId).peaks.push(p)
+    }
+    for (const { peaks, color } of byMaterial.values()) {
+      drawSingleCurve(ctx, peaks, color, W, H, plotH, plotY0)
+    }
+  } else if (standardPeaks.value.length) {
+    // 单曲线模式（原有行为，蓝色）
+    drawSingleCurve(ctx, standardPeaks.value, 'rgba(77, 156, 245, 0.75)', W, H, plotH, plotY0)
   }
 
-  // 绘制观测峰（橙色竖虚线）
+  // 观测峰（橙色竖虚线）
   ctx.strokeStyle = 'rgba(245, 158, 11, 0.85)'
   ctx.lineWidth   = 1.5
   ctx.setLineDash([4, 3])
@@ -228,7 +284,10 @@ function onMouseMove(e) {
     const d = Math.abs(p.wavenumber - wn)
     if (d < minDist) { minDist = d; nearest = p; src = 'observed' }
   }
-  for (const p of standardPeaks.value) {
+  const peaksToCheck = allStandardPeaks.value.length > 0
+    ? allStandardPeaks.value
+    : standardPeaks.value
+  for (const p of peaksToCheck) {
     const d = Math.abs(p.wavenumber - wn)
     if (d < minDist) { minDist = d; nearest = p; src = 'standard' }
   }
@@ -251,6 +310,15 @@ watch(() => props.suggestedMaterial, (val) => {
   selectedId.value = val
   loadStandardPeaks(val)
 })
+
+watch(() => props.standardMaterials, (val) => {
+  if (val && val.length > 0) {
+    loadMultiMaterialPeaks(val)
+  } else {
+    allStandardPeaks.value = []
+    redraw()
+  }
+}, { immediate: true })
 
 // ── 图像 URL 变化时重置错误状态 ──────────────────────────────────
 watch(currentImageUrl, () => {
