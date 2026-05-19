@@ -258,37 +258,11 @@ async function submit() {
   }
 }
 
-async function submitSingle() {
-  // 用户消息
-  messages.value.push({
-    role: 'user',
-    previews: fileEntries.value.map(f => f.preview).filter(Boolean),
-    pdfCount: fileEntries.value.filter(f => !f.preview).length,
-    text: inputText.value || null,
-    type: analysisType.value,
-  })
-
-  // AI 占位
-  const ai = { role: 'assistant', content: '', streaming: true, caseNo: null, spectraData: null }
-  messages.value.push(ai)
-  scroll()
-
-  // FormData
-  const fd = new FormData()
-  fileEntries.value.forEach(f => fd.append('files', f.raw))
-  fd.append('analysis_type', analysisType.value)
-  if (inputText.value) fd.append('failure_background', inputText.value)
-
-  // 清空输入
-  fileEntries.value = []
-  inputText.value = ''
-
-  loading.value = true
+async function _streamRequest(fd, aiMsg) {
   abortCtrl = new AbortController()
-
   try {
-    const resp = await fetch('/api/v1/chat/stream', { method:'POST', body:fd, signal:abortCtrl.signal })
-    if (!resp.ok) { ai.content = `请求失败 (${resp.status})`; return }
+    const resp = await fetch('/api/v1/chat/stream', { method: 'POST', body: fd, signal: abortCtrl.signal })
+    if (!resp.ok) { aiMsg.content = `请求失败 (${resp.status})`; return }
 
     const reader = resp.body.getReader()
     const dec = new TextDecoder()
@@ -303,24 +277,48 @@ async function submitSingle() {
         if (!line.startsWith('data: ')) continue
         try {
           const p = JSON.parse(line.slice(6))
-          if (p.content)                    { ai.content += p.content; scroll() }
-          else if (p.type === 'spectra_data' && Array.isArray(p.observed_peaks)) { ai.spectraData = p; scroll() }
-          else if (p.done)                  { ai.caseNo = p.case_no; loadCases() }
-          else if (p.error)                 { ai.content += `\n⚠️ ${p.error}` }
+          if (p.content)                    { aiMsg.content += p.content; scroll() }
+          else if (p.type === 'spectra_data' && Array.isArray(p.observed_peaks)) { aiMsg.spectraData = p; scroll() }
+          else if (p.done)                  { aiMsg.caseNo = p.case_no; loadCases() }
+          else if (p.error)                 { aiMsg.content += `\n⚠️ ${p.error}` }
         } catch {}
       }
     }
   } catch (e) {
-    if (e.name !== 'AbortError') ai.content = `连接失败：${e.message}`
+    if (e.name !== 'AbortError') aiMsg.content = `连接失败：${e.message}`
   } finally {
     loading.value = false
-    ai.streaming = false
+    aiMsg.streaming = false
     scroll()
   }
 }
 
+async function submitSingle() {
+  messages.value.push({
+    role: 'user',
+    previews: fileEntries.value.map(f => f.preview).filter(Boolean),
+    pdfCount: fileEntries.value.filter(f => !f.preview).length,
+    text: inputText.value || null,
+    type: analysisType.value,
+  })
+
+  const ai = { role: 'assistant', content: '', streaming: true, caseNo: null, spectraData: null }
+  messages.value.push(ai)
+  scroll()
+
+  const fd = new FormData()
+  fileEntries.value.forEach(f => fd.append('files', f.raw))
+  fd.append('analysis_type', analysisType.value)
+  if (inputText.value) fd.append('failure_background', inputText.value)
+
+  fileEntries.value = []
+  inputText.value = ''
+  loading.value = true
+
+  await _streamRequest(fd, ai)
+}
+
 async function submitJoint() {
-  // 用户消息（展示所有文件）
   messages.value.push({
     role: 'user',
     previews: fileEntries.value.map(f => f.preview).filter(Boolean),
@@ -341,41 +339,9 @@ async function submitJoint() {
   fileEntries.value = []
   inputText.value = ''
   jointMode.value = false
-
   loading.value = true
-  abortCtrl = new AbortController()
 
-  try {
-    const resp = await fetch('/api/v1/chat/stream', { method: 'POST', body: fd, signal: abortCtrl.signal })
-    if (!resp.ok) { ai.content = `请求失败 (${resp.status})`; return }
-
-    const reader = resp.body.getReader()
-    const dec = new TextDecoder()
-    let buf = ''
-
-    while (true) {
-      const { done, value } = await reader.read()
-      if (done) break
-      buf += dec.decode(value, { stream: true })
-      const lines = buf.split('\n'); buf = lines.pop()
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue
-        try {
-          const p = JSON.parse(line.slice(6))
-          if (p.content)                    { ai.content += p.content; scroll() }
-          else if (p.type === 'spectra_data' && Array.isArray(p.observed_peaks)) { ai.spectraData = p; scroll() }
-          else if (p.done)                  { ai.caseNo = p.case_no; loadCases() }
-          else if (p.error)                 { ai.content += `\n⚠️ ${p.error}` }
-        } catch {}
-      }
-    }
-  } catch (e) {
-    if (e.name !== 'AbortError') ai.content = `连接失败：${e.message}`
-  } finally {
-    loading.value = false
-    ai.streaming = false
-    scroll()
-  }
+  await _streamRequest(fd, ai)
 }
 
 async function submitCompare() {
@@ -459,7 +425,7 @@ async function submitCompare() {
   }
 }
 
-function abort() { abortCtrl?.abort(); loading.value = false }
+function abort() { abortCtrl?.abort() }
 
 onMounted(loadCases)
 </script>
