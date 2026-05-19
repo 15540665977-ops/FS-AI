@@ -400,6 +400,8 @@ async def cross_compare(
         raise HTTPException(status_code=400, detail="未找到有效的谱图图像")
 
     materials_info, reference_context = _build_reference_context(ids, spec_type)
+    if not materials_info:
+        raise HTTPException(status_code=400, detail="未找到任何指定参考材料，请确认材料ID有效")
 
     async def event_stream():
         full_text: List[str] = []

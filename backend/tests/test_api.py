@@ -222,7 +222,10 @@ def test_cross_compare_emits_spectra_data_with_standard_materials(chat_client, t
         for c in fake_chunks:
             yield c
 
-    with patch("api.chat.get_orchestrator") as mock_get_orch:
+    fake_materials_info = [{"id": "PP", "label": "聚丙烯"}, {"id": "PA6", "label": "尼龙6"}]
+
+    with patch("api.chat.get_orchestrator") as mock_get_orch, \
+         patch("api.chat._build_reference_context", return_value=(fake_materials_info, "ref context")) as _:
         mock_orch = MagicMock()
         mock_orch.analyze_stream_cross_compare = fake_cross_stream
         mock_orch.extract_peaks_structured = AsyncMock(return_value=fake_spectra)
