@@ -152,20 +152,22 @@ function onMaterialChange(id) {
 async function loadMultiMaterialPeaks(materials) {
   allStandardPeaks.value = []
   if (!materials.length) { redraw(); return }
-  await Promise.all(materials.map(async (m, i) => {
+  const collected = await Promise.all(materials.map(async (m, i) => {
     try {
       const r = await fetch(`/api/v1/knowledge/entry/${m.id}`)
       const d = await r.json()
       const color = CURVE_COLORS[i % CURVE_COLORS.length]
-      const peaks = (d.ftir_peaks || []).map(p => ({
+      return (d.ftir_peaks || []).map(p => ({
         ...p,
         materialId:    m.id,
         materialLabel: m.label || m.id,
         color,
       }))
-      allStandardPeaks.value = [...allStandardPeaks.value, ...peaks]
-    } catch {}
+    } catch {
+      return []
+    }
   }))
+  allStandardPeaks.value = collected.flat()
   redraw()
 }
 
