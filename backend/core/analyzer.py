@@ -13,6 +13,7 @@ import httpx
 from core.prompts import PromptTemplates
 from core.rag import VectorRetriever
 from core.web_search import WebSearchClient
+from core.spectrum_extractor import SpectrumExtractor
 
 
 _MEDIA_TYPES = {
@@ -32,6 +33,13 @@ SYSTEM_PROMPT = """你是理想汽车非金属材料团队的谱图分析专家�
 4. 引用所依据的知识来源（本地知识库 / 标准谱图 / 联网文献）
 5. 最后给出推荐后续验证测试
 
+谱图曲线分析规范（必须遵守）：
+6. 必须分析图像中可见的所有吸收特征，包括图中未标注的峰
+7. 对每个显著峰描述：峰形（窄/宽/不对称/有肩峰）、相对强度
+8. 若提示词中提供了【图像曲线自动提取数据】，用该数值数据验证并补充目视观察结果；\
+自动提取峰位精度约±20~50 cm⁻¹，最终以图中已标注数值和目视读取为准
+9. 对于宽峰或重叠峰，明确指出可能存在多个组分叠加
+
 禁止使用模糊表述，如"可能"、"大约"、"类似"——用置信度标注代替。"""
 
 
@@ -43,6 +51,7 @@ class AnalysisOrchestrator:
         self._async_client: Optional[anthropic.AsyncAnthropic] = None
         self.retriever = VectorRetriever()
         self.web_search = WebSearchClient()
+        self.spectrum_extractor = SpectrumExtractor()
 
     @property
     def async_client(self) -> anthropic.AsyncAnthropic:
@@ -54,6 +63,14 @@ class AnalysisOrchestrator:
                 http_client=httpx.AsyncClient(),
             )
         return self._async_client
+
+    @async_client.setter
+    def async_client(self, value):
+        self._async_client = value
+
+    @async_client.deleter
+    def async_client(self):
+        self._async_client = None
 
     # ------------------------------------------------------------------
     # 图像处理
@@ -84,6 +101,47 @@ class AnalysisOrchestrator:
             })
         content.append({"type": "text", "text": prompt_text})
         return [{"role": "user", "content": content}]
+
+    # ------------------------------------------------------------------
+    # 谱图曲线预处理
+    # ------------------------------------------------------------------
+
+    def _extract_one(self, image_path: str, session_dir: str) -> dict:
+        """在线程中对单张图运行曲线提取（同步，供 to_thread 调用）"""
+        return self.spectrum_extractor.extract_and_annotate(image_path, session_dir)
+
+    async def _preprocess_spectra(
+        self, images: List[str], session_dir: str
+    ) -> tuple[List[str], str]:
+        """
+        并发对每张图运行谱图曲线提取。
+
+        Returns:
+            annotated_paths : 成功生成的标注图路径列表（与原图一起送给 Claude）
+            extraction_text : 格式化的数值摘要文本（插入提示词）
+        """
+        tasks = [
+            asyncio.to_thread(self._extract_one, img, session_dir)
+            for img in images
+        ]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        annotated_paths: List[str] = []
+        text_parts: List[str] = []
+
+        for i, res in enumerate(results):
+            if isinstance(res, Exception):
+                continue
+            ann = res.get("annotated_path")
+            if ann:
+                annotated_paths.append(ann)
+            summary = res.get("summary_text", "")
+            if summary and "提取失败" not in summary:
+                label = f"[图像 {i + 1}]" if len(images) > 1 else ""
+                text_parts.append(f"{label}\n{summary}".strip())
+
+        extraction_text = "\n\n".join(text_parts)
+        return annotated_paths, extraction_text
 
     # ------------------------------------------------------------------
     # 上下文构建
@@ -139,6 +197,7 @@ class AnalysisOrchestrator:
         failure_background: Optional[str],
         rag_context: str,
         web_context: str,
+        extraction_context: str = "",
     ) -> str:
         """组装发给 Claude 的用户文字部分"""
         parts = []
@@ -150,6 +209,8 @@ class AnalysisOrchestrator:
             parts.append(f"知识库参考：\n{rag_context}")
         if web_context:
             parts.append(f"联网文献补充：\n{web_context}")
+        if extraction_context:
+            parts.append(extraction_context)
 
         if analysis_type == "failure":
             parts.append("请对上传的谱图进行失效分析，对比失效件与好件差异，识别失效模式并给出推断依据及置信度。")
@@ -180,17 +241,84 @@ class AnalysisOrchestrator:
             material_hint: 用户提供的材料信息提示
             failure_background: 失效背景描述
         """
-        rag_context, web_context = await self._build_contexts(material_hint)
-        prompt_text = self._build_prompt_text(
-            analysis_type, material_hint, failure_background, rag_context, web_context
+        # 谱图曲线预处理与 RAG/Web 检索并发执行
+        session_dir = str(Path(images[0]).parent) if images else ""
+        (annotated_paths, extraction_context), (rag_context, web_context) = (
+            await asyncio.gather(
+                self._preprocess_spectra(images, session_dir),
+                self._build_contexts(material_hint),
+            )
         )
-        messages = self._build_vision_messages(images, prompt_text)
+
+        prompt_text = self._build_prompt_text(
+            analysis_type, material_hint, failure_background,
+            rag_context, web_context, extraction_context,
+        )
+        # 原始图 + 标注图（如有）一起送给 Claude
+        all_images = images + annotated_paths
+        messages = self._build_vision_messages(all_images, prompt_text)
 
         async with self.async_client.messages.stream(
             model="claude-sonnet-4-6",
-            max_tokens=4096,
+            max_tokens=6000,
             system=SYSTEM_PROMPT,
             messages=messages,
         ) as stream:
             async for text in stream.text_stream:
                 yield text
+
+    # ── 结构化峰位提取 ────────────────────────────────────────────────
+
+    async def extract_peaks_structured(
+        self,
+        images: List[str],
+        analysis_summary: str,
+    ) -> dict:
+        """
+        二次非流式调用：基于已完成的分析文本，从图像提取 FTIR 峰位 JSON。
+        任何错误均静默，返回 {"suggested_material": None, "observed_peaks": []}。
+        """
+        import json as _json
+        import re
+
+        prompt = (
+            "以下是对上方谱图的分析摘要：\n"
+            f"{analysis_summary[:2000]}\n\n"
+            "请基于谱图图像和上方分析，以 JSON 格式输出可识别的 FTIR 峰位。\n"
+            "只输出合法 JSON，不要任何其他文字：\n"
+            '{\n'
+            '  "suggested_material": "最可能的知识库材料ID（如 PP、PA6、EPDM），若不确定填 null",\n'
+            '  "observed_peaks": [\n'
+            '    {"wavenumber": 2920, "assignment": "CH₂ 反对称伸缩", "intensity": "很强"}\n'
+            '  ]\n'
+            '}'
+        )
+        _EMPTY = {"suggested_material": None, "observed_peaks": []}
+        try:
+            messages = self._build_vision_messages(images, prompt)
+            response = await self.async_client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=1000,
+                messages=messages,
+            )
+            text = response.content[0].text.strip()
+            match = re.search(r'\{[\s\S]*\}', text)
+            if not match:
+                return _EMPTY
+            data = _json.loads(match.group())
+            if not isinstance(data.get("observed_peaks"), list):
+                data["observed_peaks"] = []
+            valid_peaks = []
+            for p in data["observed_peaks"]:
+                if isinstance(p.get("wavenumber"), (int, float)):
+                    valid_peaks.append({
+                        "wavenumber": int(p["wavenumber"]),
+                        "assignment": str(p.get("assignment", "")),
+                        "intensity":  str(p.get("intensity", "中")),
+                    })
+            data["observed_peaks"] = valid_peaks
+            if "suggested_material" not in data:
+                data["suggested_material"] = None
+            return data
+        except Exception:
+            return _EMPTY

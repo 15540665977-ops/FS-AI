@@ -2,13 +2,16 @@
 主应用入口 — FastAPI 应用初始化
 # reload-trigger
 """
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from db.models import create_tables
 from api.chat import router as chat_router
 from api.library import router as library_router
 from api.cases import router as cases_router
+from api.knowledge_db import router as knowledge_db_router
 
 app = FastAPI(
     title="谱图智能分析系统",
@@ -24,9 +27,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+_UPLOADS_DIR = Path(__file__).parent / "uploads"
+_UPLOADS_DIR.mkdir(exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=str(_UPLOADS_DIR)), name="uploads")
+
 app.include_router(chat_router, prefix="/api/v1/chat", tags=["分析"])
 app.include_router(library_router, prefix="/api/v1/library", tags=["标准库"])
 app.include_router(cases_router, prefix="/api/v1/cases", tags=["案例记录"])
+app.include_router(knowledge_db_router, prefix="/api/v1/knowledge", tags=["知识库"])
 
 
 @app.on_event("startup")

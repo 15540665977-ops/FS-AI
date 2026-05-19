@@ -84,3 +84,53 @@ async def test_analyze_stream_yields_text(orchestrator, test_image):
 
     assert len(chunks) == 3
     assert "2917" in "".join(chunks)
+
+
+@pytest.mark.asyncio
+async def test_extract_peaks_structured_parses_valid_json(orchestrator, test_image):
+    mock_resp = MagicMock()
+    mock_resp.content = [MagicMock(text=(
+        '{"suggested_material": "PP", "observed_peaks": ['
+        '{"wavenumber": 2920, "assignment": "CH2 stretch", "intensity": "强"}]}'
+    ))]
+    with patch.object(orchestrator, 'async_client') as mock_client:
+        mock_client.messages.create = AsyncMock(return_value=mock_resp)
+        result = await orchestrator.extract_peaks_structured([test_image], "PP material analysis")
+    assert result["suggested_material"] == "PP"
+    assert len(result["observed_peaks"]) == 1
+    assert result["observed_peaks"][0]["wavenumber"] == 2920
+    assert result["observed_peaks"][0]["intensity"] == "强"
+
+
+@pytest.mark.asyncio
+async def test_extract_peaks_structured_returns_empty_on_api_error(orchestrator, test_image):
+    with patch.object(orchestrator, 'async_client') as mock_client:
+        mock_client.messages.create = AsyncMock(side_effect=Exception("API timeout"))
+        result = await orchestrator.extract_peaks_structured([test_image], "text")
+    assert result == {"suggested_material": None, "observed_peaks": []}
+
+
+@pytest.mark.asyncio
+async def test_extract_peaks_structured_returns_empty_on_bad_json(orchestrator, test_image):
+    mock_resp = MagicMock()
+    mock_resp.content = [MagicMock(text="这不是JSON，是普通文字")]
+    with patch.object(orchestrator, 'async_client') as mock_client:
+        mock_client.messages.create = AsyncMock(return_value=mock_resp)
+        result = await orchestrator.extract_peaks_structured([test_image], "text")
+    assert result == {"suggested_material": None, "observed_peaks": []}
+
+
+@pytest.mark.asyncio
+async def test_extract_peaks_structured_filters_invalid_wavenumbers(orchestrator, test_image):
+    mock_resp = MagicMock()
+    mock_resp.content = [MagicMock(text=(
+        '{"suggested_material": null, "observed_peaks": ['
+        '{"wavenumber": "not-a-number", "assignment": "bad", "intensity": "强"},'
+        '{"wavenumber": 1735, "assignment": "C=O ester", "intensity": "很强"}]}'
+    ))]
+    with patch.object(orchestrator, 'async_client') as mock_client:
+        mock_client.messages.create = AsyncMock(return_value=mock_resp)
+        result = await orchestrator.extract_peaks_structured([test_image], "text")
+    assert result["suggested_material"] is None
+    assert len(result["observed_peaks"]) == 1
+    assert result["observed_peaks"][0]["wavenumber"] == 1735
