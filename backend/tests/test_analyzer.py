@@ -134,3 +134,32 @@ async def test_extract_peaks_structured_filters_invalid_wavenumbers(orchestrator
     assert result["suggested_material"] is None
     assert len(result["observed_peaks"]) == 1
     assert result["observed_peaks"][0]["wavenumber"] == 1735
+
+
+def test_joint_prompt_contains_cross_correlation(orchestrator):
+    """联合分析提示词应包含交叉关联分析步骤"""
+    text = orchestrator._build_prompt_text("joint", None, None, "", "", "")
+    assert "交叉关联" in text
+    assert "FTIR" in text
+    assert "DSC" in text
+    assert "TGA" in text
+
+
+def test_joint_prompt_contains_identify_step(orchestrator):
+    """联合分析提示词应包含图像识别步骤"""
+    text = orchestrator._build_prompt_text("joint", None, None, "", "", "")
+    assert "识别" in text
+    assert "同一材料" in text
+
+
+def test_joint_prompt_does_not_use_general_instruction(orchestrator):
+    """joint 类型不应落入通用分析的 else 分支"""
+    text = orchestrator._build_prompt_text("joint", None, None, "", "", "")
+    # general branch ends with: "请分析上传的谱图，识别材料类型..."
+    assert "请分析上传的谱图，识别材料类型" not in text
+
+
+def test_general_prompt_unchanged_after_joint_added(orchestrator):
+    """新增 joint 分支后通用分析提示词不受影响"""
+    text = orchestrator._build_prompt_text("general", None, None, "", "", "")
+    assert "请分析上传的谱图，识别材料类型" in text
