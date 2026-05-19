@@ -111,7 +111,7 @@ def test_get_nonexistent_case(client):
 
 # ── chat SSE ──
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def chat_client(test_db_override):
     """独立客户端，包含 chat 路由"""
     from fastapi import FastAPI

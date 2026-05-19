@@ -4,7 +4,9 @@
 """
 import asyncio
 import base64
+import json
 import os
+import re
 from pathlib import Path
 from typing import AsyncGenerator, List, Optional
 import anthropic
@@ -278,9 +280,6 @@ class AnalysisOrchestrator:
         二次非流式调用：基于已完成的分析文本，从图像提取 FTIR 峰位 JSON。
         任何错误均静默，返回 {"suggested_material": None, "observed_peaks": []}。
         """
-        import json as _json
-        import re
-
         prompt = (
             "以下是对上方谱图的分析摘要：\n"
             f"{analysis_summary[:2000]}\n\n"
@@ -305,7 +304,7 @@ class AnalysisOrchestrator:
             match = re.search(r'\{[\s\S]*\}', text)
             if not match:
                 return _EMPTY
-            data = _json.loads(match.group())
+            data = json.loads(match.group())
             if not isinstance(data.get("observed_peaks"), list):
                 data["observed_peaks"] = []
             valid_peaks = []
