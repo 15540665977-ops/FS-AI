@@ -255,7 +255,7 @@ class AnalysisOrchestrator:
 
         Args:
             images: 磁盘上的图像路径列表
-            analysis_type: "general" | "failure" | "consistency"
+            analysis_type: "general" | "failure" | "consistency" | "joint"
             material_hint: 用户提供的材料信息提示
             failure_background: 失效背景描述
         """
