@@ -173,3 +173,76 @@ def test_stream_emits_spectra_data_event(chat_client, tmp_path):
     assert payload["type"] == "spectra_data"
     assert payload["suggested_material"] == "PP"
     assert payload["observed_peaks"][0]["wavenumber"] == 2920
+
+
+def test_cross_compare_rejects_empty_material_ids(chat_client, tmp_path):
+    """material_ids 为空 JSON 列表时返回 400"""
+    from PIL import Image
+    img_path = tmp_path / "unknown.png"
+    Image.new("RGB", (100, 80), "white").save(img_path)
+    with open(img_path, "rb") as f:
+        resp = chat_client.post(
+            "/api/v1/chat/cross-compare",
+            files={"file": ("unknown.png", f, "image/png")},
+            data={"material_ids": "[]", "spec_type": "ftir"},
+        )
+    assert resp.status_code == 400
+
+
+def test_cross_compare_rejects_too_many_materials(chat_client, tmp_path):
+    """超过 5 个材料时返回 400"""
+    from PIL import Image
+    img_path = tmp_path / "unknown.png"
+    Image.new("RGB", (100, 80), "white").save(img_path)
+    with open(img_path, "rb") as f:
+        resp = chat_client.post(
+            "/api/v1/chat/cross-compare",
+            files={"file": ("unknown.png", f, "image/png")},
+            data={"material_ids": '["PP","PA6","PE","ABS","PC","EPDM"]', "spec_type": "ftir"},
+        )
+    assert resp.status_code == 400
+
+
+def test_cross_compare_emits_spectra_data_with_standard_materials(chat_client, tmp_path):
+    """cross-compare 流结束后应发出含 standard_materials 的 spectra_data 事件"""
+    import json as _json
+    from PIL import Image
+    from unittest.mock import AsyncMock, MagicMock
+
+    img_path = tmp_path / "unknown.png"
+    Image.new("RGB", (100, 80), "white").save(img_path)
+
+    fake_chunks = ["这是", "对比结果"]
+    fake_spectra = {
+        "suggested_material": None,
+        "observed_peaks": [{"wavenumber": 2920, "assignment": "CH2", "intensity": "强"}],
+    }
+
+    async def fake_cross_stream(*a, **kw):
+        for c in fake_chunks:
+            yield c
+
+    with patch("api.chat.get_orchestrator") as mock_get_orch:
+        mock_orch = MagicMock()
+        mock_orch.analyze_stream_cross_compare = fake_cross_stream
+        mock_orch.extract_peaks_structured = AsyncMock(return_value=fake_spectra)
+        mock_get_orch.return_value = mock_orch
+
+        with open(img_path, "rb") as f:
+            resp = chat_client.post(
+                "/api/v1/chat/cross-compare",
+                files={"file": ("unknown.png", f, "image/png")},
+                data={"material_ids": '["PP","PA6"]', "spec_type": "ftir"},
+            )
+
+    assert resp.status_code == 200
+    spectra_lines = [
+        line for line in resp.text.splitlines()
+        if line.startswith("data:") and '"spectra_data"' in line
+    ]
+    assert len(spectra_lines) == 1
+    payload = _json.loads(spectra_lines[0][len("data: "):])
+    assert payload["type"] == "spectra_data"
+    assert payload["mode"] == "cross_compare"
+    assert len(payload["standard_materials"]) == 2
+    assert payload["standard_materials"][0]["id"] == "PP"

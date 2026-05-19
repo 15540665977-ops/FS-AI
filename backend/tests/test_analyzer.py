@@ -163,3 +163,21 @@ def test_general_prompt_unchanged_after_joint_added(orchestrator):
     """新增 joint 分支后通用分析提示词不受影响"""
     text = orchestrator._build_prompt_text("general", None, None, "", "", "")
     assert "请分析上传的谱图，识别材料类型" in text
+
+
+def test_build_cross_compare_prompt_text(orchestrator):
+    """cross_compare 分析时应在提示词中包含参考材料资料"""
+    ref_context = "【PP 聚丙烯】FTIR特征峰：2920 cm⁻¹"
+    text = orchestrator._build_prompt_text(
+        "cross_compare", None, None, "", "", "",
+        reference_context=ref_context,
+    )
+    assert "PP" in text
+    assert "2920" in text
+    assert "对比" in text
+
+
+def test_build_cross_compare_prompt_without_ref_context(orchestrator):
+    """没有 reference_context 时 cross_compare 仍返回基本对比提示"""
+    text = orchestrator._build_prompt_text("cross_compare", None, None, "", "", "")
+    assert "对比" in text

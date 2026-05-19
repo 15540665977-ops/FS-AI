@@ -200,6 +200,7 @@ class AnalysisOrchestrator:
         rag_context: str,
         web_context: str,
         extraction_context: str = "",
+        reference_context: str = "",
     ) -> str:
         """组装发给 Claude 的用户文字部分"""
         parts = []
@@ -207,6 +208,8 @@ class AnalysisOrchestrator:
             parts.append(f"材料信息：{material_hint}")
         if failure_background:
             parts.append(f"失效背景：{failure_background}")
+        if reference_context:
+            parts.append(reference_context)
         if rag_context:
             parts.append(f"知识库参考：\n{rag_context}")
         if web_context:
@@ -233,6 +236,12 @@ class AnalysisOrchestrator:
                 "   - DSC 结晶行为 ↔ TGA 热稳定性关系\n"
                 "   - 任何谱图间的矛盾点及可能原因\n"
                 "4. 综合结论：材料鉴定结果，置信度，建议后续验证测试"
+            )
+        elif analysis_type == "cross_compare":
+            parts.append(
+                "待测样品图像见附图。\n\n"
+                "请根据上方参考材料数据，逐一对比待测样品与每种参考材料的特征峰异同，"
+                "评估相似程度，给出最可能的材料鉴定结论及置信度。"
             )
         else:
             parts.append("请分析上传的谱图，识别材料类型、列出特征峰位（含归属和强度），评估热性能参数，指出异常迹象。")
@@ -273,6 +282,42 @@ class AnalysisOrchestrator:
             rag_context, web_context, extraction_context,
         )
         # 原始图 + 标注图（如有）一起送给 Claude
+        all_images = images + annotated_paths
+        messages = self._build_vision_messages(all_images, prompt_text)
+
+        async with self.async_client.messages.stream(
+            model="claude-sonnet-4-6",
+            max_tokens=6000,
+            system=SYSTEM_PROMPT,
+            messages=messages,
+        ) as stream:
+            async for text in stream.text_stream:
+                yield text
+
+    async def analyze_stream_cross_compare(
+        self,
+        images: List[str],
+        reference_context: str,
+        spec_type: str = "ftir",
+        failure_background: Optional[str] = None,
+    ) -> AsyncGenerator[str, None]:
+        """
+        跨材料对比分析：接收待测图像 + 预格式化的参考材料文本，流式返回对比报告。
+
+        Args:
+            images: 待测样品图像路径列表
+            reference_context: 已格式化的参考材料峰位文本（由调用方从知识库构建）
+            spec_type: 测试类型 ("ftir" | "dsc" | "tga")
+            failure_background: 可选的背景描述
+        """
+        session_dir = str(Path(images[0]).parent) if images else ""
+        annotated_paths, extraction_context = await self._preprocess_spectra(images, session_dir)
+
+        prompt_text = self._build_prompt_text(
+            "cross_compare", None, failure_background,
+            "", "", extraction_context,
+            reference_context=reference_context,
+        )
         all_images = images + annotated_paths
         messages = self._build_vision_messages(all_images, prompt_text)
 

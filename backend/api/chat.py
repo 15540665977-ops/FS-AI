@@ -299,3 +299,149 @@ async def compare_spectra(
         yield f"data: {json.dumps({'done': True, 'case_nos': case_nos}, ensure_ascii=False)}\n\n"
 
     return StreamingResponse(event_stream(), media_type="text/event-stream")
+
+
+def _build_reference_context(material_ids: List[str], spec_type: str) -> tuple[List[dict], str]:
+    """
+    从知识库加载指定材料数据，格式化为参考文本，同时返回带 label 的材料列表。
+
+    Returns:
+        materials_info: [{"id": "PP", "label": "聚丙烯"}, ...]
+        reference_context: 格式化后注入 prompt 的参考文本
+    """
+    from api.knowledge_db import _load_materials, _load_chemicals
+    all_materials = _load_materials()
+    all_chemicals = _load_chemicals()
+
+    materials_info: List[dict] = []
+    context_parts = ["参考材料数据库资料："]
+
+    for mid in material_ids:
+        entry = all_materials.get(mid) or all_chemicals.get(mid)
+        if not entry:
+            continue
+        names = entry.get("common_names", [])
+        label = names[0] if names else mid
+        materials_info.append({"id": mid, "label": label})
+
+        if spec_type == "ftir":
+            peaks = entry.get("ftir_peaks", [])
+            if peaks:
+                peak_strs = "；".join(
+                    f"{p['wavenumber']} cm⁻¹({p.get('assignment', '')}，{p.get('intensity', '')})"
+                    for p in peaks[:15]
+                )
+                context_parts.append(f"【{mid} {label}】FTIR特征峰：{peak_strs}")
+        elif spec_type == "dsc":
+            params = entry.get("dsc_parameters", {})
+            features = entry.get("dsc_features", [])
+            lines = [f"【{mid} {label}】DSC参数："]
+            if params.get("tm_range"):
+                lines.append(f"  Tm范围：{params['tm_range']}°C")
+            if params.get("tg_range"):
+                lines.append(f"  Tg范围：{params['tg_range']}°C")
+            if features:
+                lines.append(f"  特征：{'; '.join(str(f) for f in features[:5])}")
+            context_parts.append("\n".join(lines))
+        elif spec_type == "tga":
+            chars = entry.get("tga_characteristics", {})
+            features = entry.get("tga_features", [])
+            lines = [f"【{mid} {label}】TGA特征："]
+            if chars.get("tga_onset_c"):
+                lines.append(f"  起始分解温度：{chars['tga_onset_c']}°C")
+            if chars.get("residue"):
+                lines.append(f"  残留量：{chars['residue']}")
+            if features:
+                lines.append(f"  特征：{'; '.join(str(f) for f in features[:5])}")
+            context_parts.append("\n".join(lines))
+
+    return materials_info, "\n".join(context_parts)
+
+
+@router.post("/cross-compare")
+async def cross_compare(
+    file: UploadFile = File(...),
+    material_ids: str = Form(...),   # JSON 字符串，如 '["PP","PA6","ABS"]'
+    spec_type: str = Form("ftir"),   # "ftir" | "dsc" | "tga"
+    failure_background: Optional[str] = Form(None),
+    db: Session = Depends(get_db),
+):
+    """
+    跨材料对比：上传待测谱图 + 选择知识库参考材料，流式返回对比分析。
+
+    SSE 格式：
+      data: {"content": "文本片段"}
+      data: {"type": "spectra_data", "mode": "cross_compare", "observed_peaks": [...],
+             "standard_materials": [{"id": "PP", "label": "聚丙烯"}], "image_urls": [...]}
+      data: {"done": true, "case_no": "FA-2026-xxx"}
+    """
+    try:
+        ids: List[str] = json.loads(material_ids)
+    except (json.JSONDecodeError, ValueError):
+        raise HTTPException(status_code=400, detail="material_ids 格式错误，应为 JSON 数组")
+
+    if len(ids) < 1:
+        raise HTTPException(status_code=400, detail="至少选择 1 种参考材料")
+    if len(ids) > 5:
+        raise HTTPException(status_code=400, detail="最多选择 5 种参考材料")
+
+    session_id = str(uuid.uuid4())[:8]
+    session_dir = UPLOAD_DIR / session_id
+    orchestrator = get_orchestrator()
+
+    try:
+        image_paths = await _extract_images([file], session_dir)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"文件解析失败：{e}")
+
+    if not image_paths:
+        raise HTTPException(status_code=400, detail="未找到有效的谱图图像")
+
+    materials_info, reference_context = _build_reference_context(ids, spec_type)
+
+    async def event_stream():
+        full_text: List[str] = []
+        try:
+            async for chunk in orchestrator.analyze_stream_cross_compare(
+                images=image_paths,
+                reference_context=reference_context,
+                spec_type=spec_type,
+                failure_background=failure_background,
+            ):
+                full_text.append(chunk)
+                yield f"data: {json.dumps({'content': chunk}, ensure_ascii=False)}\n\n"
+
+            case_no = _save_case(
+                db, image_paths, f"cross_compare_{spec_type}",
+                None, None, None,
+                "".join(full_text),
+            )
+
+            try:
+                spectra = await orchestrator.extract_peaks_structured(
+                    image_paths,
+                    "".join(full_text),
+                )
+                image_urls = [
+                    f"/uploads/sessions/{session_id}/{Path(p).name}"
+                    for p in image_paths
+                ]
+                spectra_payload = {
+                    "type": "spectra_data",
+                    "mode": "cross_compare",
+                    "observed_peaks": spectra.get("observed_peaks", []),
+                    "standard_materials": materials_info,
+                    "image_urls": image_urls,
+                }
+                yield f"data: {json.dumps(spectra_payload, ensure_ascii=False)}\n\n"
+            except Exception:
+                pass
+
+            yield f"data: {json.dumps({'done': True, 'case_no': case_no}, ensure_ascii=False)}\n\n"
+
+        except Exception as e:
+            yield f"data: {json.dumps({'error': str(e)}, ensure_ascii=False)}\n\n"
+
+    return StreamingResponse(event_stream(), media_type="text/event-stream")
