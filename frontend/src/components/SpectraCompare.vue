@@ -245,6 +245,12 @@ function onMouseMove(e) {
   }
 }
 
+// ── suggestedMaterial prop 变化时同步选中材料 ────────────────────
+watch(() => props.suggestedMaterial, (val) => {
+  selectedId.value = val
+  loadStandardPeaks(val)
+})
+
 // ── 初始化 ───────────────────────────────────────────────────────
 onMounted(async () => {
   await loadEntries()
