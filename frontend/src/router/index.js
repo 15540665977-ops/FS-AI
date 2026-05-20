@@ -3,5 +3,8 @@ import FailureAnalysis from '../views/FailureAnalysis.vue'
 
 export default createRouter({
   history: createWebHistory(),
-  routes: [{ path: '/:pathMatch(.*)*', component: FailureAnalysis }],
+  routes: [
+    { path: '/cross-compare', component: () => import('../views/CrossCompare.vue') },
+    { path: '/:pathMatch(.*)*', component: FailureAnalysis },
+  ],
 })
