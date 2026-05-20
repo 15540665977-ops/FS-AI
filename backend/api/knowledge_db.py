@@ -60,12 +60,14 @@ _CHEM_TYPE_MAP: dict[str, tuple[str, str]] = {
 
 @lru_cache(maxsize=1)
 def _load_materials() -> dict:
+    # 缓存至进程重启为止；知识库 JSON 文件视为只读，运行时修改需重启服务生效
     path = _KNOWLEDGE_DIR / "materials.json"
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
 @lru_cache(maxsize=1)
 def _load_chemicals() -> dict:
+    # 同上
     path = _KNOWLEDGE_DIR / "chemicals.json"
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 

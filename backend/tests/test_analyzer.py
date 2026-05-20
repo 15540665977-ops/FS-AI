@@ -181,3 +181,33 @@ def test_build_cross_compare_prompt_without_ref_context(orchestrator):
     """没有 reference_context 时 cross_compare 仍返回基本对比提示"""
     text = orchestrator._build_prompt_text("cross_compare", None, None, "", "", "")
     assert "对比" in text
+
+
+@pytest.mark.asyncio
+async def test_analyze_stream_cross_compare_yields_text(orchestrator, test_image):
+    """模拟 Claude API，验证 analyze_stream_cross_compare 能逐块 yield 文本"""
+    mock_stream = MagicMock()
+    mock_stream.__aenter__ = AsyncMock(return_value=mock_stream)
+    mock_stream.__aexit__ = AsyncMock(return_value=False)
+
+    async def fake_text_stream():
+        for chunk in ["对比分析：", "待测样品与 PP 相似度高，", "特征峰 2920 cm⁻¹ 吻合"]:
+            yield chunk
+
+    mock_stream.text_stream = fake_text_stream()
+
+    mock_async_client = MagicMock()
+    mock_async_client.messages.stream.return_value = mock_stream
+
+    orchestrator._async_client = mock_async_client
+
+    chunks = []
+    async for chunk in orchestrator.analyze_stream_cross_compare(
+        images=[test_image],
+        reference_context="【PP 聚丙烯】FTIR特征峰：2920 cm⁻¹",
+        spec_type="ftir",
+    ):
+        chunks.append(chunk)
+
+    assert len(chunks) == 3
+    assert "2920" in "".join(chunks)

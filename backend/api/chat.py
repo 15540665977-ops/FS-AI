@@ -384,6 +384,8 @@ async def cross_compare(
         raise HTTPException(status_code=400, detail="至少选择 1 种参考材料")
     if len(ids) > 5:
         raise HTTPException(status_code=400, detail="最多选择 5 种参考材料")
+    if not all(isinstance(m, str) and m.strip() for m in ids):
+        raise HTTPException(status_code=400, detail="material_ids 每项必须为非空字符串")
 
     session_id = str(uuid.uuid4())[:8]
     session_dir = UPLOAD_DIR / session_id
