@@ -34,7 +34,7 @@
               }"
               @click="toggleEntry(e.id)"
             >
-              <el-checkbox :model-value="selectedIds.includes(e.id)" @click.stop />
+              <el-checkbox :model-value="selectedIds.includes(e.id)" @click.stop="toggleEntry(e.id)" />
               <span class="entry-id">{{ e.id }}</span>
               <span class="entry-label">{{ e.label }}</span>
             </div>
@@ -140,7 +140,7 @@ function render(text) {
 async function loadEntries() {
   try {
     const r = await fetch('/api/v1/knowledge/entries')
-    entries.value = await r.json()
+    if (r.ok) entries.value = await r.json()
   } catch {}
 }
 
@@ -170,6 +170,7 @@ function onDrop(e) {
 }
 
 function setSample(f) {
+  if (samplePreview.value) URL.revokeObjectURL(samplePreview.value)
   sampleFile.value = f
   samplePreview.value = f.name.match(/\.(png|jpe?g|webp)$/i)
     ? URL.createObjectURL(f)
