@@ -1,0 +1,772 @@
+[
+  {
+    "id": "q-002",
+    "type": "single",
+    "question": "汽车保险杠通常使用什么材料制造？",
+    "options": [
+      "ABS",
+      "PP+EPDM-TD",
+      "PA",
+      "PP-LGF"
+    ],
+    "correctAnswer": 1,
+    "explanation": "PP塑料重量轻、成本低、易成型，非常适合用于保险杠。",
+    "difficulty": "easy",
+    "relatedMaterialId": "mat-004",
+    "relatedPartId": "part-005",
+    "category": "塑料材料",
+    "tags": [
+      "保险杠",
+      "工程塑料"
+    ],
+    "updatedAt": 1778057625190
+  },
+  {
+    "id": "q-009",
+    "type": "single",
+    "question": "橡胶材料在汽车上的主要应用是？",
+    "options": [
+      "车身结构",
+      "发动机部件",
+      "轮胎和密封件",
+      "仪表盘"
+    ],
+    "correctAnswer": 2,
+    "explanation": "橡胶具有高弹性和减震性能，主要用于轮胎、密封条、减震器等部件。",
+    "difficulty": "easy",
+    "relatedMaterialId": "mat-008",
+    "category": "橡胶材料",
+    "tags": [
+      "橡胶",
+      "密封"
+    ]
+  },
+  {
+    "id": "q-014",
+    "type": "fill",
+    "question": "汽车轮胎主要由______材料制成，因其具有优异的弹性和______。",
+    "correctAnswer": [
+      "橡胶",
+      "减震（或减振）"
+    ],
+    "fillBlanks": 2,
+    "explanation": "轮胎使用橡胶材料，因为橡胶具有高弹性和良好的减震性能。",
+    "difficulty": "easy",
+    "category": "轮胎",
+    "tags": [
+      "轮胎",
+      "橡胶"
+    ],
+    "updatedAt": 1782723009329
+  },
+  {
+    "type": "single",
+    "question": "聚氨酯发泡海绵的发泡反应中，产生气泡的气体来源是什么？  （   B   ）",
+    "options": [
+      "氮气（N2）",
+      "异氰酸酯与水反应生成的二氧化碳（CO2）",
+      "多元醇分解产生的氧气（O2）",
+      "硅油挥发产生的气体"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777606743834",
+    "createdAt": 1777606743834,
+    "updatedAt": 1777606743834
+  },
+  {
+    "type": "single",
+    "question": "在聚氨酯配方中，\"异氰酸酯指数（NCO Index）\"主要影响的是什么？  （      ）",
+    "options": [
+      "原料的颜色",
+      "海绵的发泡速度与密度",
+      "海绵的交联程度，进而影响硬度和压缩变形性能",
+      "模具的脱模难易程度"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777608727612-ily14c",
+    "createdAt": 1777608727612,
+    "updatedAt": 1782806729425,
+    "explanation": ""
+  },
+  {
+    "type": "single",
+    "question": "汽车座椅坐垫海绵的典型密度范围是多少？  （      ）",
+    "options": [
+      "5~15 kg/m³",
+      "40~55 kg/m³",
+      "100~150 kg/m³",
+      "200~300 kg/m³"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777608727612-5bsokk",
+    "createdAt": 1777608727612,
+    "updatedAt": 1777608727612
+  },
+  {
+    "type": "single",
+    "question": "下列哪项物性指标主要用于评价海绵长期使用后是否容易塌陷？  （      ）",
+    "options": [
+      "回弹性（Ball Rebound）",
+      "拉伸强度（Tensile Strength）",
+      "压缩永久变形（Compression Set）",
+      "透气性（Air Flow）"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777608727612-l71prv",
+    "createdAt": 1777608727612,
+    "updatedAt": 1777608727612
+  },
+  {
+    "type": "fill",
+    "question": "汽车内饰 PP 改性塑料添加滑石粉，主要作用是提升（）、降低（）。",
+    "correctAnswer": [
+      "刚性（或刚度）",
+      "收缩率、尺寸变化"
+    ],
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1777611603832-c2ar06",
+    "createdAt": 1777611603832,
+    "updatedAt": 1782870609325,
+    "explanation": "",
+    "fillBlanks": 2
+  },
+  {
+    "type": "boolean",
+    "question": "汽车用 ABS 材料耐候性优异，可直接长期应用于车身外饰裸露件，无需做喷涂或改性耐候处理。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "correctAnswer": false,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777611603832-q1dg0n",
+    "createdAt": 1777611603832,
+    "updatedAt": 1777611603832
+  },
+  {
+    "type": "boolean",
+    "question": "硅橡胶（VMQ）耐高低温、耐老化性能优于普通三元乙丙橡胶 EPDM。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "correctAnswer": true,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777611603832-muabrd",
+    "createdAt": 1777611603832,
+    "updatedAt": 1777611603832
+  },
+  {
+    "type": "boolean",
+    "question": "汽车燃油管路常用 NBR 丁腈橡胶，核心是利用其耐油特性。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "correctAnswer": true,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777611603833-nhoppv",
+    "createdAt": 1777611603833,
+    "updatedAt": 1777611603833
+  },
+  {
+    "type": "boolean",
+    "question": "玻纤增强 PA66 材料，玻纤含量越高，材料韧性和抗冲击性能越好。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "correctAnswer": false,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777611603833-rambbj",
+    "createdAt": 1777611603833,
+    "updatedAt": 1777611603833
+  },
+  {
+    "type": "boolean",
+    "question": "汽车内饰 VOC 挥发物主要来源于塑料粒子、助剂、胶水及发泡材料。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "correctAnswer": true,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777611603833-eeioof",
+    "createdAt": 1777611603833,
+    "updatedAt": 1777611603833
+  },
+  {
+    "type": "boolean",
+    "question": "EPDM 三元乙丙橡胶耐候、耐臭氧性能差，不适合用作汽车门窗密封条。",
+    "options": [
+      "正确",
+      "错误"
+    ],
+    "correctAnswer": false,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777611603833-9po1ud",
+    "createdAt": 1777611603833,
+    "updatedAt": 1777611603833
+  },
+  {
+    "type": "fill",
+    "question": "把以下橡胶材料，按耐热性能高低排序： \nHNBR、NBR、EPDM 、VMQ、ACM 、NR、FKM\n",
+    "correctAnswer": [
+      "FKM≥VMQ ≥ACM ≥HNBR≥EPDM≥NBR ≥NR"
+    ],
+    "explanation": "",
+    "difficulty": "hard",
+    "category": "",
+    "tags": [],
+    "fillBlanks": 1,
+    "id": "q-1777612835700-fuw1d2",
+    "createdAt": 1777612835700,
+    "updatedAt": 1782870658006
+  },
+  {
+    "type": "single",
+    "question": "PP材料在汽车保险杠应用中，通常需要加入何种改性组分以提升低温冲击性能？",
+    "options": [
+      "玻纤（GF）",
+      "滑石粉（Talc）",
+      "三元乙丙橡胶（EPDM）",
+      "碳酸钙（CaCO₃）"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-hkoopd",
+    "createdAt": 1777612882659,
+    "updatedAt": 1777612882659
+  },
+  {
+    "type": "single",
+    "question": "PA66与PA6相比，以下描述错误的是？",
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-pwx8c8",
+    "createdAt": 1777612882659,
+    "updatedAt": 1782870703703,
+    "options": [
+      "PA66熔点更高",
+      "PA66吸水率低于PA6",
+      "PA66加工流动性优于PA6",
+      "PA66力学性能整体略优于PA6"
+    ],
+    "explanation": ""
+  },
+  {
+    "type": "single",
+    "question": "新能源汽车高压线束连接器的外壳材料，首选以下哪种？",
+    "options": [
+      "ABS",
+      "PA66-GF25",
+      "PP-TD20",
+      "PC透明级"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-6kppwf",
+    "createdAt": 1777612882659,
+    "updatedAt": 1777612882659
+  },
+  {
+    "type": "single",
+    "question": "注塑件出现缩痕的根本原因是？",
+    "options": [
+      "模具温度过高导致表面氧化",
+      "壁厚不均匀",
+      "厚壁区冷却收缩时表面材料被拉陷",
+      "注射压力过高造成内应力",
+      "材料流动性不足导致充填不完整"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-8mih6n",
+    "createdAt": 1777612882659,
+    "updatedAt": 1777612882659
+  },
+  {
+    "type": "single",
+    "question": "DSC（差示扫描量热法）用于表征聚合物热性能，以下哪项无法直接通过DSC测定？",
+    "options": [
+      "结晶熔融温度（Tm）",
+      "玻璃化转变温度（Tg）",
+      "结晶度（通过熔融焓计算）",
+      "材料拉伸断裂伸长率"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-exeze2",
+    "createdAt": 1777612882659,
+    "updatedAt": 1777612882659
+  },
+  {
+    "type": "single",
+    "question": "以下哪个温度可以代表材料的长期工作温度？",
+    "options": [
+      "CTI",
+      "HDT",
+      "玻璃化转变温度",
+      "熔点"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-nffoz4",
+    "createdAt": 1777612882659,
+    "updatedAt": 1777612882659
+  },
+  {
+    "type": "single",
+    "question": "在玻璃纤维增强塑料（如PA66-GF30）中，玻纤提升材料刚性和强度的主要机理是？",
+    "options": [
+      "玻纤熔入基体形成固溶强化，类似金属合金",
+      "玻纤增大材料密度，进而提升力学性能",
+      "玻纤吸收冲击能量，通过自身断裂消耗能量",
+      "玻纤以高模量刚性纤维形式分散于基体，承载应力并抑制分子链运动"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-7plkrl",
+    "createdAt": 1777612882659,
+    "updatedAt": 1777613297519,
+    "explanation": ""
+  },
+  {
+    "type": "single",
+    "question": "以下关于PC耐化学品性的描述，正确的是？\n",
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882659-gj9k19",
+    "createdAt": 1777612882659,
+    "updatedAt": 1777613223941,
+    "options": [
+      "PC耐燃油性极佳，可直接用于储油零件",
+      "PC耐所有有机溶剂，是化学品最稳定的工程塑料之一",
+      "PC耐稀酸，但对碱、芳香烃、酮类、酯类溶剂及应力开裂敏感",
+      "PC耐化学品性优于PA，在各类化学介质中尺寸变化可忽略"
+    ],
+    "explanation": ""
+  },
+  {
+    "type": "single",
+    "question": "常用MFR来表征材料加工流动性，以下描述正确的是？",
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777612882660-8b5woz",
+    "createdAt": 1777612882660,
+    "updatedAt": 1777613186305,
+    "options": [
+      "MFR越高，材料分子量越大，力学性能越好",
+      "MFR越高，材料流动性越好，但通常分子量较低，力学性能有所下降",
+      "MFR与材料力学性能无关，仅用于指导模具设计",
+      "MFR值越低越适合薄壁复杂件注塑"
+    ],
+    "explanation": ""
+  },
+  {
+    "type": "single",
+    "question": "ABS材料中三种单体各自赋予材料的性能，对应正确的是？\n",
+    "options": [
+      "耐热性，刚性，韧性",
+      "耐化学性/强度，韧性，加工流动性/光泽",
+      "光泽，耐热，耐化学品",
+      "加工流动性/光泽，韧性，耐化学性/强度"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1777613140201-x6w065",
+    "createdAt": 1777613140201,
+    "updatedAt": 1777613310598
+  },
+  {
+    "type": "fill",
+    "question": "按受热时的行为和具备反复成型加工性，可以将塑料分为（）和（）两大类。",
+    "correctAnswer": [
+      "热塑性塑料、热固性塑料",
+      "热固性塑料、热塑性塑料"
+    ],
+    "explanation": "",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "fillBlanks": 2,
+    "id": "q-1777624105853-dl5olr",
+    "createdAt": 1777624105853,
+    "updatedAt": 1782870746206
+  },
+  {
+    "type": "fill",
+    "question": "硫化工艺条件是指决定橡胶硫化质量的三个重要因素，通常习惯称它们为“硫化三要素”，即（）",
+    "correctAnswer": [
+      "温度、时间 、压力"
+    ],
+    "explanation": "",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "fillBlanks": 1,
+    "id": "q-1777624369250-omsu4l",
+    "createdAt": 1777624369250,
+    "updatedAt": 1782724513757
+  },
+  {
+    "type": "fill",
+    "question": "大多数橡胶具有不同程度的可燃性。而分子中含有的（）的橡胶，如（），则具一定的的抗燃性。",
+    "correctAnswer": [
+      "卤素",
+      "氯丁橡胶CR,氟橡胶FKM"
+    ],
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "fillBlanks": 2,
+    "id": "q-1777624513004-1jhca9",
+    "createdAt": 1777624513004,
+    "updatedAt": 1782724538342
+  },
+  {
+    "type": "single",
+    "question": "仪表板主体材料选材为PC+ABS或PP+EPDM-TD20.HI的选材原因正确的是（   ）",
+    "options": [
+      "碰撞安全、气味要求、成本需求、减重需求、耐热及性能要求",
+      "碰撞安全、气味要求、成本需求、减重需求；",
+      "碰撞安全、气味要求、成本需求；",
+      "碰撞安全、气味要求。"
+    ],
+    "correctAnswer": 0,
+    "explanation": "PC+ABS兼顾高抗冲（ABS）、耐热（110℃以上，PC）与良好流动性，适合注塑复杂结构，且低温韧性好，满足车规（-40℃~110℃）与低VOC要求；PP+EPDM-TD20.HI，用于硬质或低成本车型本体，密度低、耐候性好、易回收、气味低，但表面硬度与光泽需后处理（如喷涂/覆膜）；满足刚度（弯曲模量≥1800MPa）与安全碰撞吸能需求",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1782723512221-3kpk2p",
+    "createdAt": 1782723512221,
+    "updatedAt": 1782723512221
+  },
+  {
+    "type": "single",
+    "question": "智能底盘系统衬套类零件主要橡胶选材类型及耐温要求（   ）",
+    "options": [
+      "NR，-40℃~100℃（125℃）；",
+      "EPDM，-40℃~100℃（125℃）；",
+      "HNBR，-40℃~100℃（125℃）；",
+      "VMQ，-40℃~175℃。"
+    ],
+    "correctAnswer": 0,
+    "explanation": "以天然橡胶NR材料为主，耐温范围一般在-40℃~100℃，耐温要求高的在125℃。",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1782723748898-etgygp",
+    "createdAt": 1782723748898,
+    "updatedAt": 1782723748898
+  },
+  {
+    "type": "multiple",
+    "question": "车型质量问题常见问题类型有哪些？（   ）",
+    "options": [
+      "材料一致性类问题，",
+      "材料性能类问题；",
+      "防火阻燃性能",
+      "异响，外观，断裂，其他（涉及非金属材料问题）；"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1782723810630-mrz2fy",
+    "createdAt": 1782723810630,
+    "updatedAt": 1782723810630
+  },
+  {
+    "type": "single",
+    "question": "热管理的低温水管零件第二代材料(PA12+TIE+PP)替代第一代PA612材料的主要原因是（  ）",
+    "options": [
+      "供应原因",
+      "性能原因",
+      " 工艺原因",
+      "成本原因"
+    ],
+    "correctAnswer": 3,
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1782723848452-z0ytc9",
+    "createdAt": 1782723848452,
+    "updatedAt": 1782723848452
+  },
+  {
+    "type": "single",
+    "question": "项目流程审核时，应确认下列流程信息，请按照正确顺序进行排序（ ）\n①DVP计划需明确填写非金属QA要求的材料要求，限值及材料类型，试验数量等；\n②确定材料分供方清单的零件重量，材料类型，材料牌号，材料厂家，工艺要求等；\n③DV试验流程确认材料测试报告满足要求；\n④TR阶段沟通材料选材并推荐选材及DVP计划填写材料要求。\n⑤ESO规定其他涉及非金属材料的相关流程信息。",
+    "options": [
+      "①②③④⑤",
+      "④①②③⑤",
+      "④②①③⑤",
+      "④②③①⑤",
+      "②④③①⑤"
+    ],
+    "correctAnswer": 1,
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1782723945314-uiutbs",
+    "createdAt": 1782723945314,
+    "updatedAt": 1782723945314
+  },
+  {
+    "type": "multiple",
+    "question": "车型开发TR交流时，TR资料需确认哪些因素？（   ）",
+    "options": [
+      "零件清单",
+      "零件重量",
+      "材料类型",
+      "材料标准信息",
+      "推荐材料清单"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "explanation": "",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1782724018902-tlavda",
+    "createdAt": 1782724018902,
+    "updatedAt": 1782724018902
+  },
+  {
+    "type": "multiple",
+    "question": "热管理管路零件的DRE沟通要求推荐材料选材时，需要确认哪些信息？（   ）",
+    "options": [
+      "选材具体类型",
+      "数据库类型牌号确认",
+      "特殊要求确认，如耐水解、耐油液、耐冲击以及阻燃性能等",
+      "加工性和外观要求确认",
+      "内部确认数据库牌号信息。"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1782724079045-bjmidy",
+    "createdAt": 1782724079045,
+    "updatedAt": 1782724079045
+  },
+  {
+    "type": "multiple",
+    "question": "当DRE的选材类型无发布理想企标试验项限值时，应如何提供相关类型材料的相关试验项限值？（   ）",
+    "options": [
+      "确认选材类型是否有对应企标限值",
+      "确认选材是否有特殊要求，如阻燃性能等",
+      "内部确认是否有相关类型材料限值",
+      "参照企标要求完成是试验项限值等内容填写",
+      "针对内部试验项无现有企标或限值要求的，通过行业内多家体系内材料商材料水平技术评估后，编制材料大纲作为临时管控要求。"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1782724225932-o86yck",
+    "createdAt": 1782724225932,
+    "updatedAt": 1782724225932
+  },
+  {
+    "type": "essay",
+    "question": "请简述汽车零件非金属选材的一般性原则?（提示：可列举实例）",
+    "correctAnswer": "- 使用性能原则‌：确保材料满足零件在服役环境中的功能要求，如强度、耐热、耐候、耐化学腐蚀、阻燃及轻量化等（尤其对塑料、橡胶、复合材料等非金属件至关重要）。\n- 工艺性能原则‌：材料需适配成型工艺（如注塑、挤出、模压等），具备良好的流动性、热稳定性、尺寸稳定性及可连接性，以保障制造效率与良率。\n- 经济性能原则‌：在满足前两者前提下，综合考量材料成本、加工能耗、生命周期成本及回收性，实现性价比最优。\n这三原则适用于所有汽车零件材料选型，非金属件还需额外关注老化、VOC排放、防火安全等特殊工况，但核心框架不变",
+    "explanation": "",
+    "difficulty": "hard",
+    "category": "",
+    "tags": [],
+    "maxLength": 200,
+    "keywords": [],
+    "id": "q-1782724275649-otq2e8",
+    "createdAt": 1782724275649,
+    "updatedAt": 1782724275649
+  },
+  {
+    "type": "multiple",
+    "question": "冰箱总成盒体零件选材为PC+ABS材料要求（   ）",
+    "options": [
+      "需要耐热达到100℃以上",
+      "高抗冲、无卤环保阻燃、耐菌要求",
+      "良好外观及加工性要求",
+      "优秀的气味/VOC性能"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      4,
+      3
+    ],
+    "explanation": "满足耐热、抗冲击、阻燃（如适用）、环保及加工性要求\n耐热（≥100℃）、高抗冲、阻燃（通常V-0级）、无卤环保（ELV六项/RoHS）、良好表面质感与加工性\n冰箱也有保温工况 内部最高温度到50℃，所以对材料的耐热性 也有一定要求",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1782724344237-hd20cb",
+    "createdAt": 1782724344237,
+    "updatedAt": 1782873100797
+  },
+  {
+    "type": "multiple",
+    "question": "科技树RD项目经理(TDT经理)的主要职责有哪些？",
+    "options": [
+      "严格遵循charter中的项目计划,在阀点计划日期前,完成对应阶段的开发工作,并按照TR阀点交付物清单要求,编制和整理各项交付物文档,确保交付物内容完整、数据准确、格式规范;",
+      "阀点交付物/阀点评审报告准备就绪后,向RD项目管理代表提出TR3/TR5阀点评审申请",
+      "RD项目管理代表、财经代表依据技术委员会/一级部门评审决议完成项目预算申请审批,释放项目预算",
+      " TDT经理针对评审中提出的代办项,逐项制定闭环计划,组织团队落实整改,完成后提交闭环证据,确保代办项在规定时间内完成"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      3
+    ],
+    "explanation": "",
+    "difficulty": "medium",
+    "category": "",
+    "tags": [],
+    "id": "q-1782882551875-rmg7er",
+    "createdAt": 1782882551875,
+    "updatedAt": 1782882551875
+  },
+  {
+    "type": "multiple",
+    "question": "科技树RD项目哪几个关键节点需要在研发运营科技树双周会进行汇报？",
+    "options": [
+      "科技树RD项目立项",
+      "科技树RD项目TR3评审",
+      "科技树RD项目TR5评审",
+      "科技树RD项目结项"
+    ],
+    "correctAnswer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "explanation": "",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1782882598428-9ixif8",
+    "createdAt": 1782882598428,
+    "updatedAt": 1782882598428
+  },
+  {
+    "type": "multiple",
+    "question": "以下哪些项目属于一级项目？",
+    "options": [
+      "项目总预算（研发投入+人力成本）＜300万的项目",
+      "项目总预算（研发投入+人力成本）≥5000万的项目",
+      "公司级战略技术项目",
+      "车型平台类开发项目"
+    ],
+    "correctAnswer": [
+      1,
+      2
+    ],
+    "explanation": "",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1782882645807-zhx2a0",
+    "createdAt": 1782882645807,
+    "updatedAt": 1782882645807
+  },
+  {
+    "type": "multiple",
+    "question": "目标/潜在应用零件降本额度由谁核算？",
+    "options": [
+      "RD科技树项目经理",
+      "财经BP",
+      "采购同事",
+      "成本核算"
+    ],
+    "correctAnswer": [
+      2,
+      3
+    ],
+    "explanation": "",
+    "difficulty": "easy",
+    "category": "",
+    "tags": [],
+    "id": "q-1782882692629-nfan3o",
+    "createdAt": 1782882692629,
+    "updatedAt": 1782882692629
+  }
+]

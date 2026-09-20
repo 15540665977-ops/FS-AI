@@ -1,0 +1,201 @@
+[
+  {
+    "id": "gl-cat-fw",
+    "name": "前风挡",
+    "icon": "🪟",
+    "hasCoatingDesc": true,
+    "parts": [
+      {
+        "id": "gl-fw-01",
+        "name": "前风挡",
+        "variants": [
+          { "id": "gl-fw-01-01", "vehicleModel": "L9（X01&B/C）",    "glassComposition": "2.1白+0.76隔音PVB+2.1镀银",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥88.7%", "uvBlockingRate": "≥99.9%", "glassArea": "1.358" },
+          { "id": "gl-fw-01-02", "vehicleModel": "L8（X02&B/C）",    "glassComposition": "2.1白+0.76隔音PVB+2.1镀银",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥88.7%", "uvBlockingRate": "—",      "glassArea": "1.358" },
+          { "id": "gl-fw-01-03", "vehicleModel": "L7（X03&B/C）",    "glassComposition": "2.1镀银+0.76隔音PVB+2.1白",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥84.9%", "uvBlockingRate": "—",      "glassArea": "1.335" },
+          { "id": "gl-fw-01-04", "vehicleModel": "L6（X04&B）",      "glassComposition": "2.1SG+0.76C隔音PVB+2.1G",   "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "/",    "thermalTTS": "TTS≤60%", "lightTransmittance": "＞70%", "irBlockingRate": "≥74.9%", "uvBlockingRate": "—",      "glassArea": "1.397" },
+          { "id": "gl-fw-01-05", "vehicleModel": "MEGA（W01）",       "glassComposition": "2.1SG+0.76隔音PVB+2.1G",    "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "/",    "thermalTTS": "TTS≤60%", "lightTransmittance": "＞70%", "irBlockingRate": "≥74.9%", "uvBlockingRate": "—",      "glassArea": "1.878" },
+          { "id": "gl-fw-01-06", "vehicleModel": "MEGA 25款（W01B）", "glassComposition": "2.1镀银+0.76隔音PVB+2.1白",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥84.9%", "uvBlockingRate": "—",      "glassArea": "1.878" },
+          { "id": "gl-fw-01-07", "vehicleModel": "W02",               "glassComposition": "2.1镀银+0.76隔音PVB+2.1白",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥84.9%", "uvBlockingRate": "—",      "glassArea": "1.72" },
+          { "id": "gl-fw-01-08", "vehicleModel": "W03",               "glassComposition": "2.1镀银+0.76隔音PVB+2.1白",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥84.9%", "uvBlockingRate": "—",      "glassArea": "1.72" },
+          { "id": "gl-fw-01-09", "vehicleModel": "W04",               "glassComposition": "2.1SG+0.76隔音PVB+2.1G",    "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "/",    "thermalTTS": "TTS≤60%", "lightTransmittance": "＞70%", "irBlockingRate": "≥74.9%", "uvBlockingRate": "—",      "glassArea": "1.66" },
+          { "id": "gl-fw-01-10", "vehicleModel": "W05",               "glassComposition": "2.1镀银+0.76隔音PVB+2.1白",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥84.9%", "uvBlockingRate": "—",      "glassArea": "1.72" },
+          { "id": "gl-fw-01-11", "vehicleModel": "L9（X11）",         "glassComposition": "2.1镀银+0.76隔音PVB+2.1白",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥84.9%", "uvBlockingRate": "—",      "glassArea": "1.358" },
+          { "id": "gl-fw-01-12", "vehicleModel": "L7（X13）",         "glassComposition": "2.1镀银+0.76隔音PVB+2.1白",  "glassType": "夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "双银", "thermalTTS": "TTS≤51%", "lightTransmittance": "＞70%", "irBlockingRate": "≥84.9%", "uvBlockingRate": "—",      "glassArea": "1.358" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gl-cat-ts",
+    "name": "天窗",
+    "icon": "☀️",
+    "hasCoatingDesc": false,
+    "parts": [
+      {
+        "id": "gl-ts-01",
+        "name": "前天窗",
+        "variants": [
+          { "id": "gl-ts-01-01", "vehicleModel": "L9（X01&B/C）", "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.842" },
+          { "id": "gl-ts-01-02", "vehicleModel": "L8（X02&B/C）", "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.04" },
+          { "id": "gl-ts-01-03", "vehicleModel": "L7（X03&B/C）", "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.835/1.012" },
+          { "id": "gl-ts-01-04", "vehicleModel": "MEGA（W01）",   "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.01" },
+          { "id": "gl-ts-01-05", "vehicleModel": "W03",           "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.86/1.02" },
+          { "id": "gl-ts-01-06", "vehicleModel": "W05",           "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.86/1.02" },
+          { "id": "gl-ts-01-07", "vehicleModel": "L9（X11）",     "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.841" },
+          { "id": "gl-ts-01-08", "vehicleModel": "L8（X12）",     "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.841" },
+          { "id": "gl-ts-01-09", "vehicleModel": "L7（X13）",     "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.841" },
+          { "id": "gl-ts-01-10", "vehicleModel": "W02",           "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.86/1.02" }
+        ]
+      },
+      {
+        "id": "gl-ts-02",
+        "name": "后天窗",
+        "variants": [
+          { "id": "gl-ts-02-01", "vehicleModel": "L9（X01&B/C）", "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.934" },
+          { "id": "gl-ts-02-02", "vehicleModel": "L8（X02&B/C）", "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.733" },
+          { "id": "gl-ts-02-03", "vehicleModel": "L7（X03&B/C）", "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.549" },
+          { "id": "gl-ts-02-04", "vehicleModel": "MEGA（W01）",   "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.972" },
+          { "id": "gl-ts-02-05", "vehicleModel": "W02",           "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.73" },
+          { "id": "gl-ts-02-06", "vehicleModel": "W03",           "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.73" },
+          { "id": "gl-ts-02-07", "vehicleModel": "W05",           "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.84" },
+          { "id": "gl-ts-02-08", "vehicleModel": "L9（X11）",     "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "2.008" },
+          { "id": "gl-ts-02-09", "vehicleModel": "L7（X13）",     "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "1.598" }
+        ]
+      },
+      {
+        "id": "gl-ts-03",
+        "name": "天窗",
+        "variants": [
+          { "id": "gl-ts-03-01", "vehicleModel": "L6（X04&B）", "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "PRO:2 / MAX:1.8" },
+          { "id": "gl-ts-03-02", "vehicleModel": "W04",         "glassComposition": "2.1FG18+0.76C隔音+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%", "lightTransmittance": "18%±2%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "PRO:2.14 / MAX:1.982" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gl-cat-dr",
+    "name": "车门玻璃",
+    "icon": "🚪",
+    "hasCoatingDesc": false,
+    "parts": [
+      {
+        "id": "gl-dr-01",
+        "name": "前门固定角窗",
+        "variants": [
+          { "id": "gl-dr-01-01", "vehicleModel": "W02", "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.057" },
+          { "id": "gl-dr-01-02", "vehicleModel": "W04", "glassComposition": "2.1SG+0.76隔音PVB+2.1G",       "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥74.9%", "uvBlockingRate": "≥99.9%", "glassArea": "0.059" },
+          { "id": "gl-dr-01-03", "vehicleModel": "W05", "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.057" }
+        ]
+      },
+      {
+        "id": "gl-dr-02",
+        "name": "后门固定角窗",
+        "variants": [
+          { "id": "gl-dr-02-01", "vehicleModel": "L9（X01&B/C）", "glassComposition": "2.1VG20+0.76隔音PVB+2.1VG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",   "lightTransmittance": "18.5%±2%",  "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.117" },
+          { "id": "gl-dr-02-02", "vehicleModel": "L8（X02&B/C）", "glassComposition": "2.1VG20+0.76隔音PVB+2.1VG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",   "lightTransmittance": "18.5%±2%",  "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.126" },
+          { "id": "gl-dr-02-03", "vehicleModel": "L7（X03&B/C）", "glassComposition": "2.1VG20+0.76隔音PVB+2.1VG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",   "lightTransmittance": "18.5%±2%",  "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.106" },
+          { "id": "gl-dr-02-04", "vehicleModel": "L6（X04&B）",   "glassComposition": "5mm隐私灰玻",                  "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤37%",  "lightTransmittance": "12.5%±2%",  "irBlockingRate": "≥88.4%", "uvBlockingRate": "≥97.2%", "glassArea": "0.108" },
+          { "id": "gl-dr-02-05", "vehicleModel": "W02",            "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%",  "lightTransmittance": "18%±2%",    "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.137" },
+          { "id": "gl-dr-02-06", "vehicleModel": "W04",            "glassComposition": "5mm隐私灰玻",                  "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤37%",  "lightTransmittance": "20.2%-25.2%","irBlockingRate": "≥88.4%", "uvBlockingRate": "≥97.2%", "glassArea": "0.112" },
+          { "id": "gl-dr-02-07", "vehicleModel": "W05",            "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%",  "lightTransmittance": "18%±2%",    "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.129" },
+          { "id": "gl-dr-02-08", "vehicleModel": "L9（X11）",      "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%",  "lightTransmittance": "18%±2%",    "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.126" },
+          { "id": "gl-dr-02-09", "vehicleModel": "L8（X12）",      "glassComposition": "5.0mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤37%",  "lightTransmittance": "20.2%-25.2%","irBlockingRate": "≥88.4%", "uvBlockingRate": "≥97.2%", "glassArea": "0.156" },
+          { "id": "gl-dr-02-10", "vehicleModel": "L7（X13）",      "glassComposition": "5.0mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤37%",  "lightTransmittance": "20.2%-25.2%","irBlockingRate": "≥88.4%", "uvBlockingRate": "≥97.2%", "glassArea": "0.148" }
+        ]
+      },
+      {
+        "id": "gl-dr-03",
+        "name": "前车门升降玻璃",
+        "variants": [
+          { "id": "gl-dr-03-01", "vehicleModel": "L9（X01&B/C）", "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.388" },
+          { "id": "gl-dr-03-02", "vehicleModel": "L8（X02&B/C）", "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.388" },
+          { "id": "gl-dr-03-03", "vehicleModel": "L7（X03&B/C）", "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.377" },
+          { "id": "gl-dr-03-04", "vehicleModel": "L6（X04&B）",   "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.372" },
+          { "id": "gl-dr-03-05", "vehicleModel": "MEGA（W01）",    "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.413" },
+          { "id": "gl-dr-03-06", "vehicleModel": "W02",            "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.361" },
+          { "id": "gl-dr-03-07", "vehicleModel": "W04",            "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.379" },
+          { "id": "gl-dr-03-08", "vehicleModel": "W05",            "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.361" },
+          { "id": "gl-dr-03-09", "vehicleModel": "L9（X11）",      "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.368" },
+          { "id": "gl-dr-03-10", "vehicleModel": "L8（X12）",      "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.361" },
+          { "id": "gl-dr-03-11", "vehicleModel": "L7（X13）",      "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "—" }
+        ]
+      },
+      {
+        "id": "gl-dr-04",
+        "name": "后车门升降玻璃",
+        "variants": [
+          { "id": "gl-dr-04-01", "vehicleModel": "L9（X01&B/C）", "glassComposition": "2.1VG20+0.76隔音PVB+2.1VG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18.5%±2%", "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.383" },
+          { "id": "gl-dr-04-02", "vehicleModel": "L8（X02&B/C）", "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.35" },
+          { "id": "gl-dr-04-03", "vehicleModel": "L7（X03&B/C）", "glassComposition": "2.1VG20+0.76隔音PVB+2.1VG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18%±2%",   "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.366" },
+          { "id": "gl-dr-04-04", "vehicleModel": "L6（X04&B）",   "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38.5%",   "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.362" },
+          { "id": "gl-dr-04-05", "vehicleModel": "MEGA（W01）",    "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38.5%",   "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.531" },
+          { "id": "gl-dr-04-06", "vehicleModel": "W02",            "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.406" },
+          { "id": "gl-dr-04-07", "vehicleModel": "W04",            "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38.5%",   "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.363" },
+          { "id": "gl-dr-04-08", "vehicleModel": "W05",            "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.438" },
+          { "id": "gl-dr-04-09", "vehicleModel": "L9（X11）",      "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.39" },
+          { "id": "gl-dr-04-10", "vehicleModel": "L8（X12）",      "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.438" },
+          { "id": "gl-dr-04-11", "vehicleModel": "L7（X13）",      "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",     "lightTransmittance": "18%±2%",   "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "—" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gl-cat-rw",
+    "name": "后风挡",
+    "icon": "🔲",
+    "hasCoatingDesc": false,
+    "parts": [
+      {
+        "id": "gl-rw-01",
+        "name": "后风挡",
+        "variants": [
+          { "id": "gl-rw-01-01", "vehicleModel": "L9（X01&B/C）", "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.71" },
+          { "id": "gl-rw-01-02", "vehicleModel": "L8（X02&B/C）", "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.73" },
+          { "id": "gl-rw-01-03", "vehicleModel": "L7（X03&B/C）", "glassComposition": "3.2mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤46.5%", "lightTransmittance": "20.5%±2%", "irBlockingRate": "≥77%",   "uvBlockingRate": "≥93%",   "glassArea": "0.654" },
+          { "id": "gl-rw-01-04", "vehicleModel": "L6（X04&B）",   "glassComposition": "3.2mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤46.5%", "lightTransmittance": "20.5%±2%", "irBlockingRate": "≥77%",   "uvBlockingRate": "≥93%",   "glassArea": "0.654" },
+          { "id": "gl-rw-01-05", "vehicleModel": "MEGA（W01）",    "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.48" },
+          { "id": "gl-rw-01-06", "vehicleModel": "W02",            "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.44" },
+          { "id": "gl-rw-01-07", "vehicleModel": "W03",            "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.44" },
+          { "id": "gl-rw-01-08", "vehicleModel": "W04",            "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.67" },
+          { "id": "gl-rw-01-09", "vehicleModel": "W05",            "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.44" },
+          { "id": "gl-rw-01-10", "vehicleModel": "L9（X11）",      "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.616" },
+          { "id": "gl-rw-01-11", "vehicleModel": "L8（X12）",      "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.663" },
+          { "id": "gl-rw-01-12", "vehicleModel": "L7（X13）",      "glassComposition": "4.0mm隐私灰玻", "glassType": "钢化", "privacyFunction": "隐私灰玻", "soundInsulation": "无", "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%", "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "TBD" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gl-cat-sw",
+    "name": "侧窗",
+    "icon": "◻️",
+    "hasCoatingDesc": false,
+    "parts": [
+      {
+        "id": "gl-sw-01",
+        "name": "后侧窗（侧围）",
+        "variants": [
+          { "id": "gl-sw-01-01", "vehicleModel": "L9（X01&B/C）", "glassComposition": "4.0mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%",   "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.245" },
+          { "id": "gl-sw-01-02", "vehicleModel": "L8（X02&B/C）", "glassComposition": "4.0mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤43%",   "lightTransmittance": "18.5%±2%",   "irBlockingRate": "≥82.9%", "uvBlockingRate": "≥95.2%", "glassArea": "0.205" },
+          { "id": "gl-sw-01-03", "vehicleModel": "L7（X03&B/C）", "glassComposition": "3.5mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤45%",   "lightTransmittance": "20.5%±2%",   "irBlockingRate": "≥80.2%", "uvBlockingRate": "≥93.9%", "glassArea": "0.116" },
+          { "id": "gl-sw-01-04", "vehicleModel": "L6（X04&B）",   "glassComposition": "3.5mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤40%",   "lightTransmittance": "20.2%-25.2%","irBlockingRate": "≥80.2%", "uvBlockingRate": "≥93.9%", "glassArea": "0.133" },
+          { "id": "gl-sw-01-05", "vehicleModel": "MEGA（W01）",    "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38.5%", "lightTransmittance": "18%±2%",     "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.434" },
+          { "id": "gl-sw-01-06", "vehicleModel": "W02",            "glassComposition": "2.1PG20+0.76隔音PVB+2.1PG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%",   "lightTransmittance": "18%±2%",     "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.281" },
+          { "id": "gl-sw-01-07", "vehicleModel": "W03",            "glassComposition": "2.1PG20+0.76隔音PVB+2.1PG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38%",   "lightTransmittance": "18%±2%",     "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.281" },
+          { "id": "gl-sw-01-08", "vehicleModel": "W04",            "glassComposition": "5mm隐私灰玻",                  "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤37%",   "lightTransmittance": "20.2%-25.2%","irBlockingRate": "≥88.4%", "uvBlockingRate": "≥97.2%", "glassArea": "0.138" },
+          { "id": "gl-sw-01-09", "vehicleModel": "W05",            "glassComposition": "2.1PG20+0.76隔音PVB+2.1PG20", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤38.5%", "lightTransmittance": "18%±2%",     "irBlockingRate": "—",      "uvBlockingRate": "—",      "glassArea": "0.31" },
+          { "id": "gl-sw-01-10", "vehicleModel": "L9（X11）",      "glassComposition": "2.1FG18+0.76隔音PVB+2.1FG18", "glassType": "半钢化夹层", "privacyFunction": "隐私灰玻", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "≤38.5%",    "lightTransmittance": "18%±2%",     "irBlockingRate": "≥87.5%", "uvBlockingRate": "≥99.9%", "glassArea": "0.244" },
+          { "id": "gl-sw-01-11", "vehicleModel": "L8（X12）",      "glassComposition": "5.0mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤37%",   "lightTransmittance": "20.2%-25.2%","irBlockingRate": "≥88.4%", "uvBlockingRate": "≥97.2%", "glassArea": "0.2" },
+          { "id": "gl-sw-01-12", "vehicleModel": "L7（X13）",      "glassComposition": "5.0mm隐私灰玻",                "glassType": "钢化",       "privacyFunction": "隐私灰玻", "soundInsulation": "/",       "coatingDesc": "", "thermalTTS": "TTS≤37%",   "lightTransmittance": "20.2%-25.2%","irBlockingRate": "≥88.4%", "uvBlockingRate": "≥97.2%", "glassArea": "0.153" }
+        ]
+      },
+      {
+        "id": "gl-sw-02",
+        "name": "前侧窗（侧围）",
+        "variants": [
+          { "id": "gl-sw-02-01", "vehicleModel": "MEGA（W01）", "glassComposition": "2.1SG+0.76隔音PVB+2.1SG", "glassType": "半钢化夹层", "privacyFunction": "非隐私", "soundInsulation": "隔音PVB", "coatingDesc": "", "thermalTTS": "TTS≤58%", "lightTransmittance": "≥70%", "irBlockingRate": "≥75.8%", "uvBlockingRate": "≥99.9%", "glassArea": "0.174" }
+        ]
+      }
+    ]
+  }
+]
