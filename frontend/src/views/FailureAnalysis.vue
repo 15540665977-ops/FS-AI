@@ -4,6 +4,7 @@
     <!-- ── 顶栏 ── -->
     <header class="topbar">
       <span class="brand">谱图分析</span>
+      <el-tag v-if="auth.user?.preview" size="small" type="warning">发布预览</el-tag>
       <div class="topbar-actions">
         <el-button text size="small" class="history-btn" @click="irViewerOpen = true">
           知识库
@@ -11,11 +12,29 @@
         <el-button text size="small" class="history-btn" @click="drawerOpen = true">
           历史记录
         </el-button>
+        <el-button v-if="auth.user?.is_admin" text size="small" class="history-btn" @click="router.push('/admin/users')">
+          用户管理
+        </el-button>
+        <el-dropdown @command="onAccountCommand">
+          <span class="account-menu">{{ auth.user?.username || '账户' }}⌄</span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
     </header>
 
     <!-- ── 主体 ── -->
     <main class="body">
+      <el-alert
+        v-if="auth.user?.preview"
+        title="线上发布预览：在线 API 尚未部署，登录、上传和 AI 分析暂不可用。"
+        type="warning"
+        :closable="false"
+        class="preview-notice"
+      />
 
       <!-- 欢迎态（没有任何消息时） -->
       <div v-if="messages.length === 0" class="empty-state">
@@ -31,15 +50,17 @@
           <!-- 用户 -->
           <template v-if="m.role === 'user'">
             <div class="msg-bubble user-bubble">
-              <div v-if="m.previews.length" class="thumb-row">
-                <img
-                  v-for="(s, j) in m.previews" :key="j"
-                  :src="s" class="thumb"
-                  @click="lightbox = s"
-                />
-                <span v-if="m.pdfCount" class="pdf-badge">
-                  + {{ m.pdfCount }} 份 PDF
-                </span>
+              <!-- 分析完成后：显示服务端提取的带编号图像 -->
+              <div v-if="m.serverPreviews?.length" class="thumb-row">
+                <div v-for="(url, j) in m.serverPreviews" :key="j" class="numbered-thumb">
+                  <img :src="url" class="thumb" @click="lightbox = url" />
+                  <span class="img-num">图 {{ j + 1 }}</span>
+                </div>
+              </div>
+              <!-- 分析前：显示本地预览 + PDF 徽章 -->
+              <div v-else-if="m.previews.length || m.pdfCount" class="thumb-row">
+                <img v-for="(s, j) in m.previews" :key="j" :src="s" class="thumb" @click="lightbox = s" />
+                <span v-if="m.pdfCount" class="pdf-badge">+ {{ m.pdfCount }} 份 PDF（分析后显示提取图像）</span>
               </div>
               <p v-if="m.text" class="msg-text">{{ m.text }}</p>
               <el-tag v-if="m.type !== 'general'" size="small" type="info" class="type-tag">
@@ -181,9 +202,14 @@
 
 <script setup>
 import { ref, nextTick, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import { auth, logout } from '../auth'
+import { apiFetch } from '../apiFetch'
+import { apiUrl } from '../api'
 import { Document, Close, Plus, Paperclip, Position, VideoPause } from '@element-plus/icons-vue'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 import IRViewer from '../components/IRViewer.vue'
 import SpectraCompare from '../components/SpectraCompare.vue'
 
@@ -193,6 +219,7 @@ marked.setOptions({ breaks: true, gfm: true })
 const TYPE_LABEL = { general: '通用', failure: '失效分析', consistency: '一致性检验', joint: '联合分析' }
 
 // ── 状态 ─────────────────────────────────────────────
+const router      = useRouter()
 const messages    = ref([])
 const fileEntries = ref([])   // { name, preview|null, raw }
 const inputText   = ref('')
@@ -215,7 +242,7 @@ const scroll    = () => nextTick(() => { if (msgRef.value) msgRef.value.scrollTo
 
 function render(text) {
   if (!text) return ''
-  return marked.parse(text)
+  return DOMPurify.sanitize(marked.parse(text))
 }
 
 // ── 文件 ─────────────────────────────────────────────
@@ -241,7 +268,7 @@ function removeFile(i) {
 // ── 历史 ─────────────────────────────────────────────
 async function loadCases() {
   try {
-    const r = await fetch('/api/v1/cases/?limit=50')
+    const r = await apiFetch('/api/v1/cases/?limit=50')
     cases.value = (await r.json()).items || []
   } catch {}
 }
@@ -258,10 +285,10 @@ async function submit() {
   }
 }
 
-async function _streamRequest(fd, aiMsg) {
+async function _streamRequest(fd, aiMsg, userMsg = null) {
   abortCtrl = new AbortController()
   try {
-    const resp = await fetch('/api/v1/chat/stream', { method: 'POST', body: fd, signal: abortCtrl.signal })
+    const resp = await apiFetch('/api/v1/chat/stream', { method: 'POST', body: fd, signal: abortCtrl.signal })
     if (!resp.ok) { aiMsg.content = `请求失败 (${resp.status})`; return }
 
     const reader = resp.body.getReader()
@@ -278,7 +305,13 @@ async function _streamRequest(fd, aiMsg) {
         try {
           const p = JSON.parse(line.slice(6))
           if (p.content)                    { aiMsg.content += p.content; scroll() }
-          else if (p.type === 'spectra_data' && Array.isArray(p.observed_peaks)) { aiMsg.spectraData = p; scroll() }
+          else if (p.type === 'spectra_data' && Array.isArray(p.observed_peaks)) {
+            aiMsg.spectraData = p
+            if (userMsg && Array.isArray(p.image_urls) && p.image_urls.length) {
+              userMsg.serverPreviews = p.image_urls.map(apiUrl)
+            }
+            scroll()
+          }
           else if (p.done)                  { aiMsg.caseNo = p.case_no; loadCases() }
           else if (p.error)                 { aiMsg.content += `\n⚠️ ${p.error}` }
         } catch {}
@@ -294,13 +327,15 @@ async function _streamRequest(fd, aiMsg) {
 }
 
 async function submitSingle() {
-  messages.value.push({
+  const userMsg = {
     role: 'user',
     previews: fileEntries.value.map(f => f.preview).filter(Boolean),
     pdfCount: fileEntries.value.filter(f => !f.preview).length,
     text: inputText.value || null,
     type: analysisType.value,
-  })
+    serverPreviews: [],
+  }
+  messages.value.push(userMsg)
 
   const ai = { role: 'assistant', content: '', streaming: true, caseNo: null, spectraData: null }
   messages.value.push(ai)
@@ -315,17 +350,19 @@ async function submitSingle() {
   inputText.value = ''
   loading.value = true
 
-  await _streamRequest(fd, ai)
+  await _streamRequest(fd, ai, userMsg)
 }
 
 async function submitJoint() {
-  messages.value.push({
+  const userMsg = {
     role: 'user',
     previews: fileEntries.value.map(f => f.preview).filter(Boolean),
     pdfCount: fileEntries.value.filter(f => !f.preview).length,
     text: inputText.value || null,
     type: 'joint',
-  })
+    serverPreviews: [],
+  }
+  messages.value.push(userMsg)
 
   const ai = { role: 'assistant', content: '', streaming: true, caseNo: null, spectraData: null }
   messages.value.push(ai)
@@ -341,7 +378,7 @@ async function submitJoint() {
   jointMode.value = false
   loading.value = true
 
-  await _streamRequest(fd, ai)
+  await _streamRequest(fd, ai, userMsg)
 }
 
 async function submitCompare() {
@@ -382,7 +419,7 @@ async function submitCompare() {
   abortCtrl = new AbortController()
 
   try {
-    const resp = await fetch('/api/v1/chat/compare', { method:'POST', body:fd, signal:abortCtrl.signal })
+    const resp = await apiFetch('/api/v1/chat/compare', { method:'POST', body:fd, signal:abortCtrl.signal })
     if (!resp.ok) {
       compareMsg.items.forEach(it => { it.content = `请求失败 (${resp.status})` })
       return
@@ -427,6 +464,12 @@ async function submitCompare() {
 
 function abort() { abortCtrl?.abort() }
 
+function onAccountCommand(command) {
+  if (command === 'logout') {
+    logout().finally(() => router.replace('/login'))
+  }
+}
+
 onMounted(loadCases)
 </script>
 
@@ -454,8 +497,9 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
   flex-shrink: 0;
 }
 .brand { font-size: 15px; font-weight: 700; color: #d0dff5; letter-spacing: 0.5px; }
-.topbar-actions { display: flex; gap: 4px; }
+.topbar-actions { display: flex; align-items: center; gap: 4px; }
 .history-btn { color: #6a7d9a !important; }
+.account-menu { color: #8fa7c6; font-size: 12px; cursor: pointer; padding: 5px 7px; }
 
 /* ── 主体 ── */
 .body {
@@ -465,6 +509,7 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
   display: flex;
   flex-direction: column;
 }
+.preview-notice { margin: 0 auto 18px; width: min(840px, calc(100% - 48px)); }
 
 .empty-state {
   flex: 1;
@@ -509,6 +554,13 @@ html, body, #app { height: 100%; background: #0f1320; color: #c8d3e8; font-famil
 .thumb-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; align-items: center; }
 .thumb { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #2a4d7a; cursor: zoom-in; }
 .pdf-badge { font-size: 12px; color: #6a7d9a; }
+.numbered-thumb { position: relative; display: inline-block; }
+.img-num {
+  position: absolute; bottom: 4px; left: 4px;
+  background: rgba(0, 0, 0, 0.65); color: #fff;
+  font-size: 11px; padding: 1px 5px; border-radius: 3px;
+  pointer-events: none;
+}
 .msg-text { white-space: pre-wrap; word-break: break-word; }
 .type-tag { margin-top: 8px; }
 

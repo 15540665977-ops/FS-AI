@@ -6,7 +6,8 @@ from sqlalchemy.pool import StaticPool
 from unittest.mock import patch
 
 from db.database import Base, get_db
-import db.models  # noqa: F401 — registers ORM models against Base
+from core.security import get_current_user
+from db.models import User
 
 
 TEST_DB_URL = "sqlite://"
@@ -23,6 +24,18 @@ def test_db_override():
     Base.metadata.create_all(bind=engine)
     TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+    admin = User(
+        username="test-admin",
+        password_hash="not-used-in-route-tests",
+        is_admin=True,
+        is_active=True,
+    )
+    db = TestingSessionLocal()
+    db.add(admin)
+    db.commit()
+    db.refresh(admin)
+    db.close()
+
     def override_get_db():
         db = TestingSessionLocal()
         try:
@@ -30,7 +43,7 @@ def test_db_override():
         finally:
             db.close()
 
-    return override_get_db
+    return override_get_db, admin
 
 
 @pytest.fixture(scope="module")
@@ -38,6 +51,7 @@ def client(test_db_override):
     from fastapi import FastAPI
     from fastapi.middleware.cors import CORSMiddleware
 
+    override_get_db, admin = test_db_override
     from api.library import router as library_router
     from api.cases import router as cases_router
 
@@ -50,7 +64,8 @@ def client(test_db_override):
     )
     test_app.include_router(library_router, prefix="/api/v1/library")
     test_app.include_router(cases_router, prefix="/api/v1/cases")
-    test_app.dependency_overrides[get_db] = test_db_override
+    test_app.dependency_overrides[get_db] = override_get_db
+    test_app.dependency_overrides[get_current_user] = lambda: admin
 
     yield TestClient(test_app)
     test_app.dependency_overrides.clear()
@@ -101,7 +116,9 @@ def test_delete_spectrum(client):
 def test_list_cases_empty(client):
     resp = client.get("/api/v1/cases/")
     assert resp.status_code == 200
-    assert resp.json() == []
+    body = resp.json()
+    assert body["items"] == []
+    assert body["total"] == 0
 
 
 def test_get_nonexistent_case(client):
@@ -118,6 +135,7 @@ def chat_client(test_db_override):
     from fastapi.middleware.cors import CORSMiddleware
     from api.chat import router as chat_router
 
+    override_get_db, admin = test_db_override
     test_app = FastAPI()
     test_app.add_middleware(
         CORSMiddleware,
@@ -126,7 +144,8 @@ def chat_client(test_db_override):
         allow_headers=["*"],
     )
     test_app.include_router(chat_router, prefix="/api/v1/chat")
-    test_app.dependency_overrides[get_db] = test_db_override
+    test_app.dependency_overrides[get_db] = override_get_db
+    test_app.dependency_overrides[get_current_user] = lambda: admin
     yield TestClient(test_app)
     test_app.dependency_overrides.clear()
 

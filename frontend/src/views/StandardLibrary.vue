@@ -77,6 +77,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Plus, Search } from '@element-plus/icons-vue'
+import { apiFetch } from '../apiFetch'
 
 const items = ref([])
 const search = ref('')
@@ -87,7 +88,7 @@ const form = ref({ material_name: '', grade: '', supplier: '', approved_date: ''
 async function loadLibrary() {
   try {
     const url = search.value ? `/api/v1/library/?q=${encodeURIComponent(search.value)}` : '/api/v1/library/'
-    const res = await fetch(url)
+    const res = await apiFetch(url)
     const data = await res.json()
     items.value = data.items || []
   } catch { /* noop */ }
@@ -104,7 +105,7 @@ async function saveSpectrum() {
     if (form.value.ir_file) fd.append('ir_file', form.value.ir_file)
     if (form.value.dsc_file) fd.append('dsc_file', form.value.dsc_file)
     if (form.value.tga_file) fd.append('tga_file', form.value.tga_file)
-    const res = await fetch('/api/v1/library/', { method: 'POST', body: fd })
+    const res = await apiFetch('/api/v1/library/', { method: 'POST', body: fd })
     if (!res.ok) throw new Error(await res.text())
     ElMessage.success('录入成功')
     showDialog.value = false

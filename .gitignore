@@ -1,0 +1,35 @@
+# Secrets and local runtime data
+.env
+.env.*
+!.env.example
+!.env.production.example
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.production.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Node / frontend builds
+node_modules/
+frontend/dist/
+
+# Application runtime data and logs
+backend/spectral*.db
+backend/chroma_db/
+backend/uploads/
+backend/logs/
+backend/*.log
+frontend/*.log
+logs/
+data/
+
+# Local tooling
+.claude/
+.superpowers/

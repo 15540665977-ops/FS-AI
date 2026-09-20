@@ -15,13 +15,17 @@ from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
 from core.analyzer import AnalysisOrchestrator
+from core.paths import UPLOADS_DIR
+from core.security import CurrentUser, get_current_user
 from core.file_parser import process_pdf_file
 from db.database import get_db
 from db.models import AnalysisCase, StandardSpectrum
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
-UPLOAD_DIR = Path(__file__).parent.parent / "uploads" / "sessions"
+UPLOAD_DIR = UPLOADS_DIR / "sessions"
+MAX_UPLOAD_BYTES = int(__import__("os").environ.get("MAX_UPLOAD_BYTES", 20 * 1024 * 1024))
+MAX_UPLOAD_FILES = int(__import__("os").environ.get("MAX_UPLOAD_FILES", 10))
 
 _orchestrator: Optional[AnalysisOrchestrator] = None
 
@@ -39,16 +43,21 @@ async def _extract_images(files: List[UploadFile], session_dir: Path) -> List[st
     UploadFile.read() 是协程，必须 await，然后包装为 BytesIO 传给同步解析器。
     """
     session_dir.mkdir(parents=True, exist_ok=True)
+    if len(files) > MAX_UPLOAD_FILES:
+        raise HTTPException(status_code=413, detail=f"单次最多上传 {MAX_UPLOAD_FILES} 个文件")
     image_paths = []
 
     for file in files:
-        filename = file.filename or "upload"
+        filename = Path(file.filename or "upload").name
         ext = Path(filename).suffix.lower()
         content = await file.read()
+        if len(content) > MAX_UPLOAD_BYTES:
+            raise HTTPException(status_code=413, detail=f"文件过大，单文件最大 {MAX_UPLOAD_BYTES // 1024 // 1024} MB")
 
         if ext == ".pdf":
             pdf_obj = io.BytesIO(content)
-            paths = process_pdf_file(pdf_obj, session_dir)
+            stem = Path(filename).stem[:15].replace(" ", "_")
+            paths = process_pdf_file(pdf_obj, session_dir, prefix=f"{stem}_")
             image_paths.extend(paths)
         elif ext in (".pptx", ".ppt"):
             raise HTTPException(
@@ -76,14 +85,19 @@ async def _extract_images_per_file(
     返回 [[file0_imgs], [file1_imgs], ...]，供对比分析使用。
     """
     session_dir.mkdir(parents=True, exist_ok=True)
+    if len(files) > MAX_UPLOAD_FILES:
+        raise HTTPException(status_code=413, detail=f"单次最多上传 {MAX_UPLOAD_FILES} 个文件")
     groups: List[List[str]] = []
     for file in files:
-        filename = file.filename or "upload"
+        filename = Path(file.filename or "upload").name
         ext = Path(filename).suffix.lower()
         content = await file.read()
+        if len(content) > MAX_UPLOAD_BYTES:
+            raise HTTPException(status_code=413, detail=f"文件过大，单文件最大 {MAX_UPLOAD_BYTES // 1024 // 1024} MB")
         paths: List[str] = []
         if ext == ".pdf":
-            paths = process_pdf_file(io.BytesIO(content), session_dir)
+            stem = Path(filename).stem[:15].replace(" ", "_")
+            paths = process_pdf_file(io.BytesIO(content), session_dir, prefix=f"{stem}_")
         elif ext in (".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"):
             save_path = session_dir / filename
             save_path.write_bytes(content)
@@ -112,6 +126,72 @@ def _load_reference_images(
     ]
 
 
+def _extract_material_from_text(text: str) -> Optional[str]:
+    """
+    从 AI 分析报告中提取材料名称。
+    按优先级：推断亚型 → 句内均为+大写缩写 → 材料类型 → 鉴定结论
+    使用非贪婪量词避免跳过材料名首字母。
+    """
+    import re
+    _CN = "\u4e00-\u9fff"
+    patterns = [
+        # 1. "推断亚型：PA6" — 非贪婪，直接从冒号后起始捕获
+        f"推断亚型[：:][^\\n]{{0,3}}?([A-Za-z0-9{_CN}]{{2,20}})",
+        # 2. "材料鉴定结论：两条曲线基材均为 PEEK" — 寻找行内大写缩写
+        r"材料(?:类型|鉴定结论|鉴定|名称)[：:][^\n]*均?为\s*([A-Z]{2,8}(?:[/-][A-Z0-9]{1,4})?)",
+        # 3. "材料类型：聚酰胺" — 直接跟随（非贪婪上下文）
+        f"材料(?:类型|鉴定|名称)[：:][^\\n]{{0,3}}?([{_CN}]{{2,15}})",
+        # 4. "基材均为 PEEK" — 句内全大写缩写
+        r"(?:基材|基体)均?为\s*([A-Z]{2,8}(?:[/-][A-Z0-9]{1,4})?)",
+        # 5. "鉴定结论：..." — 兜底
+        f"鉴定结论[：:][^\\n]{{0,3}}?([A-Za-z0-9{_CN}]{{2,20}})",
+    ]
+    for pat in patterns:
+        m = re.search(pat, text[:8000], re.MULTILINE)  # 结论区通常在详细峰表之后
+        if m:
+            name = m.group(1)
+            name = re.sub(r"[*_`#>]", "", name).replace(" ", "")
+            name = re.sub(r"（[^）]{0,20}）", "", name)
+            name = name.strip("：:(),，\t")
+            if 2 <= len(name) <= 25:
+                return name
+    return None
+
+
+def _extract_confidence_from_text(text: str) -> str:
+    """
+    从 AI 分析报告中提取综合置信度。
+    优先从材料鉴定结论段落提取「置信度：确认/疑似/不确定」。
+    """
+    import re
+    CONF_MAP = {"确认": "high", "疑似": "medium", "不确定": "low"}
+
+    # 优先：在材料类型/综合结论段落附近找置信度
+    priority = re.search(
+        r"(?:材料类型|材料鉴定|综合结论|🔵)[^\n]{0,60}\n[^\n]{0,30}置信度[：:][^确疑不]{0,3}(确认|疑似|不确定)",
+        text[:8000], re.DOTALL,
+    )
+    if priority:
+        return CONF_MAP[priority.group(1)]
+
+    # 备用：统计全文前8000字中各置信度出现次数，取最多的
+    counts: dict = {}
+    for m in re.finditer(r"置信度[：:][^确疑不]{0,3}(确认|疑似|不确定)", text[:8000]):
+        k = m.group(1)
+        counts[k] = counts.get(k, 0) + 1
+    if counts:
+        return CONF_MAP[max(counts, key=counts.get)]
+
+    # 再兜底：统计【确认】【疑似】【不确定】格式
+    bracket: dict = {}
+    for m in re.finditer(r"【(确认|疑似|不确定)】", text[:8000]):
+        k = m.group(1)
+        bracket[k] = bracket.get(k, 0) + 1
+    if bracket:
+        return CONF_MAP[max(bracket, key=bracket.get)]
+    return "unknown"
+
+
 def _save_case(
     db: Session,
     image_paths: List[str],
@@ -120,20 +200,50 @@ def _save_case(
     reference_source: Optional[str],
     reference_id: Optional[int],
     full_text: str,
+    created_by: Optional[str] = None,
 ) -> str:
     """分析完成后将结果保存为案例记录，返回案例编号"""
     from api.cases import _next_case_no
+
+    # 材料名：优先用户填写 → 从报告文本提取 → 兜底"未知"
+    material_name = (
+        material_hint
+        or _extract_material_from_text(full_text)
+        or "未知"
+    )
+
+    # 结论摘要：取分析文本的最后一段（通常是综合结论）
+    conclusion = ""
+    if full_text:
+        # 找最后一个二级标题之后的内容作为结论摘要
+        import re
+        parts = re.split(r'\n#{1,3} ', full_text)
+        last_section = parts[-1].strip() if parts else full_text
+        conclusion = last_section[:600]
+
+    _TYPE_CN = {
+        "general": "通用分析",
+        "failure": "失效分析",
+        "consistency": "一致性检验",
+        "joint": "联合分析",
+        "cross_compare": "跨材料对比",
+    }
+
     case_no = _next_case_no(db)
     case = AnalysisCase(
         case_no=case_no,
-        material_name=material_hint or "未知",
-        failure_description=f"分析类型：{analysis_type}",
-        uploaded_files=json.dumps(image_paths),
+        material_name=material_name,
+        failure_description=_TYPE_CN.get(analysis_type, analysis_type),
+        uploaded_files=json.dumps(
+            [Path(p).name for p in image_paths],   # 只存文件名，不存绝对路径
+            ensure_ascii=False,
+        ),
         reference_source=reference_source,
         reference_id=reference_id,
         analysis_result=full_text,
-        conclusion=full_text[-500:] if full_text else "",
-        confidence_level="unknown",
+        conclusion=conclusion,
+        confidence_level=_extract_confidence_from_text(full_text),
+        created_by=created_by,
     )
     db.add(case)
     db.commit()
@@ -142,6 +252,7 @@ def _save_case(
 
 @router.post("/stream")
 async def analyze_stream(
+    current_user: CurrentUser,
     files: List[UploadFile] = File(...),
     analysis_type: str = Form("general"),
     material_hint: Optional[str] = Form(None),
@@ -190,7 +301,7 @@ async def analyze_stream(
             case_no = _save_case(
                 db, image_paths, analysis_type,
                 material_hint, reference_source, reference_id,
-                "".join(full_text),
+                "".join(full_text), current_user.username,
             )
 
             # 结构化峰位提取 — 失败不影响 done 事件
@@ -223,6 +334,7 @@ async def analyze_stream(
 
 @router.post("/compare")
 async def compare_spectra(
+    current_user: CurrentUser,
     files: List[UploadFile] = File(...),
     analysis_type: str = Form("general"),
     material_hint: Optional[str] = Form(None),
@@ -291,7 +403,9 @@ async def compare_spectra(
         case_nos: List[Optional[str]] = []
         for g, text in zip(groups, full_texts):
             try:
-                cn = _save_case(db, g, analysis_type, material_hint, None, None, text)
+                cn = _save_case(
+                    db, g, analysis_type, material_hint, None, None, text, current_user.username
+                )
                 case_nos.append(cn)
             except Exception:
                 case_nos.append(None)
@@ -360,6 +474,7 @@ def _build_reference_context(material_ids: List[str], spec_type: str) -> tuple[L
 
 @router.post("/cross-compare")
 async def cross_compare(
+    current_user: CurrentUser,
     file: UploadFile = File(...),
     material_ids: str = Form(...),   # JSON 字符串，如 '["PP","PA6","ABS"]'
     spec_type: str = Form("ftir"),   # "ftir" | "dsc" | "tga"
@@ -420,7 +535,7 @@ async def cross_compare(
             case_no = _save_case(
                 db, image_paths, f"cross_compare_{spec_type}",
                 None, None, None,
-                "".join(full_text),
+                "".join(full_text), current_user.username,
             )
 
             try:

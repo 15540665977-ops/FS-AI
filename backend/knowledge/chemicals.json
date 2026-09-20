@@ -1,0 +1,1002 @@
+{
+  "DEHP": {
+    "category": "plasticizer",
+    "common_names": ["邻苯二甲酸二乙己酯", "DOP", "DEHP", "增塑剂DOP"],
+    "ftir_peaks": [
+      {"wavenumber": 2958, "assignment": "CH3 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2928, "assignment": "CH2 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2870, "assignment": "CH3 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1727, "assignment": "C=O 酯基伸缩（邻苯二甲酸酯特征）", "intensity": "很强"},
+      {"wavenumber": 1600, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1579, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1462, "assignment": "CH2 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1377, "assignment": "CH3 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1280, "assignment": "C-O-C 酯键伸缩（强特征）", "intensity": "很强"},
+      {"wavenumber": 1120, "assignment": "C-O 伸缩振动", "intensity": "强"},
+      {"wavenumber": 744, "assignment": "苯环邻取代面外弯曲（特征峰）", "intensity": "很强"},
+      {"wavenumber": 703, "assignment": "苯环弯曲振动", "intensity": "强"}
+    ],
+    "识别特征": "744 cm⁻¹ 邻苯二甲酸酯苯环特征峰+1727 C=O；在PVC谱图中出现表示含增塑剂",
+    "应用场景": "PVC增塑剂；检测PVC制品中增塑剂迁移或含量",
+    "常见宿主材料": ["PVC", "PU", "部分橡胶"]
+  },
+
+  "DINP": {
+    "category": "plasticizer",
+    "common_names": ["邻苯二甲酸二异壬酯", "DINP"],
+    "ftir_peaks": [
+      {"wavenumber": 2956, "assignment": "CH3 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2926, "assignment": "CH2 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 1726, "assignment": "C=O 酯基", "intensity": "很强"},
+      {"wavenumber": 1280, "assignment": "C-O-C 伸缩", "intensity": "很强"},
+      {"wavenumber": 1118, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 744, "assignment": "邻苯二甲酸酯苯环特征", "intensity": "很强"}
+    ],
+    "识别特征": "与DEHP谱图相似，744 cm⁻¹ 邻苯二甲酸酯特征",
+    "应用场景": "汽车内饰PVC用高分子量增塑剂",
+    "常见宿主材料": ["PVC"]
+  },
+
+  "DOA": {
+    "category": "plasticizer",
+    "common_names": ["己二酸二辛酯", "DOA", "dioctyl adipate"],
+    "ftir_peaks": [
+      {"wavenumber": 2956, "assignment": "CH3 伸缩", "intensity": "强"},
+      {"wavenumber": 2928, "assignment": "CH2 伸缩", "intensity": "强"},
+      {"wavenumber": 1735, "assignment": "C=O 酯基伸缩（位置区别邻苯酯）", "intensity": "很强"},
+      {"wavenumber": 1461, "assignment": "CH2 弯曲", "intensity": "中"},
+      {"wavenumber": 1246, "assignment": "C-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 1172, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 725, "assignment": "CH2 摇摆（长链）", "intensity": "中"}
+    ],
+    "识别特征": "C=O在1735（高于邻苯酯1727）；无苯环峰；更低粘度",
+    "应用场景": "耐寒PVC增塑剂；低温性能优良",
+    "常见宿主材料": ["PVC", "PU"]
+  },
+
+  "TOTM": {
+    "category": "plasticizer",
+    "common_names": ["偏苯三酸三辛酯", "TOTM", "trimellitate plasticizer"],
+    "ftir_peaks": [
+      {"wavenumber": 2958, "assignment": "CH3 伸缩", "intensity": "强"},
+      {"wavenumber": 2928, "assignment": "CH2 伸缩", "intensity": "强"},
+      {"wavenumber": 1725, "assignment": "C=O 酯基", "intensity": "很强"},
+      {"wavenumber": 1600, "assignment": "苯环骨架（偏苯三甲酸苯环）", "intensity": "中"},
+      {"wavenumber": 1283, "assignment": "C-O-C 伸缩", "intensity": "很强"},
+      {"wavenumber": 1118, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 726, "assignment": "苯环取代", "intensity": "中"}
+    ],
+    "识别特征": "偏苯三酸酯无744的邻苯特征峰，有725 cm⁻¹ 代替",
+    "应用场景": "耐高温PVC绝缘材料增塑剂（汽车线束）",
+    "常见宿主材料": ["PVC"]
+  },
+
+  "Irganox1010": {
+    "category": "antioxidant",
+    "common_names": ["抗氧剂1010", "受阻酚抗氧剂", "Irganox 1010", "四[β-(3,5-二叔丁基-4-羟基苯基)丙酸]季戊四醇酯"],
+    "ftir_peaks": [
+      {"wavenumber": 3640, "assignment": "O-H 受阻酚羟基伸缩（自由OH）", "intensity": "中"},
+      {"wavenumber": 2957, "assignment": "叔丁基 CH3 伸缩", "intensity": "强"},
+      {"wavenumber": 1735, "assignment": "C=O 酯基伸缩", "intensity": "很强"},
+      {"wavenumber": 1612, "assignment": "苯环骨架", "intensity": "中"},
+      {"wavenumber": 1515, "assignment": "苯环骨架", "intensity": "强"},
+      {"wavenumber": 1240, "assignment": "C-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 1163, "assignment": "C-O 伸缩", "intensity": "强"}
+    ],
+    "识别特征": "3640 cm⁻¹ 游离受阻酚OH（与水醇的宽OH不同）；1735酯C=O；高度对称的叔丁基峰",
+    "应用场景": "PP/PE/PA等热塑性塑料主抗氧剂；防热氧老化",
+    "热氧老化迹象": "老化后酚OH峰减弱，同时出现1735之外的羰基变化"
+  },
+
+  "Irganox1076": {
+    "category": "antioxidant",
+    "common_names": ["抗氧剂1076", "Irganox 1076", "β-(3,5-二叔丁基-4-羟基苯基)丙酸十八酯"],
+    "ftir_peaks": [
+      {"wavenumber": 3636, "assignment": "O-H 受阻酚羟基", "intensity": "中"},
+      {"wavenumber": 2956, "assignment": "叔丁基/长链 CH3 伸缩", "intensity": "强"},
+      {"wavenumber": 2920, "assignment": "CH2 伸缩（长链）", "intensity": "强"},
+      {"wavenumber": 1736, "assignment": "C=O 酯基", "intensity": "很强"},
+      {"wavenumber": 1514, "assignment": "苯环骨架", "intensity": "强"},
+      {"wavenumber": 1248, "assignment": "C-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 720, "assignment": "长链CH2摇摆", "intensity": "中"}
+    ],
+    "识别特征": "与1010类似但有明显长链CH2峰（720）；单酯更易迁移到表面",
+    "应用场景": "PE/PP辅助抗氧剂；食品接触等级",
+    "常见宿主材料": ["PE", "PP"]
+  },
+
+  "Irgafos168": {
+    "category": "antioxidant",
+    "common_names": ["亚磷酸酯抗氧剂168", "Irgafos 168", "辅助抗氧剂"],
+    "ftir_peaks": [
+      {"wavenumber": 2960, "assignment": "叔丁基 CH3 伸缩", "intensity": "强"},
+      {"wavenumber": 1591, "assignment": "苯环骨架", "intensity": "中"},
+      {"wavenumber": 1244, "assignment": "P=O 伸缩振动（特征峰）", "intensity": "强"},
+      {"wavenumber": 1187, "assignment": "P-O-C 伸缩振动（磷酸酯特征）", "intensity": "很强"},
+      {"wavenumber": 1018, "assignment": "P-O-C 伸缩", "intensity": "强"},
+      {"wavenumber": 879, "assignment": "P-O 弯曲振动", "intensity": "中"}
+    ],
+    "识别特征": "1187 cm⁻¹ P-O-C 强峰是亚磷酸酯抗氧剂的绝对特征；无C=O峰",
+    "应用场景": "PP/PE加工稳定剂，与1010/1076搭配使用",
+    "氧化产物": "Irgafos168被氧化为磷酸酯后，P=O峰从1187 cm⁻¹ 移至1260-1280 cm⁻¹"
+  },
+
+  "CaCO3": {
+    "category": "filler",
+    "common_names": ["碳酸钙", "轻钙", "重钙", "CaCO3", "calcium carbonate"],
+    "ftir_peaks": [
+      {"wavenumber": 1430, "assignment": "CO3²⁻ 反对称伸缩（最强特征峰）", "intensity": "极强"},
+      {"wavenumber": 876, "assignment": "CO3²⁻ 面外弯曲（特征峰）", "intensity": "强"},
+      {"wavenumber": 713, "assignment": "CO3²⁻ 面内弯曲（方解石）", "intensity": "中"}
+    ],
+    "识别特征": "1430/876/713 cm⁻¹ 三峰是CaCO3绝对特征；TGA在700-850°C失重（CO2释放）",
+    "应用场景": "PP/PE/PVC填料；降低成本、提高刚性",
+    "TGA特征": "700-850°C阶段失重对应CaCO3→CaO+CO2，残留量=CaO含量（CaCO3含量×56/100）"
+  },
+
+  "Talc": {
+    "category": "filler",
+    "common_names": ["滑石粉", "硅酸镁", "talcum", "Mg3Si4O10(OH)2"],
+    "ftir_peaks": [
+      {"wavenumber": 3677, "assignment": "Mg3-OH 伸缩振动（锐峰，特征）", "intensity": "中"},
+      {"wavenumber": 1018, "assignment": "Si-O-Si 伸缩振动（强）", "intensity": "很强"},
+      {"wavenumber": 670, "assignment": "Mg-OH 弯曲振动", "intensity": "中"},
+      {"wavenumber": 465, "assignment": "Si-O 弯曲振动", "intensity": "强"}
+    ],
+    "识别特征": "3677 cm⁻¹ 锐OH峰（不同于水的宽峰）+1018 Si-O；TGA几乎无失重（无机填料）",
+    "应用场景": "PP增刚填料；汽车内饰件常用",
+    "常见宿主材料": ["PP", "PE", "PA"]
+  },
+
+  "SiliconeOil": {
+    "category": "contaminant_lubricant",
+    "common_names": ["硅油", "PDMS油", "silicone oil", "脱模剂残留"],
+    "ftir_peaks": [
+      {"wavenumber": 2963, "assignment": "Si-CH3 的 C-H 伸缩", "intensity": "中"},
+      {"wavenumber": 1261, "assignment": "Si-CH3 对称弯曲（极强特征峰）", "intensity": "极强"},
+      {"wavenumber": 1093, "assignment": "Si-O-Si 反对称伸缩（宽强峰）", "intensity": "极强"},
+      {"wavenumber": 1023, "assignment": "Si-O-Si 伸缩", "intensity": "强"},
+      {"wavenumber": 800, "assignment": "Si-C 伸缩+CH3 摇摆", "intensity": "强"},
+      {"wavenumber": 698, "assignment": "Si-O 弯曲", "intensity": "中"}
+    ],
+    "识别特征": "1261 cm⁻¹ 出现在任何非硅材料谱图中即为硅油污染的绝对证据；与VMQ固体硅橡胶峰相同但相对强度比不同",
+    "污染来源": "脱模剂、润滑脂、密封胶残留、工装污染",
+    "诊断意义": "硅油污染会导致涂层/粘接失效；1261峰强度正比于污染量"
+  },
+
+  "MineralOil": {
+    "category": "contaminant_lubricant",
+    "common_names": ["矿物油", "基础油", "机油残留", "mineral oil"],
+    "ftir_peaks": [
+      {"wavenumber": 2956, "assignment": "CH3 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2924, "assignment": "CH2 反对称伸缩", "intensity": "很强"},
+      {"wavenumber": 2853, "assignment": "CH2 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1462, "assignment": "CH2 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1377, "assignment": "CH3 弯曲振动", "intensity": "弱"},
+      {"wavenumber": 721, "assignment": "CH2 长链摇摆", "intensity": "弱"}
+    ],
+    "识别特征": "2924/2853强峰类似PE但无结晶峰；液态烃涂抹感；无特征极性基团",
+    "污染来源": "切削液、机械润滑油、液压油渗漏",
+    "诊断意义": "出现在聚合物表面提示油类污染，影响粘结性和耐候性"
+  },
+
+  "StearicAcid": {
+    "category": "lubricant_processing_aid",
+    "common_names": ["硬脂酸", "十八烷酸", "stearic acid"],
+    "ftir_peaks": [
+      {"wavenumber": 3300, "assignment": "O-H 羧酸伸缩振动（宽峰）", "intensity": "宽强"},
+      {"wavenumber": 2918, "assignment": "CH2 反对称伸缩", "intensity": "很强"},
+      {"wavenumber": 2849, "assignment": "CH2 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1710, "assignment": "C=O 羧酸羰基（二聚体）", "intensity": "很强"},
+      {"wavenumber": 1472, "assignment": "CH2 弯曲振动", "intensity": "强"},
+      {"wavenumber": 1297, "assignment": "O-H 面内弯曲+C-O 伸缩", "intensity": "中"},
+      {"wavenumber": 722, "assignment": "CH2 长链摇摆", "intensity": "中"}
+    ],
+    "识别特征": "1710 cm⁻¹ 羧酸C=O（位置低于酯1735）+3300宽O-H峰；长链CH2强峰",
+    "应用场景": "PVC/PP/PE加工润滑剂；脱模剂成分",
+    "常见宿主材料": ["PVC", "PP", "PE", "PA"]
+  },
+
+  "CaStearate": {
+    "category": "lubricant_heat_stabilizer",
+    "common_names": ["硬脂酸钙", "钙皂", "calcium stearate"],
+    "ftir_peaks": [
+      {"wavenumber": 2918, "assignment": "CH2 反对称伸缩", "intensity": "很强"},
+      {"wavenumber": 2849, "assignment": "CH2 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1580, "assignment": "COO⁻ 反对称伸缩（金属皂特征）", "intensity": "很强"},
+      {"wavenumber": 1467, "assignment": "CH2 弯曲振动", "intensity": "强"},
+      {"wavenumber": 1410, "assignment": "COO⁻ 对称伸缩", "intensity": "中"},
+      {"wavenumber": 722, "assignment": "CH2 长链摇摆", "intensity": "中"}
+    ],
+    "识别特征": "1580 cm⁻¹ 金属皂COO⁻特征（无游离COOH的1710峰）；区分硬脂酸的关键",
+    "应用场景": "PVC热稳定剂/润滑剂；PP/PE加工助剂",
+    "诊断意义": "1580峰出现但无1710，说明脂肪酸已成皂化状态"
+  },
+
+  "TiO2": {
+    "category": "pigment_filler",
+    "common_names": ["二氧化钛", "钛白粉", "TiO2", "titanium dioxide"],
+    "ftir_peaks": [
+      {"wavenumber": 700, "assignment": "Ti-O 伸缩振动（宽峰）", "intensity": "很强"},
+      {"wavenumber": 500, "assignment": "Ti-O 弯曲振动", "intensity": "强"},
+      {"wavenumber": 3400, "assignment": "表面吸附水 O-H（弱）", "intensity": "弱宽"}
+    ],
+    "识别特征": "400-900 cm⁻¹ 宽Ti-O特征吸收；TGA中几乎无失重（热稳定无机物）",
+    "应用场景": "白色颜料；几乎所有白色汽车塑料均含TiO2",
+    "TGA特征": "800°C以下无明显失重；白色残留物即为TiO2"
+  },
+
+  "CarbonBlack": {
+    "category": "pigment_filler_conductive",
+    "common_names": ["炭黑", "carbon black", "导电炭黑"],
+    "ftir_peaks": [
+      {"wavenumber": 3430, "assignment": "表面O-H（酸洗炭黑）", "intensity": "弱宽"},
+      {"wavenumber": 1700, "assignment": "C=O（表面羧基、醌基）", "intensity": "弱"},
+      {"wavenumber": 1600, "assignment": "C=C 芳香环伸缩（宽）", "intensity": "弱宽"},
+      {"wavenumber": 1200, "assignment": "C-O（表面含氧基团）", "intensity": "弱"}
+    ],
+    "识别特征": "炭黑本身IR吸收极强（全波段吸收），谱图基线抬高/压低；TGA残留量即为炭黑含量",
+    "应用场景": "黑色着色剂；导电/抗静电改性；UV稳定剂",
+    "TGA特征": "空气气氛600-700°C氧化失重即为炭黑含量；氮气中不失重"
+  },
+
+  "HALS": {
+    "category": "light_stabilizer",
+    "common_names": ["受阻胺光稳定剂", "HALS", "Tinuvin 770", "光稳定剂"],
+    "ftir_peaks": [
+      {"wavenumber": 3350, "assignment": "N-H 仲胺伸缩振动（受阻哌啶）", "intensity": "弱"},
+      {"wavenumber": 2960, "assignment": "CH3/CH2 伸缩", "intensity": "强"},
+      {"wavenumber": 1735, "assignment": "C=O 酯基（分子结构含酯键型）", "intensity": "强"},
+      {"wavenumber": 1175, "assignment": "C-O-C 酯伸缩", "intensity": "中"},
+      {"wavenumber": 1134, "assignment": "哌啶环 C-N 伸缩", "intensity": "中"}
+    ],
+    "识别特征": "1175+哌啶N-H特征；HALS品种多样，共性为受阻哌啶环结构",
+    "应用场景": "PP/PE户外耐候材料；汽车外饰件光稳定剂"
+  },
+
+  "UVabsorber": {
+    "category": "uv_stabilizer",
+    "common_names": ["紫外吸收剂", "UV-327", "UV-328", "苯并三唑UV吸收剂"],
+    "ftir_peaks": [
+      {"wavenumber": 3300, "assignment": "O-H 羟基（苯并三唑型）", "intensity": "弱"},
+      {"wavenumber": 2960, "assignment": "CH3 伸缩（烷基取代）", "intensity": "强"},
+      {"wavenumber": 1600, "assignment": "苯环/杂环骨架振动", "intensity": "强"},
+      {"wavenumber": 1480, "assignment": "苯环骨架", "intensity": "中"},
+      {"wavenumber": 1290, "assignment": "苯并三唑 C-N 伸缩", "intensity": "中"},
+      {"wavenumber": 745, "assignment": "苯并三唑环面外弯曲（特征）", "intensity": "强"}
+    ],
+    "识别特征": "745 cm⁻¹ 苯并三唑特征峰；与聚合物基体的吸收有一定叠加",
+    "应用场景": "PP/PC/ABS耐候紫外线吸收"
+  },
+
+  "DBDPE": {
+    "category": "flame_retardant",
+    "common_names": ["十溴二苯乙烷", "DBDPE", "溴系阻燃剂"],
+    "ftir_peaks": [
+      {"wavenumber": 1483, "assignment": "苯环骨架（溴代苯）", "intensity": "强"},
+      {"wavenumber": 1300, "assignment": "C-Br 伸缩（多溴取代）", "intensity": "中"},
+      {"wavenumber": 1176, "assignment": "C-C 伸缩（二苯乙烷骨架）", "intensity": "中"},
+      {"wavenumber": 860, "assignment": "多溴苯环面外弯曲", "intensity": "强"},
+      {"wavenumber": 640, "assignment": "C-Br 弯曲振动（特征）", "intensity": "强"}
+    ],
+    "识别特征": "640/860 cm⁻¹ 溴化芳烃特征；XRF检测Br元素更直接",
+    "应用场景": "HIPS/ABS/PC阻燃剂；法规限制中",
+    "TGA特征": "先于基体分解（约300°C），有HBr释放"
+  },
+
+  "Melamine": {
+    "category": "flame_retardant",
+    "common_names": ["三聚氰胺", "melamine", "蜜胺"],
+    "ftir_peaks": [
+      {"wavenumber": 3470, "assignment": "N-H 伸缩振动（氨基）", "intensity": "强"},
+      {"wavenumber": 3412, "assignment": "N-H 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 1657, "assignment": "C=N 伸缩振动（三嗪环）", "intensity": "很强"},
+      {"wavenumber": 1548, "assignment": "三嗪环骨架振动", "intensity": "很强"},
+      {"wavenumber": 815, "assignment": "三嗪环面外弯曲（三嗪特征峰）", "intensity": "很强"},
+      {"wavenumber": 768, "assignment": "N-H 面外弯曲", "intensity": "中"}
+    ],
+    "识别特征": "815 cm⁻¹ 三嗪环强峰+1657 C=N+3470 N-H 三组特征峰组合唯一",
+    "应用场景": "PA/PP无卤阻燃剂；涂料固化剂",
+    "TGA特征": "280-380°C升华分解，无机残留极少"
+  },
+
+  "RedPhosphorus": {
+    "category": "flame_retardant",
+    "common_names": ["红磷", "red phosphorus", "磷系阻燃剂"],
+    "ftir_peaks": [
+      {"wavenumber": 1000, "assignment": "P-O-P / P=O 伸缩（氧化产物）", "intensity": "中宽"},
+      {"wavenumber": 870, "assignment": "P-O 弯曲（磷氧化物）", "intensity": "弱"}
+    ],
+    "识别特征": "红磷本身IR不活跃；表面氧化产物在1000 cm⁻¹ 附近出现宽峰；最好结合XRF确认磷元素",
+    "应用场景": "PA6/PA66无卤阻燃（汽车连接器常用）",
+    "注意": "红磷氧化产物（磷酸）会导致PA水解加速"
+  },
+
+  "EpoxySoybean": {
+    "category": "plasticizer_stabilizer",
+    "common_names": ["环氧大豆油", "ESBO", "epoxidized soybean oil"],
+    "ftir_peaks": [
+      {"wavenumber": 3008, "assignment": "=C-H 残余不饱和（弱）", "intensity": "弱"},
+      {"wavenumber": 2925, "assignment": "CH2 伸缩", "intensity": "很强"},
+      {"wavenumber": 2854, "assignment": "CH2 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1736, "assignment": "C=O 酯基（三甘酯）", "intensity": "很强"},
+      {"wavenumber": 1240, "assignment": "环氧基 C-O 伸缩（特征）", "intensity": "中"},
+      {"wavenumber": 845, "assignment": "环氧环 C-O-C 弯曲（特征峰）", "intensity": "中"}
+    ],
+    "识别特征": "845 cm⁻¹ 环氧环特征+1736酯C=O；用于区分普通大豆油（无845峰）",
+    "应用场景": "PVC辅助增塑剂/热稳定剂；兼具热稳定功能"
+  },
+
+  "Phthalic_Anhydride": {
+    "category": "degradation_product",
+    "common_names": ["邻苯二甲酸酐", "苯酐", "PVC降解产物"],
+    "ftir_peaks": [
+      {"wavenumber": 1850, "assignment": "C=O 酸酐反对称伸缩（特征双峰高频）", "intensity": "强"},
+      {"wavenumber": 1770, "assignment": "C=O 酸酐对称伸缩（特征双峰低频）", "intensity": "很强"},
+      {"wavenumber": 1600, "assignment": "苯环骨架", "intensity": "中"},
+      {"wavenumber": 1280, "assignment": "C-O-C 酸酐伸缩", "intensity": "强"},
+      {"wavenumber": 748, "assignment": "苯环邻取代面外弯曲", "intensity": "很强"}
+    ],
+    "识别特征": "1850/1770 cm⁻¹ 双峰是酸酐绝对特征（任何材料中出现提示降解）",
+    "诊断意义": "DEHP/DINP老化降解产物；出现提示增塑剂严重降解",
+    "应用场景": "降解产物识别"
+  },
+
+  "OxidizedPP": {
+    "category": "degradation_product",
+    "common_names": ["PP热氧老化产物", "聚丙烯氧化降解", "PP oxidation"],
+    "ftir_peaks": [
+      {"wavenumber": 3400, "assignment": "O-H 羟基（氢过氧化物/醇）", "intensity": "宽中"},
+      {"wavenumber": 1735, "assignment": "C=O 酮/醛（端基）", "intensity": "中"},
+      {"wavenumber": 1720, "assignment": "C=O 酮（内部）", "intensity": "中"},
+      {"wavenumber": 1710, "assignment": "C=O 羧酸（严重氧化）", "intensity": "中"},
+      {"wavenumber": 998, "assignment": "PP等规特征峰（老化后减弱）", "intensity": "减弱"}
+    ],
+    "识别特征": "PP新品无1710-1735峰；老化后出现羰基峰组（1710-1740）+3400 O-H；998峰减弱",
+    "诊断意义": "羰基指数CI=A(1710)/A(2720)量化氧化程度；CI>0.1提示显著老化",
+    "老化类型": "热氧老化（高温）/光氧老化（UV）均产生类似羰基峰"
+  },
+
+  "OxidizedPA": {
+    "category": "degradation_product",
+    "common_names": ["PA水解降解产物", "尼龙水解", "PA hydrolysis"],
+    "ftir_peaks": [
+      {"wavenumber": 3400, "assignment": "N-H 端氨基+吸附水（增强）", "intensity": "宽强"},
+      {"wavenumber": 1710, "assignment": "端羧基 C=O（水解产物特征）", "intensity": "中"},
+      {"wavenumber": 1635, "assignment": "酰胺Ⅰ C=O（减弱）", "intensity": "减弱"},
+      {"wavenumber": 1540, "assignment": "酰胺Ⅱ（减弱）", "intensity": "减弱"}
+    ],
+    "识别特征": "1710 cm⁻¹ 羧酸C=O出现同时酰胺峰减弱，是PA水解特征；3400宽峰增强",
+    "诊断意义": "分子量降低导致力学性能下降；常见于吸湿/高温环境",
+    "诱因": "高温高湿环境；酸/碱接触；超声波清洗污染"
+  },
+
+  "SiliconeContamination": {
+    "category": "contaminant",
+    "common_names": ["硅系污染", "有机硅污染", "硅烷偶联剂残留"],
+    "ftir_peaks": [
+      {"wavenumber": 1261, "assignment": "Si-CH3 弯曲（硅油特征）", "intensity": "极强"},
+      {"wavenumber": 1100, "assignment": "Si-O-Si 伸缩", "intensity": "极强"},
+      {"wavenumber": 800, "assignment": "Si-C 伸缩", "intensity": "强"}
+    ],
+    "识别特征": "任何聚合物谱图中出现1261 cm⁻¹ 即为硅污染；ESCA/XPS可进一步确认Si元素价态",
+    "污染来源": "硅酮密封胶、硅油润滑剂、有机硅脱模剂、硅烷偶联剂",
+    "失效机理": "界面粘接失效；涂层脱落；密封件溶胀"
+  },
+
+  "HIPS_Rubber": {
+    "category": "elastomer_modifier",
+    "common_names": ["高抗冲聚苯乙烯橡胶相", "polybutadiene", "聚丁二烯"],
+    "ftir_peaks": [
+      {"wavenumber": 3006, "assignment": "=C-H 伸缩振动（双键）", "intensity": "中"},
+      {"wavenumber": 2919, "assignment": "CH2 伸缩", "intensity": "强"},
+      {"wavenumber": 1639, "assignment": "C=C 伸缩（顺式/反式混合）", "intensity": "中"},
+      {"wavenumber": 968, "assignment": "反式-1,4-CH=CH 面外弯曲（特征）", "intensity": "强"},
+      {"wavenumber": 912, "assignment": "乙烯基=CH2 面外弯曲", "intensity": "中"},
+      {"wavenumber": 735, "assignment": "顺式-1,4 CH=CH 面外弯曲（特征）", "intensity": "中"}
+    ],
+    "识别特征": "968 cm⁻¹ 反式双键峰是聚丁二烯关键特征；与SEBS区别：SEBS无968（已氢化）",
+    "应用场景": "ABS/HIPS增韧橡胶相；老化后968峰减弱（双键被氧化）",
+    "老化指示": "968峰减弱+1735羰基出现=橡胶相氧化降解"
+  },
+
+  "Moisture": {
+    "category": "contaminant_environmental",
+    "common_names": ["水分", "吸附水", "moisture", "结晶水"],
+    "ftir_peaks": [
+      {"wavenumber": 3400, "assignment": "O-H 伸缩振动（宽强峰）", "intensity": "宽强"},
+      {"wavenumber": 1635, "assignment": "O-H 弯曲振动（液态水特征）", "intensity": "中"},
+      {"wavenumber": 1615, "assignment": "O-H 弯曲（结晶水）", "intensity": "中"}
+    ],
+    "识别特征": "3400宽峰+1635弯曲峰是液态水/吸附水特征；干燥样品后峰消失可确认",
+    "诊断意义": "PA/POM/PET吸湿后谱图变化；高吸水量导致力学性能下降",
+    "注意": "ATR-FTIR测试前样品需干燥，排除大气湿气干扰"
+  },
+
+  "SilaneCouplngAgent": {
+    "category": "coupling_agent",
+    "common_names": ["硅烷偶联剂", "KH550", "KH560", "3-氨丙基三乙氧基硅烷"],
+    "ftir_peaks": [
+      {"wavenumber": 3375, "assignment": "N-H 伸缩（氨基硅烷型，如KH550）", "intensity": "中"},
+      {"wavenumber": 2975, "assignment": "C-H 伸缩（乙氧基）", "intensity": "中"},
+      {"wavenumber": 1600, "assignment": "N-H 弯曲（氨基）", "intensity": "弱"},
+      {"wavenumber": 1100, "assignment": "Si-O-C 伸缩（水解前）/ Si-O-Si（水解后）", "intensity": "很强"},
+      {"wavenumber": 915, "assignment": "环氧基 C-O-C（KH560环氧型特征）", "intensity": "中"}
+    ],
+    "识别特征": "1100 cm⁻¹ 强Si-O峰+具体官能团峰（氨基/环氧/乙烯基）区分型号",
+    "应用场景": "玻纤增强塑料界面改性；提高PA-GF/PP-GF结合力"
+  },
+
+  "ZnStearate": {
+    "category": "lubricant_heat_stabilizer",
+    "common_names": ["硬脂酸锌", "锌皂", "zinc stearate", "ZnSt"],
+    "ftir_peaks": [
+      {"wavenumber": 2918, "assignment": "CH₂ 反对称伸缩", "intensity": "很强"},
+      {"wavenumber": 2849, "assignment": "CH₂ 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1539, "assignment": "COO⁻ 反对称伸缩（锌皂，略低于钙皂1580）", "intensity": "很强"},
+      {"wavenumber": 1463, "assignment": "CH₂ 弯曲振动", "intensity": "强"},
+      {"wavenumber": 1403, "assignment": "COO⁻ 对称伸缩", "intensity": "中"},
+      {"wavenumber": 722, "assignment": "CH₂ 长链摇摆", "intensity": "中"}
+    ],
+    "识别特征": "1539 cm⁻¹ 金属皂COO⁻（锌皂略低于钙皂1580）；与CaStearate区分需结合XRF测Zn/Ca",
+    "应用场景": "PVC热稳定剂（常与CaStearate组成CaZn复合稳定剂）；PP/PE润滑剂；橡胶脱模剂",
+    "常见宿主材料": ["PVC", "PP", "PE", "橡胶"]
+  },
+
+  "NucleatingAgent_PP": {
+    "category": "lubricant_processing_aid",
+    "common_names": ["PP成核剂", "nucleating agent", "NA-11", "NA-21", "山梨醇成核剂", "DBS"],
+    "ftir_peaks": [
+      {"wavenumber": 3330, "assignment": "O-H 羟基（山梨醇类成核剂）", "intensity": "中"},
+      {"wavenumber": 1610, "assignment": "苯环骨架（芳香族成核剂NA-11型）", "intensity": "中"},
+      {"wavenumber": 1490, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1095, "assignment": "C-O-C 缩醛键（山梨醇类DBS特征）", "intensity": "中"},
+      {"wavenumber": 760, "assignment": "芳香环面外弯曲", "intensity": "中"}
+    ],
+    "识别特征": "成核剂用量极低（0.1-0.5%），FTIR直接识别困难；间接证据：DSC中PP冷却结晶温度Tc升高8-15°C（相比不含成核剂的PP）",
+    "DSC诊断": "PP结晶峰Tc >120°C提示含高效成核剂；Tc 105-115°C为普通PP；Tc >125°C 为NA-21级别",
+    "应用场景": "汽车内饰PP件；提高刚性/耐热性/透明度",
+    "常见宿主材料": ["PP", "PP-GF", "TPO"]
+  },
+
+  "Erucamide": {
+    "category": "lubricant_processing_aid",
+    "common_names": ["芥酸酰胺", "erucamide", "爽滑剂", "开口剂", "油酸酰胺"],
+    "ftir_peaks": [
+      {"wavenumber": 3330, "assignment": "N-H 伸缩振动（伯酰胺）", "intensity": "中"},
+      {"wavenumber": 3180, "assignment": "N-H 反对称伸缩（伯酰胺双峰）", "intensity": "中"},
+      {"wavenumber": 3005, "assignment": "=C-H 伸缩（C=C双键，芥酸C13=C14）", "intensity": "弱"},
+      {"wavenumber": 2920, "assignment": "CH₂ 反对称伸缩（长链）", "intensity": "很强"},
+      {"wavenumber": 2851, "assignment": "CH₂ 对称伸缩（长链）", "intensity": "强"},
+      {"wavenumber": 1660, "assignment": "C=O 酰胺I 伸缩（伯酰胺）", "intensity": "很强"},
+      {"wavenumber": 1635, "assignment": "C=C 伸缩（弱，与酰胺I重叠）", "intensity": "弱"},
+      {"wavenumber": 1622, "assignment": "N-H 弯曲（酰胺II）", "intensity": "强"},
+      {"wavenumber": 722, "assignment": "CH₂ 长链摇摆", "intensity": "中"}
+    ],
+    "识别特征": "1660伯酰胺C=O + 3330/3180 N-H双峰（区别于二级酰胺PA的单峰）；3005 C=C提示不饱和脂肪酰胺",
+    "注意事项": "⚠ 1660酰胺C=O可能与PA66的1635酰胺I叠加；可用N-H峰型区分（伯酰胺双峰 vs PA单峰）",
+    "应用场景": "PE/PP薄膜爽滑剂；ABS/PP注塑件表面润滑",
+    "常见宿主材料": ["PE", "PP", "ABS"]
+  },
+
+  "APP": {
+    "category": "flame_retardant",
+    "common_names": ["多聚磷酸铵", "ammonium polyphosphate", "APP", "膨胀型阻燃剂IFR组分"],
+    "ftir_peaks": [
+      {"wavenumber": 3200, "assignment": "N-H 伸缩（NH₄⁺）", "intensity": "宽强"},
+      {"wavenumber": 1250, "assignment": "P=O 伸缩振动（多磷酸酯特征）", "intensity": "很强"},
+      {"wavenumber": 1145, "assignment": "P-O-P 反对称伸缩", "intensity": "很强"},
+      {"wavenumber": 1010, "assignment": "P-O-P 对称伸缩", "intensity": "强"},
+      {"wavenumber": 880, "assignment": "P-O-P 弯曲振动", "intensity": "中"},
+      {"wavenumber": 800, "assignment": "P-N 或 P-O 弯曲", "intensity": "中"}
+    ],
+    "识别特征": "1250+1145+1010 cm⁻¹ 磷酸酯/多磷酸组合特征；XRF检测P/N元素可快速确认",
+    "应用场景": "PP/PA6 无卤膨胀型阻燃（IFR体系），常与季戊四醇（成炭剂）+三聚氰胺（发泡剂）组合",
+    "TGA特征": "280-350°C分解（APP）→ 800-900°C残留富磷炭层；残留量约15-20%",
+    "常见宿主材料": ["PP", "PA6", "PE"]
+  },
+
+  "GlassFiber": {
+    "category": "filler",
+    "common_names": ["玻璃纤维", "glass fiber", "GF", "短切玻纤"],
+    "ftir_peaks": [
+      {"wavenumber": 3680, "assignment": "表面Si-OH 伸缩（处理剂水解后）", "intensity": "弱"},
+      {"wavenumber": 1083, "assignment": "Si-O-Si 反对称伸缩（玻纤主体特征，宽）", "intensity": "极强"},
+      {"wavenumber": 800, "assignment": "Si-O-Si 对称伸缩（次强峰）", "intensity": "强"},
+      {"wavenumber": 478, "assignment": "Si-O 弯曲振动", "intensity": "强"}
+    ],
+    "识别特征": "1083 cm⁻¹ 宽Si-O-Si峰（比硅油的1093更宽，更向低频偏移）；TGA 800°C高温残留即玻纤含量",
+    "注意事项": "⚠ 与硅油(1093)/滑石粉(1018)/CaCO₃(1430)的区分：1083宽峰 + 高温残留呈白色纤维状",
+    "TGA特征": "800-900°C 热稳定无机残留，可直接读出玻纤含量（%GF = 残留%）",
+    "应用场景": "PA-GF/PP-GF/PBT-GF 增强塑料；提高刚性、强度、耐热性",
+    "常见宿主材料": ["PA6", "PA66", "PP", "PBT", "PET", "PC"]
+  },
+
+  "PolyethyleneWax": {
+    "category": "lubricant_processing_aid",
+    "common_names": ["聚乙烯蜡", "PE蜡", "polyethylene wax", "蜡类加工助剂"],
+    "ftir_peaks": [
+      {"wavenumber": 2919, "assignment": "CH₂ 反对称伸缩（与HDPE相同）", "intensity": "很强"},
+      {"wavenumber": 2850, "assignment": "CH₂ 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1472, "assignment": "CH₂ 弯曲（结晶态分裂双峰）", "intensity": "强"},
+      {"wavenumber": 1464, "assignment": "CH₂ 弯曲（非晶态）", "intensity": "强"},
+      {"wavenumber": 730, "assignment": "CH₂ 摇摆（结晶分裂双峰）", "intensity": "强"},
+      {"wavenumber": 720, "assignment": "CH₂ 摇摆（非晶态）", "intensity": "强"}
+    ],
+    "识别特征": "与PE谱图高度相似；区分依据：DSC熔点较低（85-115°C）；TGA失重温度较低（350-430°C）；分子量低的PE蜡无清晰结晶双峰",
+    "应用场景": "PVC/PP/PA加工外润滑剂；注塑件脱模；改善制品光泽",
+    "常见宿主材料": ["PVC", "PP", "PA", "PE"]
+  },
+
+  "OrganoTinStabilizer": {
+    "category": "lubricant_heat_stabilizer",
+    "common_names": ["有机锡热稳定剂", "甲基锡", "辛基锡", "organotin stabilizer", "二月桂酸二丁基锡"],
+    "ftir_peaks": [
+      {"wavenumber": 2958, "assignment": "CH₃/CH₂ 伸缩（烷基锡基团）", "intensity": "强"},
+      {"wavenumber": 1730, "assignment": "C=O 酯基（月桂酸酯型有机锡）", "intensity": "很强"},
+      {"wavenumber": 1241, "assignment": "C-O-C 酯伸缩", "intensity": "强"},
+      {"wavenumber": 1160, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 760, "assignment": "Sn-C 伸缩振动（有机锡特征，弱）", "intensity": "弱"},
+      {"wavenumber": 560, "assignment": "Sn-O 或 Sn-S 振动（特征指纹区）", "intensity": "弱"}
+    ],
+    "识别特征": "1730 cm⁻¹ 酯C=O（区分于邻苯酯1727）；760 Sn-C 弱特征峰；XRF检测Sn元素更准确；巯基锡在2565-2590有S-H特征",
+    "应用场景": "硬PVC型材/管材/汽车内饰件热稳定剂（优于Pb系，满足RoHS）",
+    "常见宿主材料": ["PVC"],
+    "毒性注意": "甲基锡毒性高；食品接触应选辛基锡（毒性低）"
+  },
+
+  "TBBPA": {
+    "category": "flame_retardant",
+    "common_names": ["四溴双酚A", "TBBPA", "添加型溴系阻燃剂", "tetrabromobisphenol A"],
+    "ftir_peaks": [
+      {"wavenumber": 3350, "assignment": "O-H 酚羟基伸缩", "intensity": "中"},
+      {"wavenumber": 2966, "assignment": "CH₃ 异丙基伸缩（双酚A骨架）", "intensity": "强"},
+      {"wavenumber": 1483, "assignment": "苯环骨架（四溴取代芳环）", "intensity": "很强"},
+      {"wavenumber": 1383, "assignment": "C(CH₃)₂ 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1174, "assignment": "C-O 伸缩（酚醚）", "intensity": "中"},
+      {"wavenumber": 855, "assignment": "四溴苯环面外弯曲（特征峰）", "intensity": "很强"},
+      {"wavenumber": 630, "assignment": "C-Br 弯曲振动（特征）", "intensity": "强"}
+    ],
+    "识别特征": "855/630 cm⁻¹ 溴代苯环特征峰组合；与DBDPE区别：3350酚OH峰（DBDPE无OH）+1383异丙基峰",
+    "应用场景": "PC/ABS阻燃剂；电子连接器PA66阻燃体系；添加型与反应型均有",
+    "TGA特征": "约300-350°C先分解（释放HBr），低于基体；XRF快速确认Br元素",
+    "常见宿主材料": ["PC", "ABS", "PC_ABS", "PA66"]
+  },
+
+  "ZnO": {
+    "category": "elastomer_modifier",
+    "common_names": ["氧化锌", "ZnO", "活性氧化锌", "zinc oxide"],
+    "ftir_peaks": [
+      {"wavenumber": 3400, "assignment": "表面O-H（吸附水）", "intensity": "弱宽"},
+      {"wavenumber": 480, "assignment": "Zn-O 伸缩振动（特征峰）", "intensity": "很强"},
+      {"wavenumber": 420, "assignment": "Zn-O 弯曲振动", "intensity": "强"}
+    ],
+    "识别特征": "480 cm⁻¹ Zn-O特征峰（指纹区）；ATR-FTIR 4000-400 cm⁻¹范围内特征清晰；XRF测Zn元素更快；TGA无失重（稳定无机物）",
+    "应用场景": "EPDM/CR/NR 硫化活化剂（与硬脂酸配合形成锌皂活化剂）；橡胶配方必备组分（通常3-5 phr）",
+    "TGA特征": "800°C无失重，白色残留，可用于ZnO含量的间接定量（结合FTIR确认种类）",
+    "常见宿主材料": ["EPDM", "CR", "NR", "NBR", "SBR"]
+  },
+
+  "Sulfur_Vulcanization": {
+    "category": "elastomer_modifier",
+    "common_names": ["硫黄硫化体系", "硫化剂", "CBS促进剂", "TBBS", "sulfur vulcanization"],
+    "ftir_peaks": [
+      {"wavenumber": 2565, "assignment": "S-H 伸缩振动（残余巯基，极弱）", "intensity": "极弱"},
+      {"wavenumber": 1530, "assignment": "S=O（磺酰胺型促进剂特征）", "intensity": "弱"},
+      {"wavenumber": 1488, "assignment": "苯并噻唑环（CBS/TBBS型促进剂）", "intensity": "弱"},
+      {"wavenumber": 760, "assignment": "苯并噻唑面外弯曲（特征）", "intensity": "弱"}
+    ],
+    "识别特征": "硫黄本身无FTIR特征（S-S无IR活性）；促进剂CBS/TBBS含苯并噻唑环（760/1488 cm⁻¹）；用量低（1-3 phr），FTIR直接检出困难；配合XRF测S元素",
+    "应用场景": "EPDM/CR/NR/SBR橡胶硫化；汽车密封条/软管/减震件",
+    "注意": "过硫化（返原）后S-S网络降解→力学性能下降，FTIR可见橡胶相双键峰（968）轻微回升"
+  },
+
+  "DINCH": {
+    "category": "plasticizer",
+    "common_names": ["己二酸二异壬酯环己烷二甲酸酯", "DINCH", "Hexamoll DINCH", "1,2-环己烷二甲酸二异壬酯"],
+    "ftir_peaks": [
+      {"wavenumber": 2958, "assignment": "CH₃ 伸缩", "intensity": "强"},
+      {"wavenumber": 2930, "assignment": "CH₂ 伸缩", "intensity": "强"},
+      {"wavenumber": 2872, "assignment": "CH₃/CH₂ 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1728, "assignment": "C=O 酯基伸缩（位置与邻苯酯接近但更宽）", "intensity": "很强"},
+      {"wavenumber": 1460, "assignment": "CH₂ 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1265, "assignment": "C-O-C 伸缩（环己烷酯特征）", "intensity": "很强"},
+      {"wavenumber": 1180, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 1130, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 851, "assignment": "环己烷环伸缩振动（无苯环峰是关键区别）", "intensity": "中"}
+    ],
+    "识别特征": "与DEHP最大区别：无744 cm⁻¹ 苯环邻取代峰，851 cm⁻¹ 环己烷环替代；为DEHP低毒替代品",
+    "应用场景": "新型医疗/食品接触/汽车内饰PVC增塑剂；REACH法规下逐步替代邻苯酯",
+    "常见宿主材料": ["PVC", "TPU"]
+  },
+
+  "DOTP": {
+    "category": "plasticizer",
+    "common_names": ["对苯二甲酸二辛酯", "DOTP", "DEHT", "di-2-ethylhexyl terephthalate"],
+    "ftir_peaks": [
+      {"wavenumber": 2960, "assignment": "CH₃ 伸缩", "intensity": "强"},
+      {"wavenumber": 2930, "assignment": "CH₂ 伸缩", "intensity": "强"},
+      {"wavenumber": 1723, "assignment": "C=O 酯基（对苯二甲酸酯，略低于邻苯酯）", "intensity": "很强"},
+      {"wavenumber": 1600, "assignment": "苯环骨架（对位取代）", "intensity": "中"},
+      {"wavenumber": 1505, "assignment": "苯环骨架（对位特征）", "intensity": "中"},
+      {"wavenumber": 1285, "assignment": "C-O-C 伸缩", "intensity": "很强"},
+      {"wavenumber": 1121, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 730, "assignment": "对位取代苯环面外弯曲（区别于邻苯744）", "intensity": "很强"},
+      {"wavenumber": 714, "assignment": "苯环弯曲（对位特征）", "intensity": "强"}
+    ],
+    "识别特征": "730/714 cm⁻¹ 对位取代苯环（区别于DEHP的744 cm⁻¹ 邻位特征峰）；1723酯C=O比DEHP略低",
+    "应用场景": "汽车内饰/线束PVC增塑剂；耐热性优于DEHP；环保型替代品",
+    "常见宿主材料": ["PVC"]
+  },
+
+  "ATBC": {
+    "category": "plasticizer",
+    "common_names": ["乙酰基柠檬酸三丁酯", "ATBC", "acetyl tributyl citrate", "柠檬酸酯增塑剂"],
+    "ftir_peaks": [
+      {"wavenumber": 2960, "assignment": "CH₃ 伸缩", "intensity": "强"},
+      {"wavenumber": 2938, "assignment": "CH₂ 伸缩", "intensity": "强"},
+      {"wavenumber": 1748, "assignment": "C=O 酯基（乙酰基酯）", "intensity": "很强"},
+      {"wavenumber": 1736, "assignment": "C=O 酯基（柠檬酸酯）", "intensity": "很强"},
+      {"wavenumber": 1459, "assignment": "CH₂ 弯曲", "intensity": "中"},
+      {"wavenumber": 1381, "assignment": "CH₃ 弯曲", "intensity": "中"},
+      {"wavenumber": 1224, "assignment": "C-O-C 伸缩（特征）", "intensity": "很强"},
+      {"wavenumber": 1186, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 1088, "assignment": "C-O-C 伸缩（叔酯）", "intensity": "强"}
+    ],
+    "识别特征": "双C=O峰（1748+1736 cm⁻¹）是柠檬酸酯特征；无苯环峰；食品级可用",
+    "应用场景": "食品接触/医疗/儿童用品PVC；部分汽车内饰环保配方",
+    "常见宿主材料": ["PVC", "PLA"]
+  },
+
+  "ATH": {
+    "category": "flame_retardant",
+    "common_names": ["氢氧化铝", "三水氧化铝", "ATH", "aluminum trihydrate", "Al(OH)₃"],
+    "ftir_peaks": [
+      {"wavenumber": 3530, "assignment": "O-H 伸缩振动（锐峰，特征双峰之一）", "intensity": "强"},
+      {"wavenumber": 3458, "assignment": "O-H 伸缩振动（锐峰，特征双峰之二）", "intensity": "强"},
+      {"wavenumber": 1643, "assignment": "O-H 弯曲振动（结晶水）", "intensity": "中"},
+      {"wavenumber": 1022, "assignment": "Al-O-H 弯曲振动", "intensity": "很强"},
+      {"wavenumber": 800, "assignment": "Al-O 伸缩振动", "intensity": "强"},
+      {"wavenumber": 570, "assignment": "Al-O-Al 弯曲振动（特征）", "intensity": "强"}
+    ],
+    "识别特征": "3530/3458 cm⁻¹ 特征双OH锐峰（与MDH区别：ATH双峰，MDH单峰3697）；无C-H峰；TGA约200-350°C失重（脱水）",
+    "应用场景": "EVA/LDPE/PP线缆绝缘层无卤阻燃；用量大（50-65 wt%）",
+    "TGA特征": "200-350°C约34%失重（3个H₂O）；残留Al₂O₃",
+    "常见宿主材料": ["EVA", "LDPE", "PP", "TPO"]
+  },
+
+  "MDH": {
+    "category": "flame_retardant",
+    "common_names": ["氢氧化镁", "MDH", "magnesium dihydroxide", "Mg(OH)₂"],
+    "ftir_peaks": [
+      {"wavenumber": 3697, "assignment": "O-H 伸缩振动（单锐峰，MDH最强特征）", "intensity": "极强"},
+      {"wavenumber": 1450, "assignment": "O-H 弯曲振动", "intensity": "弱"},
+      {"wavenumber": 445, "assignment": "Mg-O 伸缩振动（特征）", "intensity": "极强"}
+    ],
+    "识别特征": "3697 cm⁻¹ 单个极锐OH峰（ATH是双峰3530/3458）是MDH绝对特征；445 Mg-O；TGA约340-430°C失重",
+    "应用场景": "PP/PE/PA高温加工线缆无卤阻燃；耐温比ATH好（分解温度更高）",
+    "TGA特征": "340-430°C约31%失重（1个H₂O）；残留MgO",
+    "常见宿主材料": ["PP", "PE", "PA6", "TPO"]
+  },
+
+  "DOPO": {
+    "category": "flame_retardant",
+    "common_names": ["DOPO", "9,10-二氢-9-氧杂-10-磷杂菲-10-氧化物", "磷系无卤阻燃剂", "phosphorus flame retardant"],
+    "ftir_peaks": [
+      {"wavenumber": 3050, "assignment": "芳香C-H 伸缩", "intensity": "弱"},
+      {"wavenumber": 1590, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1477, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1228, "assignment": "P=O 伸缩振动（极强特征峰）", "intensity": "极强"},
+      {"wavenumber": 1178, "assignment": "P-O-C 伸缩振动", "intensity": "很强"},
+      {"wavenumber": 940, "assignment": "P-O 芳香族伸缩（特征）", "intensity": "强"},
+      {"wavenumber": 758, "assignment": "苯并杂环面外弯曲", "intensity": "强"},
+      {"wavenumber": 720, "assignment": "苯环面外弯曲", "intensity": "中"}
+    ],
+    "识别特征": "1228 cm⁻¹ P=O极强特征峰；1178 P-O-C；无卤素（区别于溴系阻燃剂）；XRF验证P元素",
+    "应用场景": "环氧树脂/PA/PBT/PC无卤阻燃；反应型与添加型均有；UL94 V-0级应用",
+    "常见宿主材料": ["PA6", "PA66", "PBT", "PC", "环氧树脂"]
+  },
+
+  "CBS_Accelerator": {
+    "category": "elastomer_modifier",
+    "common_names": ["CBS促进剂", "N-环己基-2-苯并噻唑次磺酰胺", "CBS", "sulfenamide accelerator"],
+    "ftir_peaks": [
+      {"wavenumber": 3215, "assignment": "N-H 次磺酰胺伸缩", "intensity": "中"},
+      {"wavenumber": 2930, "assignment": "环己基 CH₂ 伸缩", "intensity": "中"},
+      {"wavenumber": 1493, "assignment": "苯并噻唑苯环骨架（特征）", "intensity": "很强"},
+      {"wavenumber": 1433, "assignment": "苯环/杂环骨架", "intensity": "强"},
+      {"wavenumber": 1244, "assignment": "C-N 伸缩振动", "intensity": "强"},
+      {"wavenumber": 1039, "assignment": "S-N 伸缩振动（次磺酰胺特征）", "intensity": "中"},
+      {"wavenumber": 749, "assignment": "苯并噻唑苯环面外弯曲（特征）", "intensity": "很强"}
+    ],
+    "识别特征": "749/1493 cm⁻¹ 苯并噻唑特征峰组合；3215 N-H；欠硫化橡胶中可检出残余促进剂；XRF测S/N元素辅助确认",
+    "应用场景": "NR/SBR/NBR/EPDM迟效型促进剂；汽车轮胎/密封件",
+    "常见宿主材料": ["NR", "SBR", "NBR", "EPDM"]
+  },
+
+  "TMTD": {
+    "category": "elastomer_modifier",
+    "common_names": ["秋兰姆TMTD", "四甲基秋兰姆二硫化物", "TMTD", "thiuram disulfide"],
+    "ftir_peaks": [
+      {"wavenumber": 2970, "assignment": "N-CH₃ 伸缩", "intensity": "强"},
+      {"wavenumber": 1489, "assignment": "C=N⁺ 伸缩振动（噻唑环/秋兰姆特征峰）", "intensity": "极强"},
+      {"wavenumber": 1381, "assignment": "N-CH₃ 弯曲（两个甲基）", "intensity": "强"},
+      {"wavenumber": 986, "assignment": "C-S 伸缩振动（特征）", "intensity": "强"},
+      {"wavenumber": 551, "assignment": "S-S 伸缩振动（二硫键特征）", "intensity": "中"}
+    ],
+    "识别特征": "1489 cm⁻¹ 极强C=N⁺特征峰是秋兰姆类绝对特征；551 S-S；无苯环峰区别于CBS；用量0.5-1.5 phr时直接FTIR检出困难",
+    "应用场景": "CR/EPDM/NBR硫化促进剂/副促进剂；也用作农业杀真菌剂",
+    "常见宿主材料": ["CR", "EPDM", "NBR"]
+  },
+
+  "MBTS": {
+    "category": "elastomer_modifier",
+    "common_names": ["促进剂DM", "2,2'-二硫代双苯并噻唑", "MBTS", "benzothiazyl disulfide"],
+    "ftir_peaks": [
+      {"wavenumber": 3060, "assignment": "苯并噻唑苯环C-H（芳香）", "intensity": "弱"},
+      {"wavenumber": 1489, "assignment": "苯并噻唑苯环骨架（特征）", "intensity": "很强"},
+      {"wavenumber": 1435, "assignment": "苯环/噻唑环骨架", "intensity": "强"},
+      {"wavenumber": 1247, "assignment": "C-N 伸缩振动", "intensity": "强"},
+      {"wavenumber": 752, "assignment": "苯并噻唑面外弯曲（特征峰）", "intensity": "很强"},
+      {"wavenumber": 691, "assignment": "苯环弯曲", "intensity": "中"}
+    ],
+    "识别特征": "752 cm⁻¹ 苯并噻唑特征峰（与CBS的749相近，但无N-H峰）；无N-H区别于CBS；二硫化物结构XRF测S含量更高",
+    "应用场景": "NR/SBR/BR硫化体系；常用基础促进剂",
+    "常见宿主材料": ["NR", "SBR", "BR", "EPDM"]
+  },
+
+  "DCP": {
+    "category": "elastomer_modifier",
+    "common_names": ["过氧化二异丙苯", "DCP", "dicumyl peroxide", "交联剂DCP"],
+    "ftir_peaks": [
+      {"wavenumber": 3060, "assignment": "苯环C-H 伸缩", "intensity": "弱"},
+      {"wavenumber": 2970, "assignment": "CH₃ 伸缩（异丙基）", "intensity": "强"},
+      {"wavenumber": 2937, "assignment": "CH₂ 伸缩", "intensity": "中"},
+      {"wavenumber": 1600, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1498, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1454, "assignment": "CH₂/CH₃ 弯曲", "intensity": "中"},
+      {"wavenumber": 1170, "assignment": "C-O 过氧键伸缩（特征）", "intensity": "中"},
+      {"wavenumber": 760, "assignment": "单取代苯环面外弯曲（特征）", "intensity": "强"},
+      {"wavenumber": 702, "assignment": "苯环弯曲", "intensity": "强"}
+    ],
+    "识别特征": "760/702 cm⁻¹ 单取代苯环特征组合；1170 C-O过氧特征；DCP在橡胶中通常已分解，FTIR只能检出残余或分解产物（苯乙酮1684等）",
+    "应用场景": "EPDM/硅橡胶/PE过氧化物交联；无硫交联体系",
+    "分解产物": "FTIR中观察到1684 cm⁻¹（苯乙酮C=O）和苯环峰说明DCP已分解产生交联",
+    "常见宿主材料": ["EPDM", "VMQ", "PE", "EVA"]
+  },
+
+  "DSTDP": {
+    "category": "antioxidant",
+    "common_names": ["硫代二丙酸双十八酯", "DSTDP", "DSTP", "distearyl thiodipropionate", "辅助抗氧剂DSTDP"],
+    "ftir_peaks": [
+      {"wavenumber": 2919, "assignment": "CH₂ 反对称伸缩（长链，很强）", "intensity": "很强"},
+      {"wavenumber": 2851, "assignment": "CH₂ 对称伸缩（长链）", "intensity": "强"},
+      {"wavenumber": 1737, "assignment": "C=O 酯基伸缩", "intensity": "很强"},
+      {"wavenumber": 1472, "assignment": "CH₂ 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1377, "assignment": "CH₃ 弯曲", "intensity": "中"},
+      {"wavenumber": 1263, "assignment": "C-O-C 酯伸缩", "intensity": "强"},
+      {"wavenumber": 1174, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 720, "assignment": "长链 CH₂ 摇摆（特征）", "intensity": "中"}
+    ],
+    "识别特征": "长链CH₂双峰（2919/2851）+1737酯C=O+720摇摆峰；与Irganox1076相似但无苯环峰；含S原子（XRF可确认）",
+    "应用场景": "PP/PE硫酯类辅助抗氧剂；与受阻酚协同；耐长期热老化",
+    "常见宿主材料": ["PP", "PE", "EPDM"]
+  },
+
+  "Oleamide": {
+    "category": "lubricant_processing_aid",
+    "common_names": ["油酸酰胺", "芥酸酰胺前体", "oleamide", "顺-9-十八碳烯酰胺", "开口剂/爽滑剂"],
+    "ftir_peaks": [
+      {"wavenumber": 3336, "assignment": "N-H 伸缩（酰胺，一级，双峰之一）", "intensity": "强"},
+      {"wavenumber": 3174, "assignment": "N-H 伸缩（酰胺，一级，双峰之二）", "intensity": "强"},
+      {"wavenumber": 2920, "assignment": "CH₂ 反对称伸缩（长链C18）", "intensity": "很强"},
+      {"wavenumber": 2851, "assignment": "CH₂ 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1686, "assignment": "C=O 酰胺Ⅰ带（特征）", "intensity": "很强"},
+      {"wavenumber": 1617, "assignment": "N-H 酰胺Ⅱ带（弯曲）", "intensity": "强"},
+      {"wavenumber": 721, "assignment": "CH₂ 摇摆（长链）", "intensity": "中"}
+    ],
+    "识别特征": "3336/3174 cm⁻¹ 一级酰胺N-H双峰+1686 C=O；区别于EBS：Oleamide无1545 N-H弯曲；迁移到表面后FTIR可在表面直接检出",
+    "应用场景": "PE/PP薄膜/片材爽滑开口剂；制品表面迁移是失效/污染分析的关注点",
+    "常见宿主材料": ["PE", "PP", "EVA"]
+  },
+
+  "EBS": {
+    "category": "lubricant_processing_aid",
+    "common_names": ["乙撑双硬脂酸酰胺", "EBS", "EBH", "N,N'-亚乙基双硬脂酸酰胺", "ethylene bis-stearamide"],
+    "ftir_peaks": [
+      {"wavenumber": 3297, "assignment": "N-H 伸缩（仲酰胺，单峰）", "intensity": "中"},
+      {"wavenumber": 2919, "assignment": "CH₂ 反对称伸缩（C18长链）", "intensity": "很强"},
+      {"wavenumber": 2850, "assignment": "CH₂ 对称伸缩", "intensity": "强"},
+      {"wavenumber": 1636, "assignment": "C=O 酰胺Ⅰ带", "intensity": "很强"},
+      {"wavenumber": 1549, "assignment": "N-H 酰胺Ⅱ带（仲酰胺特征）", "intensity": "强"},
+      {"wavenumber": 1472, "assignment": "CH₂ 弯曲", "intensity": "中"},
+      {"wavenumber": 720, "assignment": "CH₂ 摇摆（长链）", "intensity": "中"}
+    ],
+    "识别特征": "仲酰胺特征：单N-H峰（3297）+1549 cm⁻¹ 酰胺Ⅱ带；与Oleamide区别：EBS有1549峰，Oleamide无；高熔点（141-146°C），TGA稳定",
+    "应用场景": "PA/POM/ABS/PC润滑分散剂；色母粒载体；脱模润滑",
+    "常见宿主材料": ["PA6", "PA66", "POM", "ABS", "PC"]
+  },
+
+  "Toluene": {
+    "category": "contaminant",
+    "common_names": ["甲苯", "toluene", "苯甲基氢", "溶剂污染物"],
+    "ftir_peaks": [
+      {"wavenumber": 3084, "assignment": "苯环C-H 伸缩（芳香）", "intensity": "弱"},
+      {"wavenumber": 3062, "assignment": "苯环C-H 伸缩", "intensity": "弱"},
+      {"wavenumber": 3028, "assignment": "苯环C-H 伸缩", "intensity": "弱"},
+      {"wavenumber": 2924, "assignment": "CH₃ 反对称伸缩", "intensity": "中"},
+      {"wavenumber": 2872, "assignment": "CH₃ 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1605, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1496, "assignment": "苯环骨架振动（特征）", "intensity": "强"},
+      {"wavenumber": 1460, "assignment": "CH₃/苯环弯曲", "intensity": "中"},
+      {"wavenumber": 1380, "assignment": "CH₃ 对称弯曲", "intensity": "中"},
+      {"wavenumber": 731, "assignment": "单取代苯环面外弯曲（特征峰）", "intensity": "极强"},
+      {"wavenumber": 695, "assignment": "苯环弯曲（单取代特征）", "intensity": "很强"}
+    ],
+    "识别特征": "731/695 cm⁻¹ 单取代苯环特征组合是甲苯最强识别峰；无O-H/N-H峰；溶剂残留分析常见",
+    "应用场景": "溶剂残留污染检测；胶黏剂/涂料工艺污染；内饰VOC分析",
+    "常见宿主材料": ["PVC", "聚氨酯涂层", "橡胶密封件"]
+  },
+
+  "Xylene": {
+    "category": "contaminant",
+    "common_names": ["二甲苯", "xylene", "对二甲苯", "邻二甲苯", "间二甲苯", "溶剂污染物"],
+    "ftir_peaks": [
+      {"wavenumber": 3060, "assignment": "苯环C-H 伸缩", "intensity": "弱"},
+      {"wavenumber": 3030, "assignment": "苯环C-H 伸缩", "intensity": "弱"},
+      {"wavenumber": 2960, "assignment": "CH₃ 伸缩", "intensity": "中"},
+      {"wavenumber": 2920, "assignment": "CH₃ 伸缩", "intensity": "中"},
+      {"wavenumber": 1610, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1496, "assignment": "苯环骨架振动", "intensity": "中"},
+      {"wavenumber": 1378, "assignment": "CH₃ 弯曲（双甲基）", "intensity": "中"},
+      {"wavenumber": 797, "assignment": "对位取代苯环面外弯曲（p-二甲苯）", "intensity": "强"},
+      {"wavenumber": 769, "assignment": "间位取代苯环面外弯曲（m-二甲苯）", "intensity": "强"},
+      {"wavenumber": 740, "assignment": "邻位取代苯环面外弯曲（o-二甲苯）", "intensity": "强"}
+    ],
+    "识别特征": "苯环面外弯曲峰位置区分异构体：p-797、m-769、o-740 cm⁻¹；与甲苯区别：无695峰，有双CH₃峰",
+    "应用场景": "溶剂残留污染检测；内饰件VOC分析；涂料/胶黏剂工艺污染",
+    "常见宿主材料": ["聚氨酯涂层", "ABS", "PP内饰件"]
+  },
+
+  "Acetone": {
+    "category": "contaminant",
+    "common_names": ["丙酮", "acetone", "二甲酮", "溶剂污染物"],
+    "ftir_peaks": [
+      {"wavenumber": 2969, "assignment": "CH₃ 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2925, "assignment": "CH₃ 对称伸缩", "intensity": "中"},
+      {"wavenumber": 1716, "assignment": "C=O 酮羰基伸缩（极强特征峰）", "intensity": "极强"},
+      {"wavenumber": 1427, "assignment": "CH₃ 不对称弯曲", "intensity": "中"},
+      {"wavenumber": 1364, "assignment": "CH₃ 对称弯曲（特征）", "intensity": "强"},
+      {"wavenumber": 1225, "assignment": "C-C-C 骨架伸缩", "intensity": "中"},
+      {"wavenumber": 531, "assignment": "C=O 面外弯曲（低波数特征）", "intensity": "中"}
+    ],
+    "识别特征": "1716 cm⁻¹ 酮C=O（比酯C=O高约20 cm⁻¹，比醛C=O高约15 cm⁻¹）；无苯环峰；无O-H峰区别于乙醇；快速挥发，大量残留说明溶剂清洗不充分",
+    "应用场景": "零件清洗溶剂残留；胶黏剂配方溶剂；手套套料/清洁剂污染检测",
+    "常见宿主材料": ["PC", "PMMA", "ABS（注意丙酮会侵蚀PC）"]
+  },
+
+  "Ethanol": {
+    "category": "contaminant",
+    "common_names": ["乙醇", "酒精", "ethanol", "工业酒精"],
+    "ftir_peaks": [
+      {"wavenumber": 3338, "assignment": "O-H 羟基伸缩（宽峰，特征）", "intensity": "很强"},
+      {"wavenumber": 2974, "assignment": "CH₃ 反对称伸缩", "intensity": "强"},
+      {"wavenumber": 2930, "assignment": "CH₂ 伸缩", "intensity": "中"},
+      {"wavenumber": 1383, "assignment": "CH₃ 弯曲", "intensity": "中"},
+      {"wavenumber": 1088, "assignment": "C-O 伸缩（醇特征）", "intensity": "很强"},
+      {"wavenumber": 879, "assignment": "CH₂ 摇摆（C-C-O 骨架）", "intensity": "中"}
+    ],
+    "识别特征": "3338宽O-H峰+1088 C-O峰是醇类特征；与水区别：有CH₃/CH₂峰（2974/2930）；与异丙醇区别：乙醇C-O单峰1088，异丙醇双峰1130+1109",
+    "应用场景": "表面清洁剂残留；硅烷偶联剂水解副产物；内饰VOC",
+    "常见宿主材料": ["各类表面涂层", "密封件"]
+  },
+
+  "Epoxy_Resin": {
+    "category": "contaminant",
+    "common_names": ["双酚A型环氧树脂", "环氧树脂", "BPA epoxy", "E-51", "E-44", "DGEBA"],
+    "ftir_peaks": [
+      {"wavenumber": 3056, "assignment": "环氧苯环C-H 伸缩", "intensity": "弱"},
+      {"wavenumber": 2966, "assignment": "CH₂/CH₃ 伸缩", "intensity": "中"},
+      {"wavenumber": 1608, "assignment": "苯环骨架（双酚A特征）", "intensity": "中"},
+      {"wavenumber": 1581, "assignment": "苯环骨架（双酚A特征）", "intensity": "中"},
+      {"wavenumber": 1508, "assignment": "苯环骨架（para-取代，特征）", "intensity": "强"},
+      {"wavenumber": 1460, "assignment": "CH₂ 弯曲", "intensity": "中"},
+      {"wavenumber": 1384, "assignment": "C(CH₃)₂ 异丙基弯曲（BPA特征）", "intensity": "中"},
+      {"wavenumber": 1242, "assignment": "C-O-C 环氧乙醚伸缩（强特征峰）", "intensity": "很强"},
+      {"wavenumber": 1183, "assignment": "C-O 芳醚伸缩", "intensity": "强"},
+      {"wavenumber": 916, "assignment": "环氧基伸缩振动（未固化特征峰！）", "intensity": "强"},
+      {"wavenumber": 828, "assignment": "对位取代苯环面外弯曲（特征）", "intensity": "很强"}
+    ],
+    "识别特征": "916 cm⁻¹ 是未固化环氧基的绝对特征峰，固化后消失；828 cm⁻¹ para-BPA苯环特征；1384 异丙基峰确认BPA骨架；粘接件开裂分析必检",
+    "应用场景": "结构胶/密封胶粘接件失效分析；涂层脱落；印刷电路板分层",
+    "常见宿主材料": ["金属/塑料粘接界面", "SMC", "BMC", "碳纤维复合材料"]
+  },
+
+  "MDI_PU": {
+    "category": "contaminant",
+    "common_names": ["MDI聚氨酯", "异氰酸酯胶", "PU胶", "MDI", "polyurethane adhesive"],
+    "ftir_peaks": [
+      {"wavenumber": 3303, "assignment": "N-H 氨酯键伸缩（固化后）", "intensity": "强"},
+      {"wavenumber": 2962, "assignment": "CH₂/CH₃ 伸缩", "intensity": "中"},
+      {"wavenumber": 2273, "assignment": "-N=C=O 异氰酸酯伸缩（未反应NCO，极强特征峰！）", "intensity": "极强"},
+      {"wavenumber": 1719, "assignment": "C=O 氨酯羰基（固化后主峰）", "intensity": "很强"},
+      {"wavenumber": 1596, "assignment": "N-H 弯曲（酰胺Ⅱ型）", "intensity": "强"},
+      {"wavenumber": 1531, "assignment": "N-H 弯曲+C-N 伸缩（氨酯特征）", "intensity": "强"},
+      {"wavenumber": 1221, "assignment": "C-O-C 醚伸缩（软段）", "intensity": "强"},
+      {"wavenumber": 816, "assignment": "4,4'-MDI 对苯取代面外弯曲（特征）", "intensity": "强"}
+    ],
+    "识别特征": "2273 cm⁻¹ N=C=O峰是未固化/残余异氰酸酯的绝对特征（1-2秒可识别）；固化后该峰消失，1719 C=O出现；816确认MDI型（TDI在820）",
+    "应用场景": "汽车内饰粘接件/包覆件失效分析；聚氨酯泡沫开裂；密封胶层剥离",
+    "常见宿主材料": ["聚酯/聚醚软段", "PU泡沫", "人造革基材"]
+  },
+
+  "Kaolin": {
+    "category": "filler",
+    "common_names": ["高岭土", "瓷土", "kaolin", "kaolinite", "Al₂Si₂O₅(OH)₄"],
+    "ftir_peaks": [
+      {"wavenumber": 3697, "assignment": "Al-O-H 伸缩（外OH，锐峰，最强特征）", "intensity": "很强"},
+      {"wavenumber": 3652, "assignment": "Al-O-H 伸缩（内OH）", "intensity": "中"},
+      {"wavenumber": 3620, "assignment": "Al-O-H 伸缩（内OH，多峰）", "intensity": "中"},
+      {"wavenumber": 1112, "assignment": "Si-O 伸缩振动", "intensity": "很强"},
+      {"wavenumber": 1033, "assignment": "Si-O-Si 伸缩（最强峰）", "intensity": "极强"},
+      {"wavenumber": 1008, "assignment": "Si-O 伸缩", "intensity": "强"},
+      {"wavenumber": 914, "assignment": "Al-O-H 弯曲（特征）", "intensity": "强"},
+      {"wavenumber": 540, "assignment": "Si-O-Al 弯曲振动（特征）", "intensity": "强"}
+    ],
+    "识别特征": "3697/3652/3620 cm⁻¹ 三组锐OH峰是高岭土特征（区别于Talc仅3677单峰）；1033 Si-O强峰；914 Al-OH弯曲唯一识别点",
+    "应用场景": "橡胶/PVC/PA填料；改善电绝缘性；汽车线束绝缘层",
+    "常见宿主材料": ["NBR", "EPDM", "PVC", "PA"]
+  },
+
+  "BaSO4": {
+    "category": "filler",
+    "common_names": ["硫酸钡", "重晶石", "barium sulfate", "BaSO₄", "blanc fixe"],
+    "ftir_peaks": [
+      {"wavenumber": 1170, "assignment": "SO₄²⁻ 反对称伸缩（强宽峰）", "intensity": "极强"},
+      {"wavenumber": 1070, "assignment": "SO₄²⁻ 反对称伸缩（第二峰）", "intensity": "很强"},
+      {"wavenumber": 1046, "assignment": "SO₄²⁻ 伸缩分裂峰", "intensity": "强"},
+      {"wavenumber": 983, "assignment": "SO₄²⁻ 对称伸缩（弱，在低对称晶体中出现）", "intensity": "弱"},
+      {"wavenumber": 637, "assignment": "SO₄²⁻ 面外弯曲（特征）", "intensity": "强"},
+      {"wavenumber": 610, "assignment": "SO₄²⁻ 面外弯曲（特征）", "intensity": "强"}
+    ],
+    "识别特征": "1170/1070 cm⁻¹ 强宽SO₄²⁻峰+637/610 cm⁻¹ 弯曲峰；无O-H峰（区别于ATH/MDH）；无C-H峰；XRF测Ba/S元素快速确认；TGA几乎无失重（稳定至1300°C）",
+    "应用场景": "PP/PA/PU高密度填料；隔音/阻尼材料；汽车车底涂料配方",
+    "TGA特征": "800°C失重<0.5%，极稳定；与CaCO3区分：BaSO4无700-850°C CO2释放阶段",
+    "常见宿主材料": ["PP", "PU", "ABS", "橡胶"]
+  },
+
+  "Mica": {
+    "category": "filler",
+    "common_names": ["云母", "白云母", "muscovite", "mica", "KAl₂(AlSi₃)O₁₀(OH)₂"],
+    "ftir_peaks": [
+      {"wavenumber": 3627, "assignment": "O-H 伸缩振动（层状硅酸盐特征锐峰）", "intensity": "中"},
+      {"wavenumber": 1025, "assignment": "Si-O-Si 反对称伸缩（最强特征）", "intensity": "极强"},
+      {"wavenumber": 1002, "assignment": "Si-O 伸缩", "intensity": "很强"},
+      {"wavenumber": 826, "assignment": "Al-O-H 弯曲振动（特征）", "intensity": "中"},
+      {"wavenumber": 756, "assignment": "Si-O-Al 面外弯曲", "intensity": "中"},
+      {"wavenumber": 545, "assignment": "Si-O-Al 弯曲振动", "intensity": "强"},
+      {"wavenumber": 467, "assignment": "Si-O 弯曲振动", "intensity": "中"}
+    ],
+    "识别特征": "3627 cm⁻¹ 锐OH（比高岭土峰少且位置不同）+1025强Si-O；826 Al-OH与Talc的670弯曲明显不同；片状结构提供独特力学补强",
+    "应用场景": "PP/PA增刚补强填料；汽车保险杠/引擎盖垫片；改善翘曲性",
+    "常见宿主材料": ["PP", "PA6", "PA66", "PBT"]
+  },
+
+  "PETS": {
+    "category": "lubricant_processing_aid",
+    "common_names": ["季戊四醇四硬脂酸酯", "PETS", "pentaerythritol stearate", "硬脂酸季戊四醇酯", "脱模润滑剂"],
+    "ftir_peaks": [
+      {"wavenumber": 2919, "assignment": "CH₂ 反对称伸缩（C18长链）", "intensity": "很强"},
+      {"wavenumber": 2851, "assignment": "CH₂ 对称伸缩（C18长链）", "intensity": "强"},
+      {"wavenumber": 1739, "assignment": "C=O 酯基伸缩（脂肪酸酯，特征峰）", "intensity": "极强"},
+      {"wavenumber": 1473, "assignment": "CH₂ 弯曲振动", "intensity": "中"},
+      {"wavenumber": 1378, "assignment": "CH₃ 弯曲", "intensity": "中"},
+      {"wavenumber": 1255, "assignment": "C-O-C 伸缩（酯键，特征）", "intensity": "很强"},
+      {"wavenumber": 1174, "assignment": "C-O 伸缩", "intensity": "强"},
+      {"wavenumber": 721, "assignment": "长链 CH₂ 摇摆（C18特征）", "intensity": "中"}
+    ],
+    "识别特征": "1739 cm⁻¹ 脂肪酸酯C=O（比芳香酯低）+1255 C-O-C+721摇摆；与StearicAcid区别：PETS无2500-3300的酸羟基宽包峰；高效内外润滑兼具",
+    "应用场景": "PA/PBT/POM/PC脱模润滑剂；注塑加工助剂；减少模具沉积",
+    "常见宿主材料": ["PA6", "PA66", "PBT", "POM", "PC"]
+  }
+}

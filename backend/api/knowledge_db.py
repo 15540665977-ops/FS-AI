@@ -7,9 +7,11 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
-router = APIRouter()
+from core.security import get_current_user
+
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 _KNOWLEDGE_DIR = Path(__file__).parent.parent / "knowledge"
 

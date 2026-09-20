@@ -9,10 +9,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from api.schemas import AnalysisCaseOut
+from core.security import CurrentAdmin, get_current_user
 from db.database import get_db
 from db.models import AnalysisCase
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 
 def _next_case_no(db: Session) -> str:
@@ -32,18 +33,31 @@ def _next_case_no(db: Session) -> str:
     return f"{prefix}{seq:03d}"
 
 
-@router.get("/", response_model=List[AnalysisCaseOut])
+@router.get("/")
 def list_cases(
+    q: Optional[str] = None,
     material_name: Optional[str] = None,
     confidence_level: Optional[str] = None,
+    limit: int = 20,
+    offset: int = 0,
     db: Session = Depends(get_db),
 ):
-    q = db.query(AnalysisCase)
-    if material_name:
-        q = q.filter(AnalysisCase.material_name.ilike(f"%{material_name}%"))
+    query = db.query(AnalysisCase)
+    keyword = q or material_name
+    if keyword:
+        query = query.filter(
+            AnalysisCase.material_name.ilike(f"%{keyword}%")
+            | AnalysisCase.case_no.ilike(f"%{keyword}%")
+        )
     if confidence_level:
-        q = q.filter(AnalysisCase.confidence_level == confidence_level)
-    return q.order_by(AnalysisCase.created_at.desc()).all()
+        query = query.filter(AnalysisCase.confidence_level == confidence_level)
+    query = query.order_by(AnalysisCase.created_at.desc())
+    total = query.count()
+    items = query.offset(offset).limit(limit).all()
+    return {
+        "items": [AnalysisCaseOut.model_validate(c) for c in items],
+        "total": total,
+    }
 
 
 @router.get("/{case_no}", response_model=AnalysisCaseOut)

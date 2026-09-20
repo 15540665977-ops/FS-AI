@@ -125,7 +125,7 @@
     "mechanism": "紫外线辐射导致聚合物链断裂、交联，产生羰基等氧化产物",
     "ftir_changes": {
       "new_peaks": [
-        {"wavenumber": 1710-1750, "assignment": "羰基 C=O，强度显著增加"},
+        {"wavenumber": "1710-1750", "assignment": "羰基 C=O，强度显著增加"},
         {"wavenumber": 3400, "assignment": "羟基 O-H，表明伴随氧化"},
         {"wavenumber": 1630, "assignment": "共轭 carbonyl，表明形成共轭双键结构"}
       ],

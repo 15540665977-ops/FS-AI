@@ -108,7 +108,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { Upload, Document, Close } from '@element-plus/icons-vue'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 import SpectraCompare from '../components/SpectraCompare.vue'
+import { apiFetch } from '../apiFetch'
+import { apiUrl } from '../api'
 
 marked.setOptions({ breaks: true, gfm: true })
 
@@ -133,13 +136,13 @@ const canSubmit = computed(() =>
 
 // ── 工具 ─────────────────────────────────────────────
 function render(text) {
-  return text ? marked.parse(text) : ''
+  return text ? DOMPurify.sanitize(marked.parse(text)) : ''
 }
 
 // ── 知识库条目加载 ─────────────────────────────────────
 async function loadEntries() {
   try {
-    const r = await fetch('/api/v1/knowledge/entries')
+    const r = await apiFetch('/api/v1/knowledge/entries')
     if (r.ok) entries.value = await r.json()
   } catch {}
 }
@@ -199,7 +202,7 @@ async function submit() {
   fd.append('spec_type', specType.value)
 
   try {
-    const resp = await fetch('/api/v1/chat/cross-compare', {
+    const resp = await apiFetch('/api/v1/chat/cross-compare', {
       method: 'POST',
       body: fd,
       signal: abortCtrl.signal,
@@ -225,7 +228,7 @@ async function submit() {
           if (p.content) {
             resultText.value += p.content
           } else if (p.type === 'spectra_data' && p.mode === 'cross_compare') {
-            spectraData.value = p
+            spectraData.value = { ...p, image_urls: (p.image_urls || []).map(apiUrl) }
           } else if (p.done) {
             // analysis complete
           } else if (p.error) {

@@ -5,7 +5,7 @@ RAG 向量检索模块
 import chromadb
 from chromadb.config import Settings
 from typing import List, Dict, Any, Optional
-from pathlib import Path
+from core.paths import CHROMA_DIR
 
 
 class VectorRetriever:
@@ -13,7 +13,7 @@ class VectorRetriever:
 
     def __init__(self, persist_dir: Optional[str] = None):
         if persist_dir is None:
-            persist_dir = str(Path(__file__).parent.parent / "chroma_db")
+            persist_dir = str(CHROMA_DIR)
         self.client = chromadb.PersistentClient(
             path=persist_dir,
             settings=Settings(anonymized_telemetry=False),

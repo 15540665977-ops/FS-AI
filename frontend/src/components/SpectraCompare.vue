@@ -81,6 +81,7 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { apiFetch } from '../apiFetch'
 
 const props = defineProps({
   observedPeaks:     { type: Array,  default: () => [] },
@@ -127,7 +128,7 @@ const currentImageUrl = computed(() => props.imageUrls[currentImgIdx.value] ?? n
 // ── 加载知识库条目列表（供下拉选择） ───────────────────────────
 async function loadEntries() {
   try {
-    const r = await fetch('/api/v1/knowledge/entries')
+    const r = await apiFetch('/api/v1/knowledge/entries')
     entries.value = await r.json()
   } catch { /* 网络失败静默 */ }
 }
@@ -136,7 +137,7 @@ async function loadEntries() {
 async function loadStandardPeaks(id) {
   if (!id) { standardPeaks.value = []; redraw(); return }
   try {
-    const r = await fetch(`/api/v1/knowledge/entry/${id}`)
+    const r = await apiFetch(`/api/v1/knowledge/entry/${id}`)
     const d = await r.json()
     standardPeaks.value = d.ftir_peaks || []
   } catch {
@@ -154,7 +155,7 @@ async function loadMultiMaterialPeaks(materials) {
   if (!materials.length) { redraw(); return }
   const collected = await Promise.all(materials.map(async (m, i) => {
     try {
-      const r = await fetch(`/api/v1/knowledge/entry/${m.id}`)
+      const r = await apiFetch(`/api/v1/knowledge/entry/${m.id}`)
       const d = await r.json()
       const color = CURVE_COLORS[i % CURVE_COLORS.length]
       return (d.ftir_peaks || []).map(p => ({
